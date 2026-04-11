@@ -1,0 +1,17 @@
+---
+import BaseLayout from '@theme/layouts/BaseLayout.astro';
+import { t, getLocalizedUrl } from '@theme/i18n/utils';
+
+const locale = 'en';
+---
+
+<BaseLayout title={t(locale, '404.title')} locale={locale} noindex={true}>
+  <div class="flex flex-col items-center justify-center text-center py-20">
+    <div class="text-8xl font-black text-silver-200 mb-4">404</div>
+    <h1 class="text-2xl font-bold text-silver-900 mb-2">{t(locale, '404.title')}</h1>
+    <p class="text-silver-500 mb-6">{t(locale, '404.description')}</p>
+    <a href={getLocalizedUrl(locale, '/')} class="btn-primary">
+      {t(locale, '404.backHome')}
+    </a>
+  </div>
+</BaseLayout>

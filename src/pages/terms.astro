@@ -1,0 +1,37 @@
+---
+import BaseLayout from '@theme/layouts/BaseLayout.astro';
+import { t } from '@theme/i18n/utils';
+import { siteConfig } from '@src/config/site';
+
+const locale = 'en';
+---
+
+<BaseLayout title={t(locale, 'terms.title')} locale={locale}>
+  <div class="max-w-3xl mx-auto">
+    <h1 class="text-3xl font-extrabold text-silver-900 mb-6">{t(locale, 'terms.title')}</h1>
+    <div class="glass-card p-6 sm:p-8 prose">
+      <p><strong>Effective Date:</strong> January 1, 2026</p>
+
+      <h2>1. Acceptance of Terms</h2>
+      <p>By accessing and using {siteConfig.name} ("the Service"), you agree to be bound by these Terms of Service. If you do not agree, please do not use the Service.</p>
+
+      <h2>2. Description of Service</h2>
+      <p>{siteConfig.name} provides free online HVAC duct sizing calculations for informational and educational purposes. The calculator uses industry-standard formulas based on ASHRAE guidelines.</p>
+
+      <h2>3. Disclaimer</h2>
+      <p>The calculations provided by this tool are for reference purposes only. While we strive for accuracy, results should be verified by a qualified HVAC professional before use in actual installations. We are not responsible for any errors, losses, or damages resulting from the use of this calculator.</p>
+
+      <h2>4. Intellectual Property</h2>
+      <p>All content, code, and design elements of {siteConfig.name} are protected by copyright and intellectual property laws.</p>
+
+      <h2>5. Limitation of Liability</h2>
+      <p>The Service is provided "as is" without warranties of any kind. In no event shall {siteConfig.name} be liable for any direct, indirect, incidental, or consequential damages.</p>
+
+      <h2>6. Changes to Terms</h2>
+      <p>We reserve the right to modify these terms at any time. Continued use of the Service constitutes acceptance of updated terms.</p>
+
+      <h2>7. Contact</h2>
+      <p>For questions about these Terms, contact us at <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>.</p>
+    </div>
+  </div>
+</BaseLayout>

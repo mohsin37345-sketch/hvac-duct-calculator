@@ -1,0 +1,15 @@
+{
+  "site.title": "Calculateur de Conduits CVC",
+  "site.tagline": "Calculez le dimensionnement des conduits CVC",
+  "nav.home": "Accueil",
+  "nav.about": "À propos",
+  "nav.blog": "Blog",
+  "nav.contact": "Contact",
+  "calc.calculate": "Calculer",
+  "calc.results": "Résultats",
+  "contact.title": "Contactez-nous",
+  "contact.send": "Envoyer le message",
+  "404.title": "Page non trouvée",
+  "404.backHome": "Retour à l'accueil",
+  "footer.language": "Langue"
+}

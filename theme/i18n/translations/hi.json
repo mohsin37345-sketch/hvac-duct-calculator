@@ -1,0 +1,16 @@
+{
+  "site.title": "HVAC डक्ट कैलकुलेटर",
+  "site.tagline": "उचित HVAC डक्टवर्क साइज़िंग की गणना करें",
+  "site.description": "मुफ्त ऑनलाइन HVAC डक्ट साइज़िंग कैलकुलेटर।",
+  "nav.home": "होम",
+  "nav.about": "हमारे बारे में",
+  "nav.blog": "ब्लॉग",
+  "nav.contact": "संपर्क करें",
+  "calc.calculate": "गणना करें",
+  "calc.results": "परिणाम",
+  "contact.title": "संपर्क करें",
+  "contact.send": "संदेश भेजें",
+  "404.title": "पेज नहीं मिला",
+  "404.backHome": "होम पर वापस",
+  "footer.language": "भाषा"
+}

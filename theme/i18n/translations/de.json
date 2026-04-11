@@ -1,0 +1,15 @@
+{
+  "site.title": "HVAC-Kanalrechner",
+  "site.tagline": "Berechnen Sie die richtige HVAC-Kanaldimensionierung",
+  "nav.home": "Startseite",
+  "nav.about": "Über uns",
+  "nav.blog": "Blog",
+  "nav.contact": "Kontakt",
+  "calc.calculate": "Berechnen",
+  "calc.results": "Ergebnisse",
+  "contact.title": "Kontaktieren Sie uns",
+  "contact.send": "Nachricht senden",
+  "404.title": "Seite nicht gefunden",
+  "404.backHome": "Zurück zur Startseite",
+  "footer.language": "Sprache"
+}

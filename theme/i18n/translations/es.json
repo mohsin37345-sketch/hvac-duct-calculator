@@ -1,0 +1,16 @@
+{
+  "site.title": "Calculadora de Ductos HVAC",
+  "site.tagline": "Calcule el dimensionamiento adecuado de ductos HVAC",
+  "site.description": "Calculadora gratuita en línea para dimensionamiento de ductos HVAC.",
+  "nav.home": "Inicio",
+  "nav.about": "Acerca de",
+  "nav.blog": "Blog",
+  "nav.contact": "Contacto",
+  "calc.calculate": "Calcular",
+  "calc.results": "Resultados",
+  "contact.title": "Contáctenos",
+  "contact.send": "Enviar Mensaje",
+  "404.title": "Página no encontrada",
+  "404.backHome": "Volver al inicio",
+  "footer.language": "Idioma"
+}

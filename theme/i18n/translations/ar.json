@@ -1,0 +1,15 @@
+{
+  "site.title": "حاسبة مجاري التكييف",
+  "site.tagline": "احسب الحجم المناسب لمجاري التكييف",
+  "nav.home": "الرئيسية",
+  "nav.about": "من نحن",
+  "nav.blog": "المدونة",
+  "nav.contact": "اتصل بنا",
+  "calc.calculate": "احسب",
+  "calc.results": "النتائج",
+  "contact.title": "اتصل بنا",
+  "contact.send": "إرسال الرسالة",
+  "404.title": "الصفحة غير موجودة",
+  "404.backHome": "العودة إلى الرئيسية",
+  "footer.language": "اللغة"
+}

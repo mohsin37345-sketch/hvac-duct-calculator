@@ -1,0 +1,187 @@
+---
+import { t } from '@theme/i18n/utils';
+
+export interface Props {
+  locale?: string;
+}
+
+const { locale = 'en' } = Astro.props;
+---
+
+<div class="glass-card p-6 sm:p-8">
+  <form id="mainCalculatorForm" novalidate>
+    <!-- Duct Type -->
+    <div class="mb-6">
+      <label class="block text-xs font-semibold text-silver-500 uppercase tracking-wider mb-2">{t(locale, 'calc.ductType')}</label>
+      <div class="toggle-group" id="ductTypeToggle">
+        <button type="button" class="toggle-btn active" data-value="metal" id="btn-ductType-metal">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/></svg>
+          {t(locale, 'calc.metal')}
+        </button>
+        <button type="button" class="toggle-btn" data-value="flex" id="btn-ductType-flex">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12c2-4 6-4 8 0s6 4 8 0"/><path d="M4 8c2-4 6-4 8 0s6 4 8 0"/><path d="M4 16c2-4 6-4 8 0s6 4 8 0"/></svg>
+          {t(locale, 'calc.flex')}
+        </button>
+      </div>
+    </div>
+
+    <!-- Size By + Friction Rate -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+      <div>
+        <label class="block text-xs font-semibold text-silver-500 uppercase tracking-wider mb-2" for="sizeBy">{t(locale, 'calc.sizeBy')}</label>
+        <div class="relative">
+          <select id="sizeBy" class="form-input pr-10 cursor-pointer">
+            <option value="friction_rate">{t(locale, 'calc.frictionRate')}</option>
+            <option value="velocity">{t(locale, 'calc.velocity')}</option>
+          </select>
+          <svg class="absolute right-3 top-1/2 -translate-y-1/2 text-silver-400 pointer-events-none" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+      </div>
+      <div>
+        <label class="block text-xs font-semibold text-silver-500 uppercase tracking-wider mb-2" for="frictionRate" id="frictionRateLabel">
+          <span class="text-accent mr-1">*</span>{t(locale, 'calc.frictionLossRate')}
+          <a href="#friction-rate-info" class="text-accent text-[0.65rem] ml-auto hover:underline" id="viewCommonRates">{t(locale, 'calc.viewCommonRates')}</a>
+        </label>
+        <div class="relative">
+          <input type="text" id="frictionRate" class="form-input pr-28" inputmode="decimal" placeholder="0.08" autocomplete="off" />
+          <span class="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-silver-400 pointer-events-none" id="frictionRateUnit">per 100 ft (in/wg)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bends -->
+    <div class="grid grid-cols-3 gap-3 mb-6">
+      <div>
+        <label class="block text-xs font-semibold text-silver-500 uppercase tracking-wider mb-2" for="bends45">{t(locale, 'calc.bends45')}</label>
+        <input type="text" id="bends45" class="form-input" inputmode="numeric" value="0" autocomplete="off" />
+      </div>
+      <div>
+        <label class="block text-xs font-semibold text-silver-500 uppercase tracking-wider mb-2" for="bends90">{t(locale, 'calc.bends90')}</label>
+        <input type="text" id="bends90" class="form-input" inputmode="numeric" value="0" autocomplete="off" />
+      </div>
+      <div>
+        <label class="block text-xs font-semibold text-silver-500 uppercase tracking-wider mb-2" for="bends180">{t(locale, 'calc.bends180')}</label>
+        <input type="text" id="bends180" class="form-input" inputmode="numeric" value="0" autocomplete="off" />
+      </div>
+    </div>
+
+    <!-- Duct TEL -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+      <div>
+        <label class="block text-xs font-semibold text-silver-500 uppercase tracking-wider mb-2" for="ductLength"><span class="text-accent mr-1">*</span>{t(locale, 'calc.ductTel')}</label>
+        <input type="text" id="ductLength" class="form-input" inputmode="decimal" placeholder="feet" autocomplete="off" />
+      </div>
+      <div class="flex items-end pb-2">
+        <p class="text-xs text-accent italic opacity-85">{t(locale, 'calc.includeFittings')}</p>
+      </div>
+    </div>
+
+    <!-- Enter Either + Shape -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+      <div>
+        <label class="block text-xs font-semibold text-silver-500 uppercase tracking-wider mb-2" for="ductSizeOrCfm">{t(locale, 'calc.enterEither')}</label>
+        <div class="relative">
+          <select id="ductSizeOrCfm" class="form-input pr-10 cursor-pointer">
+            <option value="ductSize">{t(locale, 'calc.ductSize')}</option>
+            <option value="cfm">{t(locale, 'calc.cfm')}</option>
+          </select>
+          <svg class="absolute right-3 top-1/2 -translate-y-1/2 text-silver-400 pointer-events-none" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+      </div>
+      <div>
+        <label class="block text-xs font-semibold text-silver-500 uppercase tracking-wider mb-2" for="shape">
+          {t(locale, 'calc.ductShape')}
+          <a href="#utility-calcs" class="text-accent text-[0.65rem] ml-2 hover:underline" id="convertHere">{t(locale, 'calc.convertHere')}</a>
+        </label>
+        <div class="relative">
+          <select id="shape" class="form-input pr-10 cursor-pointer">
+            <option value="round">{t(locale, 'calc.round')}</option>
+            <option value="rectangular">{t(locale, 'calc.rectangular')}</option>
+          </select>
+          <svg class="absolute right-3 top-1/2 -translate-y-1/2 text-silver-400 pointer-events-none" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dimensions -->
+    <div id="dimensionsContainer" class="mb-6">
+      <div id="roundDimensions">
+        <label class="block text-xs font-semibold text-silver-500 uppercase tracking-wider mb-2" for="diameter"><span class="text-accent mr-1">*</span>{t(locale, 'calc.diameter')}</label>
+        <div class="relative">
+          <input type="text" id="diameter" class="form-input pr-20" inputmode="decimal" placeholder="inches" autocomplete="off" />
+          <span class="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-silver-400 pointer-events-none">inches</span>
+        </div>
+      </div>
+      <div id="rectDimensions" class="hidden grid grid-cols-2 gap-4">
+        <div>
+          <label class="block text-xs font-semibold text-silver-500 uppercase tracking-wider mb-2" for="rectWidth"><span class="text-accent mr-1">*</span>{t(locale, 'calc.width')}</label>
+          <div class="relative">
+            <input type="text" id="rectWidth" class="form-input pr-20" inputmode="decimal" placeholder="inches" autocomplete="off" />
+            <span class="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-silver-400 pointer-events-none">inches</span>
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-silver-500 uppercase tracking-wider mb-2" for="rectHeight"><span class="text-accent mr-1">*</span>{t(locale, 'calc.height')}</label>
+          <div class="relative">
+            <input type="text" id="rectHeight" class="form-input pr-20" inputmode="decimal" placeholder="inches" autocomplete="off" />
+            <span class="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-silver-400 pointer-events-none">inches</span>
+          </div>
+        </div>
+      </div>
+      <div id="cfmContainer" class="hidden">
+        <label class="block text-xs font-semibold text-silver-500 uppercase tracking-wider mb-2" for="cfm"><span class="text-accent mr-1">*</span>{t(locale, 'calc.airflow')}</label>
+        <div class="relative">
+          <input type="text" id="cfm" class="form-input pr-16" inputmode="decimal" placeholder="CFM" autocomplete="off" />
+          <span class="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-silver-400 pointer-events-none">CFM</span>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn-primary w-full" id="calculate">
+      <span>{t(locale, 'calc.calculate')}</span>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </button>
+  </form>
+
+  <!-- Results -->
+  <div class="hidden mt-8" id="resultsContainer">
+    <div class="flex items-center gap-4 mb-6">
+      <div class="flex-1 h-px bg-gradient-to-r from-transparent via-silver-300 to-transparent"></div>
+      <span class="text-sm font-bold text-accent uppercase tracking-wider">{t(locale, 'calc.results')}</span>
+      <div class="flex-1 h-px bg-gradient-to-r from-transparent via-silver-300 to-transparent"></div>
+    </div>
+    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3" id="resultsGrid"></div>
+  </div>
+</div>
+
+<!-- Common Rates Modal -->
+<div class="fixed inset-0 bg-black/20 backdrop-blur-md z-[1000] hidden flex items-center justify-center p-4" id="frictionRateModal">
+  <div class="glass-card max-w-lg w-full">
+    <div class="flex items-center justify-between p-5 border-b border-silver-200">
+      <h3 class="font-bold text-silver-900">{t(locale, 'rates.title')}</h3>
+      <button type="button" id="closeModal" class="p-1 rounded-md text-silver-400 hover:text-accent hover:bg-accent-subtle transition-colors" aria-label="Close">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="p-5">
+      <table class="w-full text-sm">
+        <thead>
+          <tr>
+            <th class="text-left text-xs font-bold text-accent uppercase tracking-wider pb-2 border-b-2 border-silver-200">{t(locale, 'rates.application')}</th>
+            <th class="text-left text-xs font-bold text-accent uppercase tracking-wider pb-2 border-b-2 border-silver-200">{t(locale, 'rates.rate')}</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-silver-100">
+          <tr class="hover:bg-accent-subtle"><td class="py-2">{t(locale, 'friction.resSupply')}</td><td>0.08</td></tr>
+          <tr class="hover:bg-accent-subtle"><td class="py-2">{t(locale, 'friction.resReturn')}</td><td>0.06</td></tr>
+          <tr class="hover:bg-accent-subtle"><td class="py-2">{t(locale, 'friction.comLow')}</td><td>0.08 – 0.10</td></tr>
+          <tr class="hover:bg-accent-subtle"><td class="py-2">{t(locale, 'friction.comMed')}</td><td>0.10 – 0.20</td></tr>
+          <tr class="hover:bg-accent-subtle"><td class="py-2">{t(locale, 'friction.comHigh')}</td><td>0.20 – 0.60</td></tr>
+          <tr class="hover:bg-accent-subtle"><td class="py-2">{t(locale, 'friction.industrial')}</td><td>0.30 – 1.00</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script is:inline src="/calculator.js"></script>

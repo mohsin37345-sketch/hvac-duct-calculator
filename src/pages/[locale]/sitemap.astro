@@ -1,0 +1,44 @@
+---
+import BaseLayout from '@theme/layouts/BaseLayout.astro';
+import { t, getLocalizedUrl, getStaticLocalePaths, locales } from '@theme/i18n/utils';
+import { footerNav } from '@src/config/site';
+import { getCollection } from 'astro:content';
+
+export function getStaticPaths() {
+  return getStaticLocalePaths();
+}
+
+const locale = Astro.params.locale!;
+const posts = await getCollection('blog');
+const pages = footerNav.map((item) => ({
+  label: t(locale, item.key),
+  url: getLocalizedUrl(locale, item.path),
+}));
+---
+
+<BaseLayout title={t(locale, 'sitemap.title')} locale={locale} noindex={true}>
+  <div class="max-w-3xl mx-auto">
+    <h1 class="text-3xl font-extrabold text-silver-900 mb-6">{t(locale, 'sitemap.title')}</h1>
+    <div class="glass-card p-6 sm:p-8 space-y-8">
+      <div>
+        <h2 class="text-lg font-bold text-silver-800 mb-3">{t(locale, 'sitemap.pages')}</h2>
+        <ul class="space-y-2">
+          <li><a href={getLocalizedUrl(locale, '/')} class="text-accent hover:underline">{t(locale, 'nav.home')}</a></li>
+          {pages.map((page) => (
+            <li><a href={page.url} class="text-accent hover:underline">{page.label}</a></li>
+          ))}
+        </ul>
+      </div>
+      {posts.length > 0 && (
+        <div>
+          <h2 class="text-lg font-bold text-silver-800 mb-3">{t(locale, 'sitemap.blog')}</h2>
+          <ul class="space-y-2">
+            {posts.map((post) => (
+              <li><a href={getLocalizedUrl(locale, `/blog/${post.id}`)} class="text-accent hover:underline">{post.data.title}</a></li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  </div>
+</BaseLayout>

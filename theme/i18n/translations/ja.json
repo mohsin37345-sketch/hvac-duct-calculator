@@ -1,0 +1,14 @@
+{
+  "site.title": "HVACダクト計算機",
+  "nav.home": "ホーム",
+  "nav.about": "概要",
+  "nav.blog": "ブログ",
+  "nav.contact": "お問い合わせ",
+  "calc.calculate": "計算する",
+  "calc.results": "結果",
+  "contact.title": "お問い合わせ",
+  "contact.send": "メッセージを送信",
+  "404.title": "ページが見つかりません",
+  "404.backHome": "ホームに戻る",
+  "footer.language": "言語"
+}

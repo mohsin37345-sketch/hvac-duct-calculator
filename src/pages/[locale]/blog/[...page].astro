@@ -1,0 +1,51 @@
+---
+import BaseLayout from '@theme/layouts/BaseLayout.astro';
+import BlogCard from '@theme/components/BlogCard.astro';
+import Pagination from '@theme/components/Pagination.astro';
+import { getCollection } from 'astro:content';
+import { t, getLocalizedUrl, getStaticLocalePaths } from '@theme/i18n/utils';
+
+export async function getStaticPaths({ paginate }: { paginate: Function }) {
+  const localePaths = getStaticLocalePaths();
+  const posts = await getCollection('blog');
+  const sorted = posts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+
+  return localePaths.flatMap(({ params }) =>
+    paginate(sorted, {
+      params,
+      pageSize: 12,
+    })
+  );
+}
+
+const locale = Astro.params.locale!;
+const { page } = Astro.props;
+---
+
+<BaseLayout title={`${t(locale, 'nav.blog')} ${page.currentPage > 1 ? `- Page ${page.currentPage}` : ''}`} locale={locale}>
+  <div class="max-w-4xl mx-auto">
+    <h1 class="text-3xl font-extrabold text-silver-900 mb-8">{t(locale, 'nav.blog')}</h1>
+    {page.data.length > 0 ? (
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {page.data.map((post: any) => (
+          <BlogCard
+            title={post.data.title}
+            description={post.data.description}
+            date={post.data.date}
+            slug={post.id}
+            image={post.data.image}
+            category={post.data.category}
+            locale={locale}
+          />
+        ))}
+      </div>
+    ) : (
+      <p class="text-silver-500 text-center py-12">No blog posts yet.</p>
+    )}
+    <Pagination
+      currentPage={page.currentPage}
+      totalPages={page.lastPage}
+      baseUrl={getLocalizedUrl(locale, '/blog').replace(/\/$/, '')}
+    />
+  </div>
+</BaseLayout>

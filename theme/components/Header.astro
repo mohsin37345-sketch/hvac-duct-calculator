@@ -1,0 +1,130 @@
+---
+import { navItems } from '@src/config/site';
+import { t, getLocalizedUrl } from '@theme/i18n/utils';
+
+export interface Props {
+  locale?: string;
+  currentPath?: string;
+}
+
+const { locale = 'en', currentPath = '/' } = Astro.props;
+---
+
+<header class="sticky top-0 z-50 bg-white/75 backdrop-blur-xl border-b border-silver-200/60" style="backdrop-filter: blur(24px) saturate(1.8);">
+  <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between 2xl:max-w-[1440px]">
+    <!-- Logo -->
+    <a href={getLocalizedUrl(locale, '/')} class="flex items-center gap-3 no-underline" aria-label={t(locale, 'site.title')}>
+      <div class="w-10 h-10 flex items-center justify-center rounded-xl bg-gradient-to-br from-[#5b6abf] to-[#4a58a8] shadow-md">
+        <svg viewBox="0 0 40 40" fill="none" class="w-6 h-6">
+          <rect x="4" y="8" width="32" height="6" rx="1.5" fill="#fff" stroke="rgba(255,255,255,0.5)" stroke-width="0.5"/>
+          <rect x="8" y="14" width="4" height="14" rx="1" fill="#fff"/>
+          <rect x="18" y="14" width="4" height="14" rx="1" fill="#fff"/>
+          <rect x="28" y="14" width="4" height="14" rx="1" fill="#fff"/>
+          <rect x="4" y="28" width="32" height="5" rx="1.5" fill="#fff" stroke="rgba(255,255,255,0.5)" stroke-width="0.5"/>
+        </svg>
+      </div>
+      <div>
+        <span class="block text-lg font-extrabold text-silver-900 tracking-tight leading-tight">{t(locale, 'site.title')}</span>
+        <span class="hidden sm:block text-xs text-silver-500 uppercase tracking-wider font-medium">{t(locale, 'site.tagline')}</span>
+      </div>
+    </a>
+
+    <!-- Desktop Nav -->
+    <nav class="hidden md:flex items-center gap-1" aria-label="Main navigation">
+      {navItems.map((item) => {
+        const href = getLocalizedUrl(locale, item.path);
+        const isActive = currentPath === href || (item.path !== '/' && currentPath.startsWith(href.replace(/\/$/, '')));
+        return (
+          <a
+            href={href}
+            class:list={[
+              'px-4 py-2 rounded-lg text-sm font-semibold transition-colors',
+              isActive ? 'text-accent bg-accent-subtle' : 'text-silver-600 hover:text-silver-900 hover:bg-silver-100',
+            ]}
+          >
+            {t(locale, item.key)}
+          </a>
+        );
+      })}
+    </nav>
+
+    <!-- Mobile Menu Button -->
+    <button
+      type="button"
+      class="md:hidden p-2 rounded-lg text-silver-600 hover:bg-silver-100 transition-colors"
+      id="mobile-menu-toggle"
+      aria-label="Toggle menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="3" y1="6" x2="21" y2="6" class="burger-line-1" />
+        <line x1="3" y1="12" x2="21" y2="12" class="burger-line-2" />
+        <line x1="3" y1="18" x2="21" y2="18" class="burger-line-3" />
+      </svg>
+    </button>
+  </div>
+</header>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu-overlay" id="mobile-menu-overlay"></div>
+<div class="mobile-menu-panel" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigation menu">
+  <div class="p-4 border-b border-silver-200 flex items-center justify-between">
+    <span class="font-bold text-silver-900">{t(locale, 'site.title')}</span>
+    <button type="button" id="mobile-menu-close" class="p-2 rounded-lg text-silver-500 hover:bg-silver-100" aria-label="Close menu">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <nav class="flex flex-col p-4 gap-1">
+    {navItems.map((item) => {
+      const href = getLocalizedUrl(locale, item.path);
+      const isActive = currentPath === href;
+      return (
+        <a
+          href={href}
+          class:list={[
+            'px-4 py-3 rounded-lg text-base font-semibold transition-colors mobile-nav-link',
+            isActive ? 'text-accent bg-accent-subtle' : 'text-silver-700 hover:bg-silver-100',
+          ]}
+        >
+          {t(locale, item.key)}
+        </a>
+      );
+    })}
+  </nav>
+</div>
+
+<script>
+  const toggle = document.getElementById('mobile-menu-toggle');
+  const overlay = document.getElementById('mobile-menu-overlay');
+  const panel = document.getElementById('mobile-menu');
+  const closeBtn = document.getElementById('mobile-menu-close');
+  const links = document.querySelectorAll('.mobile-nav-link');
+
+  function openMenu() {
+    overlay?.classList.add('open');
+    panel?.classList.add('open');
+    toggle?.setAttribute('aria-expanded', 'true');
+    document.body.classList.add('menu-open');
+  }
+
+  function closeMenu() {
+    overlay?.classList.remove('open');
+    panel?.classList.remove('open');
+    toggle?.setAttribute('aria-expanded', 'false');
+    document.body.classList.remove('menu-open');
+  }
+
+  toggle?.addEventListener('click', () => {
+    const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+    isOpen ? closeMenu() : openMenu();
+  });
+
+  overlay?.addEventListener('click', closeMenu);
+  closeBtn?.addEventListener('click', closeMenu);
+  links.forEach(link => link.addEventListener('click', closeMenu));
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeMenu();
+  });
+</script>

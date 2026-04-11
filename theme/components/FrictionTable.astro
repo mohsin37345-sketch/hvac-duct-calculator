@@ -1,0 +1,40 @@
+---
+import { t } from '@theme/i18n/utils';
+
+export interface Props {
+  locale?: string;
+}
+
+const { locale = 'en' } = Astro.props;
+
+const rates = [
+  { key: 'friction.resSupply', rate: '0.08' },
+  { key: 'friction.resReturn', rate: '0.06' },
+  { key: 'friction.comLow', rate: '0.08 – 0.10' },
+  { key: 'friction.comMed', rate: '0.10 – 0.20' },
+  { key: 'friction.comHigh', rate: '0.20 – 0.60' },
+  { key: 'friction.industrial', rate: '0.30 – 1.00' },
+];
+---
+
+<section class="py-12" id="friction-rate-info">
+  <h2 class="text-2xl font-extrabold text-silver-900 text-center mb-8">{t(locale, 'friction.title')}</h2>
+  <div class="glass-card overflow-hidden">
+    <table class="w-full text-sm">
+      <thead>
+        <tr class="bg-accent-subtle">
+          <th class="text-left text-xs font-bold text-accent uppercase tracking-wider px-6 py-3">{t(locale, 'rates.application')}</th>
+          <th class="text-left text-xs font-bold text-accent uppercase tracking-wider px-6 py-3">{t(locale, 'rates.rate')}</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-silver-100">
+        {rates.map((r) => (
+          <tr class="hover:bg-accent-subtle/50 transition-colors">
+            <td class="px-6 py-3 text-silver-700 font-medium">{t(locale, r.key)}</td>
+            <td class="px-6 py-3 text-silver-600 font-mono">{r.rate}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</section>

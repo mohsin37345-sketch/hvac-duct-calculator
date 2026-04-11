@@ -1,0 +1,26 @@
+---
+import BaseLayout from '@theme/layouts/BaseLayout.astro';
+import { t, getStaticLocalePaths } from '@theme/i18n/utils';
+import { siteConfig } from '@src/config/site';
+
+export function getStaticPaths() {
+  return getStaticLocalePaths();
+}
+
+const locale = Astro.params.locale!;
+---
+
+<BaseLayout title={t(locale, 'privacy.title')} locale={locale}>
+  <div class="max-w-3xl mx-auto">
+    <h1 class="text-3xl font-extrabold text-silver-900 mb-6">{t(locale, 'privacy.title')}</h1>
+    <div class="glass-card p-6 sm:p-8 prose">
+      <p><strong>Effective Date:</strong> January 1, 2026</p>
+      <h2>1. Information We Collect</h2>
+      <p>{siteConfig.name} does not collect personal information unless you submit it through our contact form. Calculator inputs are processed entirely in your browser.</p>
+      <h2>2. Cookies</h2>
+      <p>We may use cookies and analytics services to improve the Service. This data is anonymized.</p>
+      <h2>3. Contact</h2>
+      <p>Contact us at <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>.</p>
+    </div>
+  </div>
+</BaseLayout>

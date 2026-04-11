@@ -1,0 +1,21 @@
+---
+import BaseLayout from '@theme/layouts/BaseLayout.astro';
+import { t, getStaticLocalePaths } from '@theme/i18n/utils';
+
+export function getStaticPaths() {
+  return getStaticLocalePaths();
+}
+
+const locale = Astro.params.locale!;
+---
+
+<BaseLayout title={t(locale, 'about.title')} description={t(locale, 'about.description')} locale={locale} schemaType="about">
+  <div class="max-w-3xl mx-auto">
+    <h1 class="text-3xl font-extrabold text-silver-900 mb-6">{t(locale, 'about.title')}</h1>
+    <div class="glass-card p-6 sm:p-8 space-y-5">
+      <p class="text-silver-600 leading-relaxed">{t(locale, 'about.content1')}</p>
+      <p class="text-silver-600 leading-relaxed">{t(locale, 'about.content2')}</p>
+      <p class="text-silver-600 leading-relaxed">{t(locale, 'about.content3')}</p>
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,29 @@
+---
+import BaseLayout from '@theme/layouts/BaseLayout.astro';
+import Calculator from '@theme/components/Calculator.astro';
+import UtilityCalcs from '@theme/components/UtilityCalcs.astro';
+import HowItWorks from '@theme/components/HowItWorks.astro';
+import FrictionTable from '@theme/components/FrictionTable.astro';
+import FAQ from '@theme/components/FAQ.astro';
+import { t, getStaticLocalePaths } from '@theme/i18n/utils';
+
+export function getStaticPaths() {
+  return getStaticLocalePaths();
+}
+
+const locale = Astro.params.locale!;
+---
+
+<BaseLayout title={t(locale, 'site.title')} description={t(locale, 'site.description')} locale={locale} schemaType="website">
+  <div class="space-y-4">
+    <div class="text-center mb-8">
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-silver-900 tracking-tight mb-3">{t(locale, 'site.title')}</h1>
+      <p class="text-silver-500 text-lg max-w-2xl mx-auto">{t(locale, 'site.description')}</p>
+    </div>
+    <Calculator locale={locale} />
+    <UtilityCalcs locale={locale} />
+  </div>
+  <HowItWorks locale={locale} />
+  <FrictionTable locale={locale} />
+  <FAQ locale={locale} />
+</BaseLayout>

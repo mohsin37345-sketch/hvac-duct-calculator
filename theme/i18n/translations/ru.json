@@ -1,0 +1,15 @@
+{
+  "site.title": "Калькулятор воздуховодов HVAC",
+  "site.tagline": "Рассчитайте правильный размер воздуховодов",
+  "nav.home": "Главная",
+  "nav.about": "О нас",
+  "nav.blog": "Блог",
+  "nav.contact": "Контакты",
+  "calc.calculate": "Рассчитать",
+  "calc.results": "Результаты",
+  "contact.title": "Связаться с нами",
+  "contact.send": "Отправить сообщение",
+  "404.title": "Страница не найдена",
+  "404.backHome": "На главную",
+  "footer.language": "Язык"
+}

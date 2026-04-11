@@ -1,0 +1,14 @@
+{
+  "site.title": "HVAC ডাক্ট ক্যালকুলেটর",
+  "nav.home": "হোম",
+  "nav.about": "আমাদের সম্পর্কে",
+  "nav.blog": "ব্লগ",
+  "nav.contact": "যোগাযোগ",
+  "calc.calculate": "গণনা করুন",
+  "calc.results": "ফলাফল",
+  "contact.title": "যোগাযোগ করুন",
+  "contact.send": "বার্তা পাঠান",
+  "404.title": "পৃষ্ঠা পাওয়া যায়নি",
+  "404.backHome": "হোমে ফিরে যান",
+  "footer.language": "ভাষা"
+}

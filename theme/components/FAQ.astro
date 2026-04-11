@@ -1,0 +1,44 @@
+---
+import { t } from '@theme/i18n/utils';
+
+export interface Props {
+  locale?: string;
+}
+
+const { locale = 'en' } = Astro.props;
+
+const faqs = [
+  { q: 'faq.q1', a: 'faq.a1' },
+  { q: 'faq.q2', a: 'faq.a2' },
+  { q: 'faq.q3', a: 'faq.a3' },
+  { q: 'faq.q4', a: 'faq.a4' },
+  { q: 'faq.q5', a: 'faq.a5' },
+  { q: 'faq.q6', a: 'faq.a6' },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: t(locale, f.q),
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: t(locale, f.a),
+    },
+  })),
+};
+---
+
+<section class="py-12">
+  <h2 class="text-2xl font-extrabold text-silver-900 text-center mb-8">{t(locale, 'faq.title')}</h2>
+  <div class="glass-card px-6 sm:px-8 py-2">
+    {faqs.map((faq) => (
+      <details class="faq-item">
+        <summary>{t(locale, faq.q)}</summary>
+        <div class="faq-answer">{t(locale, faq.a)}</div>
+      </details>
+    ))}
+  </div>
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+</section>

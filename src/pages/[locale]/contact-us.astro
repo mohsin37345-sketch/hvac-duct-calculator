@@ -1,0 +1,19 @@
+---
+import BaseLayout from '@theme/layouts/BaseLayout.astro';
+import ContactForm from '@theme/components/ContactForm.astro';
+import { t, getStaticLocalePaths } from '@theme/i18n/utils';
+
+export function getStaticPaths() {
+  return getStaticLocalePaths();
+}
+
+const locale = Astro.params.locale!;
+---
+
+<BaseLayout title={t(locale, 'contact.title')} description={t(locale, 'contact.description')} locale={locale} schemaType="contact">
+  <div class="max-w-2xl mx-auto">
+    <h1 class="text-3xl font-extrabold text-silver-900 mb-2">{t(locale, 'contact.title')}</h1>
+    <p class="text-silver-500 mb-6">{t(locale, 'contact.description')}</p>
+    <ContactForm locale={locale} />
+  </div>
+</BaseLayout>

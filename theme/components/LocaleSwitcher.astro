@@ -1,0 +1,36 @@
+---
+import { locales } from '@theme/i18n/locales';
+import { getLocalizedUrl, t } from '@theme/i18n/utils';
+
+export interface Props {
+  locale?: string;
+}
+
+const { locale = 'en' } = Astro.props;
+---
+
+<div>
+  <label for="locale-switcher" class="block text-xs font-semibold text-silver-600 uppercase tracking-wider mb-1.5">
+    {t(locale, 'footer.language')}
+  </label>
+  <select
+    id="locale-switcher"
+    class="form-input text-sm py-2 pr-8 cursor-pointer max-w-[200px]"
+    aria-label="Select language"
+  >
+    {locales.map((l) => (
+      <option value={l.code} selected={l.code === locale} data-url={getLocalizedUrl(l.code, '/')}>
+        {l.nativeName}
+      </option>
+    ))}
+  </select>
+</div>
+
+<script>
+  const select = document.getElementById('locale-switcher') as HTMLSelectElement;
+  select?.addEventListener('change', () => {
+    const option = select.options[select.selectedIndex];
+    const url = option.getAttribute('data-url');
+    if (url) window.location.href = url;
+  });
+</script>

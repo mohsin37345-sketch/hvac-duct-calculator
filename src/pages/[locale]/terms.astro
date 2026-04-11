@@ -1,0 +1,28 @@
+---
+import BaseLayout from '@theme/layouts/BaseLayout.astro';
+import { t, getStaticLocalePaths } from '@theme/i18n/utils';
+import { siteConfig } from '@src/config/site';
+
+export function getStaticPaths() {
+  return getStaticLocalePaths();
+}
+
+const locale = Astro.params.locale!;
+---
+
+<BaseLayout title={t(locale, 'terms.title')} locale={locale}>
+  <div class="max-w-3xl mx-auto">
+    <h1 class="text-3xl font-extrabold text-silver-900 mb-6">{t(locale, 'terms.title')}</h1>
+    <div class="glass-card p-6 sm:p-8 prose">
+      <p><strong>Effective Date:</strong> January 1, 2026</p>
+      <h2>1. Acceptance of Terms</h2>
+      <p>By accessing and using {siteConfig.name}, you agree to be bound by these Terms of Service.</p>
+      <h2>2. Description of Service</h2>
+      <p>{siteConfig.name} provides free online HVAC duct sizing calculations for informational purposes.</p>
+      <h2>3. Disclaimer</h2>
+      <p>Calculations are for reference only. Results should be verified by a qualified HVAC professional.</p>
+      <h2>4. Contact</h2>
+      <p>Contact us at <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>.</p>
+    </div>
+  </div>
+</BaseLayout>

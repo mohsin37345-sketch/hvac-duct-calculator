@@ -1,0 +1,14 @@
+{
+  "site.title": "HVAC-kanalkalkylator",
+  "nav.home": "Hem",
+  "nav.about": "Om oss",
+  "nav.blog": "Blogg",
+  "nav.contact": "Kontakt",
+  "calc.calculate": "Beräkna",
+  "calc.results": "Resultat",
+  "contact.title": "Kontakta oss",
+  "contact.send": "Skicka meddelande",
+  "404.title": "Sidan hittades inte",
+  "404.backHome": "Tillbaka till startsidan",
+  "footer.language": "Språk"
+}

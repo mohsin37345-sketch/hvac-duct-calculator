@@ -1,0 +1,71 @@
+---
+import BaseLayout from '@theme/layouts/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
+import { t, getLocalizedUrl } from '@theme/i18n/utils';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const locale = 'en';
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<BaseLayout
+  title={post.data.title}
+  description={post.data.description}
+  locale={locale}
+  schemaType="article"
+  articleData={{
+    title: post.data.title,
+    description: post.data.description,
+    image: post.data.image,
+    datePublished: post.data.date.toISOString(),
+    author: post.data.author,
+  }}
+>
+  <article class="max-w-3xl mx-auto">
+    <!-- Breadcrumb -->
+    <nav class="text-xs text-silver-400 mb-6 flex items-center gap-2">
+      <a href={getLocalizedUrl(locale, '/')} class="hover:text-accent">{t(locale, 'nav.home')}</a>
+      <span>/</span>
+      <a href={getLocalizedUrl(locale, '/blog')} class="hover:text-accent">{t(locale, 'nav.blog')}</a>
+      <span>/</span>
+      <span class="text-silver-600">{post.data.title}</span>
+    </nav>
+
+    <!-- Hero -->
+    <header class="mb-8">
+      {post.data.category && (
+        <span class="inline-block text-xs font-bold text-accent uppercase tracking-wider mb-3">{post.data.category}</span>
+      )}
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-silver-900 leading-tight mb-3">{post.data.title}</h1>
+      <div class="flex items-center gap-4 text-sm text-silver-500">
+        <span>{post.data.author}</span>
+        <span>·</span>
+        <time datetime={post.data.date.toISOString()}>
+          {post.data.date.toLocaleDateString(locale, { year: 'numeric', month: 'long', day: 'numeric' })}
+        </time>
+      </div>
+    </header>
+
+    {post.data.image && (
+      <img src={post.data.image} alt={post.data.title} class="w-full rounded-2xl mb-8 shadow-md" />
+    )}
+
+    <div class="glass-card p-6 sm:p-8 prose">
+      <Content />
+    </div>
+
+    <div class="mt-8 text-center">
+      <a href={getLocalizedUrl(locale, '/blog')} class="text-accent font-semibold hover:underline">
+        ← {t(locale, 'nav.blog')}
+      </a>
+    </div>
+  </article>
+</BaseLayout>

@@ -1,0 +1,40 @@
+---
+import BaseLayout from '@theme/layouts/BaseLayout.astro';
+import { t } from '@theme/i18n/utils';
+import { siteConfig } from '@src/config/site';
+
+const locale = 'en';
+---
+
+<BaseLayout title={t(locale, 'privacy.title')} locale={locale}>
+  <div class="max-w-3xl mx-auto">
+    <h1 class="text-3xl font-extrabold text-silver-900 mb-6">{t(locale, 'privacy.title')}</h1>
+    <div class="glass-card p-6 sm:p-8 prose">
+      <p><strong>Effective Date:</strong> January 1, 2026</p>
+
+      <h2>1. Information We Collect</h2>
+      <p>{siteConfig.name} does not collect personal identification information unless you voluntarily submit it through our contact form. Calculator inputs are processed entirely in your browser and are not stored on our servers.</p>
+
+      <h2>2. Cookies and Analytics</h2>
+      <p>We may use cookies and analytics services to understand how visitors use our site. This data is anonymized and used solely to improve the Service.</p>
+
+      <h2>3. Third-Party Services</h2>
+      <p>Our site may use third-party services (e.g., Google Fonts, analytics) that may collect usage data subject to their own privacy policies.</p>
+
+      <h2>4. Data Security</h2>
+      <p>We take reasonable measures to protect any information submitted through our contact form. However, no method of transmission over the internet is 100% secure.</p>
+
+      <h2>5. Children's Privacy</h2>
+      <p>Our Service is not directed at individuals under 13. We do not knowingly collect information from children.</p>
+
+      <h2>6. Your Rights</h2>
+      <p>You may contact us at any time to request deletion of any personal data you have submitted through our contact form.</p>
+
+      <h2>7. Changes to This Policy</h2>
+      <p>We may update this Privacy Policy from time to time. Changes will be posted on this page.</p>
+
+      <h2>8. Contact</h2>
+      <p>For privacy-related inquiries, contact us at <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>.</p>
+    </div>
+  </div>
+</BaseLayout>

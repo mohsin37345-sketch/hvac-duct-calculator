@@ -1,0 +1,14 @@
+{
+  "site.title": "HVAC калкулатор за въздуховоди",
+  "nav.home": "Начало",
+  "nav.about": "За нас",
+  "nav.blog": "Блог",
+  "nav.contact": "Контакт",
+  "calc.calculate": "Изчисли",
+  "calc.results": "Резултати",
+  "contact.title": "Свържете се с нас",
+  "contact.send": "Изпрати съобщение",
+  "404.title": "Страницата не е намерена",
+  "404.backHome": "Обратно към началото",
+  "footer.language": "Език"
+}

@@ -1,0 +1,80 @@
+---
+import '@src/styles/global.css';
+import Header from '@theme/components/Header.astro';
+import Footer from '@theme/components/Footer.astro';
+import SEO from '@theme/components/SEO.astro';
+import Schema from '@theme/components/Schema.astro';
+import { getLocaleInfo, locales, getLocalizedUrl } from '@theme/i18n/utils';
+
+export interface Props {
+  title: string;
+  description?: string;
+  locale?: string;
+  canonical?: string;
+  ogImage?: string;
+  schemaType?: 'website' | 'about' | 'contact' | 'article';
+  articleData?: {
+    title: string;
+    description: string;
+    image?: string;
+    datePublished: string;
+    author: string;
+  };
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description = '',
+  locale = 'en',
+  canonical,
+  ogImage,
+  schemaType = 'website',
+  articleData,
+  noindex = false,
+} = Astro.props;
+
+const localeInfo = getLocaleInfo(locale);
+const currentPath = Astro.url.pathname;
+---
+
+<!DOCTYPE html>
+<html lang={locale} dir={localeInfo.dir}>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <SEO
+    title={title}
+    description={description}
+    canonical={canonical}
+    ogImage={ogImage}
+    locale={locale}
+    noindex={noindex}
+  />
+
+  <!-- hreflang alternates -->
+  {locales.map((l) => (
+    <link
+      rel="alternate"
+      hreflang={l.code}
+      href={`https://hvacductcalculator.com${getLocalizedUrl(l.code, currentPath.replace(/^\/(ar|hi|es|ru|fr|de|it|pt|bn|ja|ko|ms|pl|id|bg|tr|sv)\//, '/').replace(/^\//, ''))}`}
+    />
+  ))}
+  <link rel="alternate" hreflang="x-default" href={`https://hvacductcalculator.com${currentPath}`} />
+
+  <Schema type={schemaType} locale={locale} articleData={articleData} />
+</head>
+<body class="min-h-screen flex flex-col">
+  <Header locale={locale} currentPath={currentPath} />
+
+  <main class="flex-1 w-full max-w-5xl mx-auto px-4 py-8 2xl:max-w-[1440px]">
+    <slot />
+  </main>
+
+  <Footer locale={locale} />
+</body>
+</html>

@@ -1,0 +1,54 @@
+---
+import { siteConfig } from '@src/config/site';
+
+export interface Props {
+  title: string;
+  description?: string;
+  canonical?: string;
+  ogImage?: string;
+  locale?: string;
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description = siteConfig.description,
+  canonical,
+  ogImage = siteConfig.ogImage,
+  locale = 'en',
+  noindex = false,
+} = Astro.props;
+
+const fullTitle = title === siteConfig.name ? title : `${title} | ${siteConfig.name}`;
+const canonicalUrl = canonical || Astro.url.href;
+const ogImageUrl = ogImage?.startsWith('http') ? ogImage : `${siteConfig.url}${ogImage}`;
+---
+
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalUrl} />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+{noindex ? (
+  <meta name="robots" content="noindex, nofollow" />
+) : (
+  <>
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow" />
+  </>
+)}
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:site_name" content={siteConfig.name} />
+<meta property="og:locale" content={locale} />
+{ogImageUrl && <meta property="og:image" content={ogImageUrl} />}
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={description} />
+{ogImageUrl && <meta name="twitter:image" content={ogImageUrl} />}
