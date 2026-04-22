@@ -2,8 +2,12 @@
 import BaseLayout from '@theme/layouts/BaseLayout.astro';
 import Calculator from '@theme/components/Calculator.astro';
 import UtilityCalcs from '@theme/components/UtilityCalcs.astro';
+import ContentSections from '@theme/components/ContentSections.astro';
+import QuickReference from '@theme/components/QuickReference.astro';
 import HowItWorks from '@theme/components/HowItWorks.astro';
 import FrictionTable from '@theme/components/FrictionTable.astro';
+import ReviewedBy from '@theme/components/ReviewedBy.astro';
+import PeopleAlsoSearch from '@theme/components/PeopleAlsoSearch.astro';
 import FAQ from '@theme/components/FAQ.astro';
 import { t, getStaticLocalePaths } from '@theme/i18n/utils';
 
@@ -14,16 +18,20 @@ export function getStaticPaths() {
 const locale = Astro.params.locale!;
 ---
 
-<BaseLayout title={t(locale, 'site.title')} description={t(locale, 'site.description')} locale={locale} schemaType="website">
+<BaseLayout title={t(locale, 'hub.h1')} description={t(locale, 'hub.snippet')} locale={locale} schemaType="website">
   <div class="space-y-4">
     <div class="text-center mb-8">
-      <h1 class="text-3xl sm:text-4xl font-extrabold text-silver-900 tracking-tight mb-3">{t(locale, 'site.title')}</h1>
-      <p class="text-silver-500 text-lg max-w-2xl mx-auto">{t(locale, 'site.description')}</p>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-silver-900 tracking-tight mb-3">{t(locale, 'hub.h1')}</h1>
+      <p class="text-silver-500 text-lg max-w-2xl mx-auto featured-snippet">{t(locale, 'hub.snippet')}</p>
     </div>
     <Calculator locale={locale} />
     <UtilityCalcs locale={locale} />
   </div>
+  <ContentSections locale={locale} />
+  <QuickReference locale={locale} />
   <HowItWorks locale={locale} />
   <FrictionTable locale={locale} />
+  <ReviewedBy locale={locale} />
+  <PeopleAlsoSearch locale={locale} />
   <FAQ locale={locale} />
 </BaseLayout>

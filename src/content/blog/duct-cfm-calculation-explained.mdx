@@ -1,0 +1,130 @@
+---
+title: "Duct CFM Calculation Explained: Airflow for Every Room"
+description: "Learn how to calculate CFM airflow for HVAC duct sizing. Covers the 1 CFM per sq ft rule, BTU based methods, Manual J, and practical examples."
+date: 2026-03-04
+author: "HVAC Duct Calculator Team"
+category: "Calculations"
+---
+
+## What Is CFM and Why It Matters
+
+CFM stands for Cubic Feet per Minute. It measures the volume of air flowing through a duct in one minute. Every room in a building requires a specific CFM to maintain comfortable temperatures during heating and cooling.
+
+If a room does not receive enough CFM, it will be too hot in summer or too cold in winter. If it receives too much, it wastes energy and can create drafts.
+
+## Method 1: The 1 CFM Per Square Foot Rule
+
+The simplest way to estimate CFM for residential rooms:
+
+**CFM = Room Area (sq ft) × 1**
+
+This rule assumes standard 8 foot ceilings, average insulation, and moderate climate conditions.
+
+| Room | Size | CFM Needed |
+|---|---|---|
+| Small bedroom | 120 sq ft | 120 CFM |
+| Master bedroom | 250 sq ft | 250 CFM |
+| Living room | 350 sq ft | 350 CFM |
+| Kitchen | 200 sq ft | 200 CFM |
+| Bathroom | 80 sq ft | 80 CFM |
+| Home office | 150 sq ft | 150 CFM |
+
+**When this method works well:** Standard residential homes in moderate climates with typical insulation.
+
+**When it falls short:** Rooms with large windows, poor insulation, high ceilings, or extreme climates need more precise calculations.
+
+## Method 2: BTU Based CFM Calculation
+
+If you know the heating or cooling load for a room in BTU, you can calculate the exact CFM:
+
+**CFM = BTU / (1.08 × ΔT)**
+
+Where:
+- BTU = heating or cooling load in BTU per hour
+- ΔT = temperature difference between supply and return air
+- 1.08 = constant (specific heat of air × density × conversion factor)
+
+### Typical ΔT Values
+
+| Mode | ΔT |
+|---|---|
+| Cooling | 20°F |
+| Heating (gas furnace) | 55°F to 70°F |
+| Heating (heat pump) | 25°F to 35°F |
+
+### Example: Cooling a 300 sq ft living room
+
+1. Estimated cooling load: 300 × 25 = 7,500 BTU/hr
+2. CFM = 7,500 / (1.08 × 20) = 7,500 / 21.6 = **347 CFM**
+
+This is close to the 1 CFM per sq ft rule, which confirms both methods align for typical conditions.
+
+## Method 3: Tonnage Based CFM
+
+For whole system sizing, use the relationship between cooling tonnage and airflow:
+
+**1 ton of cooling = 12,000 BTU/hr = 400 CFM**
+
+| System Size | BTU/hr | Total CFM |
+|---|---|---|
+| 1.5 tons | 18,000 | 600 CFM |
+| 2.0 tons | 24,000 | 800 CFM |
+| 2.5 tons | 30,000 | 1,000 CFM |
+| 3.0 tons | 36,000 | 1,200 CFM |
+| 3.5 tons | 42,000 | 1,400 CFM |
+| 4.0 tons | 48,000 | 1,600 CFM |
+| 5.0 tons | 60,000 | 2,000 CFM |
+
+Once you know the total system CFM, distribute it to each room based on the room's proportional load or square footage.
+
+## Method 4: Manual J Load Calculation
+
+Manual J is the ACCA (Air Conditioning Contractors of America) standard for calculating heating and cooling loads. It is the most accurate method because it accounts for:
+
+- Wall, ceiling, and floor construction
+- Insulation R values
+- Window sizes, types, and orientations
+- Infiltration rates
+- Internal heat gains (appliances, occupants, lighting)
+- Climate zone data
+- Duct location and insulation
+
+The output of Manual J is a room by room BTU load, which converts directly to CFM using the BTU formula above.
+
+**Manual J is required** for new construction permits in most jurisdictions and is strongly recommended for any duct design project.
+
+Read our full [Manual J explained](/blog/manual-j-load-calculation-explained) guide.
+
+## How CFM Connects to Duct Size
+
+Once you know the CFM for each room, you can size the duct using:
+
+**Duct Diameter = √(4 × CFM / (π × Velocity)) × 12**
+
+At a standard residential velocity of 700 FPM:
+
+| CFM | Duct Diameter |
+|---|---|
+| 80 | 5 inch |
+| 120 | 6 inch |
+| 200 | 8 inch |
+| 300 | 9 inch |
+| 400 | 10 inch |
+| 600 | 12 inch |
+| 800 | 14 inch |
+| 1,200 | 16 inch |
+
+Use our [HVAC Duct Calculator](/) to find the exact duct size for any CFM requirement.
+
+## Common CFM Calculation Mistakes
+
+1. **Using cooling CFM for heating** — Heating and cooling CFM requirements differ because of different ΔT values
+2. **Ignoring room orientation** — South and west facing rooms with large windows need more CFM
+3. **Forgetting internal loads** — Kitchens with ovens and rooms with computers generate significant heat
+4. **Not accounting for duct losses** — Add 5% to 10% for duct leakage if ducts are in unconditioned spaces
+
+## Related Guides
+
+- [How to calculate duct size step by step](/blog/how-to-calculate-duct-size)
+- [BTU to tonnage conversion guide](/blog/btu-to-tonnage-conversion)
+- [CFM formula for HVAC systems](/blog/cfm-formula-hvac)

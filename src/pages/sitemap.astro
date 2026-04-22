@@ -11,6 +11,10 @@ const pages = footerNav.map((item) => ({
   label: t(locale, item.key),
   url: getLocalizedUrl(locale, item.path),
 }));
+
+const ductSizes = [4, 6, 8, 10, 12, 14, 16, 18, 20, 24];
+const roomSizes = [100, 150, 200, 300, 400, 500, 750, 1000, 1500, 2000];
+const homeSizes = [500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 5000];
 ---
 
 <BaseLayout title={t(locale, 'sitemap.title')} locale={locale} noindex={true}>
@@ -24,6 +28,33 @@ const pages = footerNav.map((item) => ({
           <li><a href={getLocalizedUrl(locale, '/')} class="text-accent hover:underline">{t(locale, 'nav.home')}</a></li>
           {pages.map((page) => (
             <li><a href={page.url} class="text-accent hover:underline">{page.label}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="text-lg font-bold text-silver-800 mb-3">Duct Size Calculators</h2>
+        <ul class="space-y-2">
+          {ductSizes.map((size) => (
+            <li><a href={`/duct-calculator-${size}-inch/`} class="text-accent hover:underline">{size} Inch Duct Calculator</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="text-lg font-bold text-silver-800 mb-3">CFM by Room Size</h2>
+        <ul class="space-y-2">
+          {roomSizes.map((sqft) => (
+            <li><a href={`/cfm-calculator-${sqft}-sqft/`} class="text-accent hover:underline">CFM Calculator for {sqft} Sq Ft Room</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="text-lg font-bold text-silver-800 mb-3">Whole Home Duct Sizing</h2>
+        <ul class="space-y-2">
+          {homeSizes.map((sqft) => (
+            <li><a href={`/hvac-duct-sizing-for-${sqft}-sqft/`} class="text-accent hover:underline">HVAC Duct Sizing for {sqft.toLocaleString()} Sq Ft Home</a></li>
           ))}
         </ul>
       </div>

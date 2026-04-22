@@ -1,0 +1,116 @@
+---
+title: "Static Pressure in HVAC: Calculation Guide and Best Practices"
+description: "Learn how to calculate static pressure in HVAC duct systems. Understand available static pressure, total external static pressure, and how it affects duct sizing."
+date: 2026-02-28
+author: "HVAC Duct Calculator Team"
+category: "Calculations"
+---
+
+## What Is Static Pressure in HVAC
+
+Static pressure is the resistance to airflow in a duct system. It is the force that the blower fan must generate to push air through all the ductwork, fittings, filters, coils, and registers. It is measured in inches of water gauge (in/wg).
+
+Think of it like water pressure in a plumbing system. The pump must generate enough pressure to push water through all the pipes. Similarly, the HVAC blower must generate enough static pressure to push air through all the ducts.
+
+## Why Static Pressure Matters
+
+Static pressure is the hidden factor that determines whether an HVAC system works correctly:
+
+- **Too high** = restricted airflow, noisy operation, high energy use, equipment damage
+- **Too low** = the blower cannot push air to distant rooms
+- **Just right** = every room gets the correct CFM at acceptable noise levels
+
+The target for most residential systems is **0.5 in/wg total external static pressure** (TESP). This is the maximum resistance the duct system should create.
+
+## Understanding Total External Static Pressure
+
+Total External Static Pressure (TESP) is the sum of all pressure drops in the system outside the air handler itself:
+
+**TESP = Supply Duct Losses + Return Duct Losses + Filter Loss + Coil Loss + Register Losses**
+
+### Typical Component Pressure Drops
+
+| Component | Pressure Drop |
+|---|---|
+| 1 inch filter (clean) | 0.05 to 0.10 in/wg |
+| 1 inch filter (dirty) | 0.15 to 0.25 in/wg |
+| MERV 13 filter | 0.15 to 0.30 in/wg |
+| Evaporator coil (wet) | 0.15 to 0.25 in/wg |
+| Supply registers | 0.02 to 0.05 in/wg each |
+| Return grilles | 0.02 to 0.03 in/wg each |
+| Supply ductwork | 0.10 to 0.20 in/wg (total) |
+| Return ductwork | 0.05 to 0.10 in/wg (total) |
+
+## How to Calculate Available Static Pressure for Duct Sizing
+
+Available static pressure (ASP) is what remains for the ductwork after accounting for all other system components:
+
+**ASP = Equipment Rated TESP − Filter Loss − Coil Loss − Register Losses**
+
+### Example Calculation
+
+Equipment rated at 0.50 in/wg TESP:
+1. Filter loss: 0.10 in/wg
+2. Coil loss: 0.20 in/wg
+3. Register losses: 0.05 in/wg
+4. **ASP = 0.50 − 0.10 − 0.20 − 0.05 = 0.15 in/wg**
+
+This 0.15 in/wg is all the pressure available for both supply and return ductwork combined.
+
+## Converting ASP to Friction Rate
+
+Once you know the available static pressure, convert it to a friction rate for duct sizing:
+
+**Friction Rate = (ASP / TEL) × 100**
+
+Where TEL is the Total Effective Length of the longest duct run.
+
+### Example
+
+- ASP = 0.15 in/wg
+- Longest run TEL = 150 feet
+- **Friction Rate = (0.15 / 150) × 100 = 0.10 in/wg per 100 ft**
+
+This friction rate goes directly into the [HVAC Duct Calculator](/) to size every duct in the system.
+
+## How to Measure Static Pressure
+
+HVAC technicians measure static pressure with a manometer (digital or analog):
+
+1. Drill small test holes in the supply and return plenums
+2. Insert static pressure probes
+3. Read the pressure on the supply side (positive) and return side (negative)
+4. **TESP = |Supply reading| + |Return reading|**
+
+### Acceptable Readings
+
+| Measurement Point | Acceptable Range |
+|---|---|
+| Total external (TESP) | 0.30 to 0.50 in/wg |
+| Supply side | 0.15 to 0.30 in/wg |
+| Return side | 0.10 to 0.20 in/wg |
+
+Readings above 0.50 in/wg typically indicate restrictive ductwork, dirty filters, or undersized returns.
+
+## Signs of High Static Pressure
+
+- System runs constantly but rooms are not comfortable
+- Noisy airflow from supply registers
+- Blower motor runs hot
+- Higher than normal electricity bills
+- Thermostat takes a long time to reach set point
+
+## How to Reduce Static Pressure
+
+1. **Upgrade to larger return ducts** (most common fix)
+2. **Increase trunk duct size** in restrictive sections
+3. **Use a lower MERV filter** if acceptable for air quality needs
+4. **Eliminate unnecessary bends** in duct runs
+5. **Replace kinked or compressed flex duct**
+6. **Add return air pathways** (transfer grilles or jump ducts)
+
+## Related Guides
+
+- [Friction rate guide](/blog/friction-rate-guide)
+- [TEL calculation guide](/blog/tel-total-effective-length-guide)
+- [How to diagnose undersized ductwork](/blog/how-to-diagnose-undersized-ductwork)

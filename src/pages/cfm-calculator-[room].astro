@@ -1,0 +1,103 @@
+---
+import BaseLayout from '@theme/layouts/BaseLayout.astro';
+
+export function getStaticPaths() {
+  const rooms = [100, 150, 200, 300, 400, 500, 750, 1000, 1500, 2000];
+  return rooms.map((sqft) => {
+    const cfm = sqft;
+    const btu = sqft * 25;
+    const tons = btu / 12000;
+    const ductDia = Math.ceil(Math.sqrt((cfm * 4) / (Math.PI * 700)) * 12);
+    const roundedDia = Math.ceil(ductDia / 2) * 2;
+    return {
+      params: { room: `${sqft}-sqft` },
+      props: { sqft, cfm, btu, tons: tons.toFixed(2), ductDia: roundedDia },
+    };
+  });
+}
+
+const { sqft, cfm, btu, tons, ductDia } = Astro.props;
+const title = `CFM Calculator for ${sqft} Sq Ft Room — Airflow & Duct Size Guide`;
+const description = `Find the exact CFM airflow needed for a ${sqft} square foot room. Get recommended duct sizes, BTU load estimates, and HVAC sizing data for ${sqft} sqft spaces.`;
+
+const allRooms = [100, 150, 200, 300, 400, 500, 750, 1000, 1500, 2000];
+---
+
+<BaseLayout title={title} description={description} locale="en" schemaType="website">
+  <div class="prog-hero">
+    <h1>CFM Calculator for {sqft} Sq Ft Room</h1>
+    <p>{description}</p>
+  </div>
+
+  <div class="glass-card p-6 sm:p-8 mb-8">
+    <h2 class="content-heading">Airflow Requirements for {sqft} Square Feet</h2>
+
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
+      <div class="result-card">
+        <div class="text-xs text-silver-500 uppercase tracking-wider font-semibold mb-1">Required CFM</div>
+        <div class="text-2xl font-extrabold text-accent">{cfm}</div>
+      </div>
+      <div class="result-card">
+        <div class="text-xs text-silver-500 uppercase tracking-wider font-semibold mb-1">Est. BTU Load</div>
+        <div class="text-2xl font-extrabold text-accent">{btu.toLocaleString()}</div>
+      </div>
+      <div class="result-card">
+        <div class="text-xs text-silver-500 uppercase tracking-wider font-semibold mb-1">Cooling Tons</div>
+        <div class="text-2xl font-extrabold text-accent">{tons}</div>
+      </div>
+      <div class="result-card">
+        <div class="text-xs text-silver-500 uppercase tracking-wider font-semibold mb-1">Duct Size</div>
+        <div class="text-2xl font-extrabold text-accent">{ductDia}"</div>
+      </div>
+    </div>
+
+    <p class="content-text">
+      A {sqft} square foot room requires approximately {cfm} CFM of airflow for proper heating
+      and cooling. This is based on the industry standard rule of 1 CFM per square foot.
+      The estimated cooling load is {btu.toLocaleString()} BTU ({tons} tons), and the recommended
+      round duct size is {ductDia} inches at a quiet velocity of 700 FPM.
+    </p>
+  </div>
+
+  <div class="glass-card p-6 sm:p-8 mb-8">
+    <h2 class="content-heading">How We Calculated This</h2>
+    <div class="formula-block">
+      <span class="formula-label">Step 1: CFM Requirement</span>
+      <code class="formula-code">CFM = {sqft} sqft × 1 CFM/sqft = {cfm} CFM</code>
+    </div>
+    <div class="formula-block">
+      <span class="formula-label">Step 2: BTU Load Estimate</span>
+      <code class="formula-code">BTU = {sqft} sqft × 25 BTU/sqft = {btu.toLocaleString()} BTU</code>
+      <p class="formula-desc">Using 25 BTU per square foot as a general residential estimate. Actual load depends on insulation, climate, and sun exposure.</p>
+    </div>
+    <div class="formula-block">
+      <span class="formula-label">Step 3: Duct Size</span>
+      <code class="formula-code">Diameter = √(4 × {cfm} ÷ (π × 700)) × 12 ≈ {ductDia} inches</code>
+      <p class="formula-desc">Based on 700 FPM velocity for quiet residential operation.</p>
+    </div>
+  </div>
+
+  <div class="prog-cta">
+    <a href="/" class="btn-primary">Use Full HVAC Duct Calculator →</a>
+  </div>
+
+  <div class="glass-card p-6 sm:p-8 mb-8">
+    <h2 class="content-heading">Related Guides</h2>
+    <div class="prog-links">
+      <a href="/blog/duct-cfm-calculation-explained/">CFM Calculation Explained</a>
+      <a href="/blog/how-to-calculate-duct-size/">How to Calculate Duct Size</a>
+      <a href="/blog/duct-sizing-for-home/">Duct Sizing for Home HVAC</a>
+      <a href="/blog/btu-to-tonnage-conversion/">BTU to Tonnage Conversion</a>
+      <a href="/blog/hvac-load-calculation-guide/">HVAC Load Calculation Guide</a>
+    </div>
+  </div>
+
+  <div class="glass-card p-6 sm:p-8">
+    <h2 class="content-heading">Other Room Sizes</h2>
+    <div class="prog-links">
+      {allRooms.filter((r) => r !== sqft).map((r) => (
+        <a href={`/cfm-calculator-${r}-sqft/`}>{r} sqft Room</a>
+      ))}
+    </div>
+  </div>
+</BaseLayout>

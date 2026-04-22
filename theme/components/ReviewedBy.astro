@@ -1,0 +1,49 @@
+---
+import { t } from '@theme/i18n/utils';
+
+export interface Props {
+  locale?: string;
+}
+
+const { locale = 'en' } = Astro.props;
+---
+
+<section class="reviewed-by-section" id="reviewed-by">
+  <div class="glass-card p-6 sm:p-8">
+    <div class="reviewed-header">
+      <div class="reviewed-badge-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+        </svg>
+      </div>
+      <div>
+        <h2 class="reviewed-title">{t(locale, 'hub.reviewed.title')}</h2>
+        <p class="reviewed-text">{t(locale, 'hub.reviewed.text')}</p>
+        <p class="reviewed-text" style="margin-top: 0.5rem; font-weight: 600;">{t(locale, 'hub.reviewed.author')}</p>
+        <p class="reviewed-text" style="font-size: 0.75rem; margin-top: 0.25rem;">{t(locale, 'hub.reviewed.date')}</p>
+      </div>
+    </div>
+
+    <div class="reviewed-badges">
+      <span class="trust-badge">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+        {t(locale, 'hub.reviewed.badge1')}
+      </span>
+      <span class="trust-badge">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+        {t(locale, 'hub.reviewed.badge2')}
+      </span>
+      <span class="trust-badge">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+        {t(locale, 'hub.reviewed.badge3')}
+      </span>
+    </div>
+
+    <div class="reviewed-disclaimer">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+      </svg>
+      <p>{t(locale, 'hub.reviewed.disclaimer')}</p>
+    </div>
+  </div>
+</section>

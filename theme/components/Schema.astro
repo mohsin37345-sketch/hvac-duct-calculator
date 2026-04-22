@@ -43,6 +43,19 @@ if (type === 'website') {
     url: siteConfig.url,
     description: siteConfig.description,
   });
+  schemas.push({
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'HVAC Duct Calculator',
+    applicationCategory: 'UtilityApplication',
+    operatingSystem: 'Web',
+    description: 'Free online HVAC duct sizing calculator for professionals and homeowners. Calculate duct dimensions, CFM airflow, friction loss, and velocity.',
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'USD',
+    },
+  });
 }
 
 if (type === 'about') {

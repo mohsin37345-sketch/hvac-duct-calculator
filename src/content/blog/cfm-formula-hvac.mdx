@@ -1,0 +1,152 @@
+---
+title: "CFM Formula for HVAC Systems: Every Equation You Need"
+description: "All the essential CFM formulas for HVAC duct sizing in one place. Covers airflow calculation, BTU to CFM conversion, duct area formulas, and velocity relationships."
+date: 2026-02-24
+author: "HVAC Duct Calculator Team"
+category: "Calculations"
+---
+
+## The Core CFM Formula
+
+The fundamental relationship in HVAC duct sizing is:
+
+**Q = A × V**
+
+Where:
+- **Q** = airflow in CFM (Cubic Feet per Minute)
+- **A** = cross sectional area of the duct in square feet
+- **V** = air velocity in FPM (Feet per Minute)
+
+This single formula connects duct size, airflow, and velocity. If you know any two, you can solve for the third.
+
+## Duct Area Formulas
+
+### Round Duct
+**A = π × (D/2)²**
+
+Where D is the diameter in feet (divide inches by 12).
+
+Simplified: **A = π × D² / 4**
+
+### Rectangular Duct
+**A = W × H**
+
+Where W and H are width and height in feet.
+
+### Round Equivalent for Rectangular
+**De = 1.3 × (a × b)^0.625 / (a + b)^0.25**
+
+Where a and b are rectangular sides in inches.
+
+## CFM from Duct Size and Velocity
+
+If you know the duct size and want to find the airflow capacity:
+
+**CFM = A × V**
+
+### Example: 10 inch round duct at 700 FPM
+
+1. Convert 10 inches to feet: 10/12 = 0.833 ft
+2. Area: π × (0.833/2)² = π × 0.1736 = 0.545 sq ft
+3. **CFM = 0.545 × 700 = 382 CFM**
+
+## Duct Size from CFM and Velocity
+
+If you know the required CFM and want to find the duct diameter:
+
+**D (inches) = √(4 × CFM / (π × V)) × 12**
+
+### Example: 200 CFM at 700 FPM
+
+1. D = √(4 × 200 / (π × 700)) × 12
+2. D = √(800 / 2199) × 12
+3. D = √0.364 × 12
+4. D = 0.603 × 12
+5. **D = 7.2 inches → round up to 8 inch duct**
+
+## Velocity from CFM and Duct Size
+
+If you know CFM and duct size, calculate velocity to check noise levels:
+
+**V = CFM / A**
+
+### Example: 300 CFM through a 10 inch duct
+
+1. Area = π × (10/24)² = 0.545 sq ft
+2. **V = 300 / 0.545 = 550 FPM** ✅ (well within quiet range)
+
+## BTU to CFM Conversion
+
+**CFM = BTU / (1.08 × ΔT)**
+
+Where:
+- BTU = heating or cooling load in BTU/hr
+- ΔT = temperature difference between supply and return air
+- 1.08 = constant (density × specific heat × conversion)
+
+| Application | ΔT | Simplified Formula |
+|---|---|---|
+| Cooling | 20°F | CFM = BTU / 21.6 |
+| Gas furnace heating | 60°F | CFM = BTU / 64.8 |
+| Heat pump heating | 30°F | CFM = BTU / 32.4 |
+
+## Tonnage to CFM
+
+**CFM = Tons × 400**
+
+| Tonnage | CFM |
+|---|---|
+| 1 ton | 400 CFM |
+| 1.5 tons | 600 CFM |
+| 2 tons | 800 CFM |
+| 3 tons | 1,200 CFM |
+| 4 tons | 1,600 CFM |
+| 5 tons | 2,000 CFM |
+
+## CFM per Square Foot Rule
+
+**CFM = Floor Area (sq ft) × 1**
+
+This simple rule works for standard residential spaces with 8 foot ceilings and average insulation.
+
+## Pressure Loss Formula
+
+**ΔP = f × (TEL / 100)**
+
+Where:
+- ΔP = pressure drop in inches of water gauge (in/wg)
+- f = friction rate (in/wg per 100 ft)
+- TEL = Total Effective Length in feet
+
+## Available Friction Rate
+
+**f = (ASP / TEL) × 100**
+
+Where:
+- f = available friction rate
+- ASP = Available Static Pressure for ductwork (in/wg)
+- TEL = longest duct run's Total Effective Length
+
+## Quick Reference: All Formulas
+
+| What You Need | Formula |
+|---|---|
+| CFM from duct size | CFM = A × V |
+| Duct diameter from CFM | D = √(4 × CFM / (π × V)) × 12 |
+| Velocity from CFM | V = CFM / A |
+| Round duct area | A = π × (D/2)² |
+| CFM from BTU | CFM = BTU / (1.08 × ΔT) |
+| CFM from tonnage | CFM = Tons × 400 |
+| Pressure loss | ΔP = f × (TEL / 100) |
+| Friction rate | f = (ASP / TEL) × 100 |
+| Rect to round | De = 1.3 × (a×b)^0.625 / (a+b)^0.25 |
+
+## Calculate Instantly
+
+Our [HVAC Duct Calculator](/) applies all these formulas automatically. Enter your values and get results in seconds.
+
+## Related Guides
+
+- [How to calculate duct size](/blog/how-to-calculate-duct-size)
+- [Duct CFM calculation explained](/blog/duct-cfm-calculation-explained)
+- [BTU to tonnage conversion](/blog/btu-to-tonnage-conversion)

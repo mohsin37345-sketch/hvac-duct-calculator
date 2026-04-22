@@ -1,0 +1,146 @@
+---
+import BaseLayout from '@theme/layouts/BaseLayout.astro';
+
+export function getStaticPaths() {
+  const sizes = [500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 5000];
+  return sizes.map((sqft) => {
+    const totalCfm = sqft;
+    const btu = sqft * 25;
+    const tons = (btu / 12000).toFixed(1);
+    const trunkDia = Math.ceil(Math.sqrt((totalCfm * 4) / (Math.PI * 700)) * 12);
+    const roundedTrunk = Math.ceil(trunkDia / 2) * 2;
+    const rooms = Math.round(sqft / 200);
+    const branchCfm = Math.round(totalCfm / rooms);
+    const branchDia = Math.ceil(Math.sqrt((branchCfm * 4) / (Math.PI * 700)) * 12);
+    const roundedBranch = Math.ceil(branchDia / 2) * 2;
+
+    return {
+      params: { sqft: `${sqft}` },
+      props: { sqft, totalCfm, btu, tons, trunkDia: roundedTrunk, rooms, branchCfm, branchDia: roundedBranch },
+    };
+  });
+}
+
+const { sqft, totalCfm, btu, tons, trunkDia, rooms, branchCfm, branchDia } = Astro.props;
+const title = `HVAC Duct Sizing for ${sqft.toLocaleString()} Sq Ft Home — Complete Guide`;
+const description = `Complete duct sizing guide for a ${sqft.toLocaleString()} square foot home. See recommended trunk and branch duct sizes, total CFM, BTU load, and tonnage requirements.`;
+
+const allSizes = [500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 5000];
+---
+
+<BaseLayout title={title} description={description} locale="en" schemaType="website">
+  <div class="prog-hero">
+    <h1>HVAC Duct Sizing for {sqft.toLocaleString()} Sq Ft Home</h1>
+    <p>{description}</p>
+  </div>
+
+  <div class="glass-card p-6 sm:p-8 mb-8">
+    <h2 class="content-heading">System Overview</h2>
+
+    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-6">
+      <div class="result-card">
+        <div class="text-xs text-silver-500 uppercase tracking-wider font-semibold mb-1">Total CFM</div>
+        <div class="text-2xl font-extrabold text-accent">{totalCfm.toLocaleString()}</div>
+      </div>
+      <div class="result-card">
+        <div class="text-xs text-silver-500 uppercase tracking-wider font-semibold mb-1">Cooling Load</div>
+        <div class="text-2xl font-extrabold text-accent">{btu.toLocaleString()} BTU</div>
+      </div>
+      <div class="result-card">
+        <div class="text-xs text-silver-500 uppercase tracking-wider font-semibold mb-1">System Size</div>
+        <div class="text-2xl font-extrabold text-accent">{tons} Ton</div>
+      </div>
+      <div class="result-card">
+        <div class="text-xs text-silver-500 uppercase tracking-wider font-semibold mb-1">Main Trunk</div>
+        <div class="text-2xl font-extrabold text-accent">{trunkDia}"</div>
+      </div>
+      <div class="result-card">
+        <div class="text-xs text-silver-500 uppercase tracking-wider font-semibold mb-1">Branch Ducts</div>
+        <div class="text-2xl font-extrabold text-accent">{branchDia}"</div>
+      </div>
+      <div class="result-card">
+        <div class="text-xs text-silver-500 uppercase tracking-wider font-semibold mb-1">Est. Rooms</div>
+        <div class="text-2xl font-extrabold text-accent">{rooms}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="glass-card p-6 sm:p-8 mb-8">
+    <h2 class="content-heading">Recommended Duct Layout</h2>
+    <p class="content-text">
+      For a {sqft.toLocaleString()} square foot home, the HVAC system needs to deliver approximately
+      {totalCfm.toLocaleString()} CFM of total airflow. This requires a {tons} ton cooling system
+      with a cooling capacity of {btu.toLocaleString()} BTU per hour.
+    </p>
+
+    <div class="glass-card overflow-hidden">
+      <table class="prog-table">
+        <thead>
+          <tr>
+            <th>Duct Section</th>
+            <th>Size</th>
+            <th>CFM</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="font-medium">Main Supply Trunk</td>
+            <td class="font-mono font-bold text-accent">{trunkDia}" round</td>
+            <td class="font-mono">{totalCfm} CFM</td>
+            <td>Sheet metal recommended</td>
+          </tr>
+          <tr>
+            <td class="font-medium">Branch Supply Runs</td>
+            <td class="font-mono font-bold text-accent">{branchDia}" round</td>
+            <td class="font-mono">{branchCfm} CFM each</td>
+            <td>Metal or flex acceptable</td>
+          </tr>
+          <tr>
+            <td class="font-medium">Main Return</td>
+            <td class="font-mono font-bold text-accent">{trunkDia + 2}" round</td>
+            <td class="font-mono">{totalCfm} CFM</td>
+            <td>Larger for lower velocity</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="glass-card p-6 sm:p-8 mb-8">
+    <h2 class="content-heading">Important Notes</h2>
+    <div class="stat-callout">
+      <div class="stat-icon">📋</div>
+      <p>
+        These are general estimates based on 1 CFM per square foot and 25 BTU per square foot.
+        Actual requirements vary based on climate zone, insulation quality, window area, ceiling height,
+        and occupancy. For accurate sizing, a Manual J load calculation and Manual D duct design should
+        be performed by a licensed HVAC professional.
+      </p>
+    </div>
+  </div>
+
+  <div class="prog-cta">
+    <a href="/" class="btn-primary">Use Full HVAC Duct Calculator →</a>
+  </div>
+
+  <div class="glass-card p-6 sm:p-8 mb-8">
+    <h2 class="content-heading">Related Guides</h2>
+    <div class="prog-links">
+      <a href="/blog/duct-sizing-for-home/">Duct Sizing for Home HVAC</a>
+      <a href="/blog/manual-j-load-calculation-explained/">Manual J Load Calculation</a>
+      <a href="/blog/supply-vs-return-ductwork/">Supply vs Return Ductwork</a>
+      <a href="/blog/hvac-load-calculation-guide/">HVAC Load Calculation Guide</a>
+      <a href="/blog/types-of-hvac-duct-systems/">Types of Duct Systems</a>
+    </div>
+  </div>
+
+  <div class="glass-card p-6 sm:p-8">
+    <h2 class="content-heading">Other Home Sizes</h2>
+    <div class="prog-links">
+      {allSizes.filter((s) => s !== sqft).map((s) => (
+        <a href={`/hvac-duct-sizing-for-${s}-sqft/`}>{s.toLocaleString()} sqft Home</a>
+      ))}
+    </div>
+  </div>
+</BaseLayout>

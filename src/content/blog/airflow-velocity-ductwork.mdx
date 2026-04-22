@@ -1,0 +1,102 @@
+---
+title: "What Is Airflow Velocity in Ductwork and Why It Matters"
+description: "Airflow velocity in HVAC ductwork is the speed of air moving through ducts, measured in feet per minute. Learn acceptable velocities, noise limits, and sizing impact."
+date: 2026-02-18
+author: "HVAC Duct Calculator Team"
+category: "HVAC Concepts"
+---
+
+## What Is Airflow Velocity
+
+Airflow velocity is the speed at which air moves through a duct, measured in feet per minute (FPM). It is determined by the relationship between the volume of air (CFM) and the cross sectional area of the duct.
+
+**Velocity = CFM / Area**
+
+Higher velocity means air is moving faster through the duct. Lower velocity means air is moving slower.
+
+## Why Velocity Matters
+
+Velocity directly affects three things occupants notice:
+
+### 1. Noise
+Air moving through ductwork creates noise. The faster the air moves, the more turbulence it creates, and the louder the sound. In bedrooms and offices, keeping velocity low is essential for comfort.
+
+### 2. Air Distribution
+If velocity is too low, air may not reach the far side of a room from the supply register. Proper velocity ensures good "throw" from the register, which helps mix conditioned air throughout the space.
+
+### 3. Pressure Loss
+Higher velocity creates more friction loss per foot of duct. This means the blower must work harder, using more energy and reducing system efficiency.
+
+## Recommended Velocity Ranges
+
+| Application | Velocity Range | Notes |
+|---|---|---|
+| Residential bedrooms | 400 to 600 FPM | Maximum quiet operation |
+| Residential supply | 600 to 900 FPM | Standard range |
+| Residential return | 500 to 700 FPM | Lower velocity for quiet |
+| Residential main trunk | 700 to 900 FPM | Higher is acceptable |
+| Commercial offices | 800 to 1,200 FPM | Background noise masks duct noise |
+| Commercial supply | 1,000 to 1,500 FPM | Higher noise tolerance |
+| Industrial | 1,500 to 2,500 FPM | Noise not a concern |
+
+## Calculating Velocity
+
+**V = CFM / A**
+
+For a round duct: **A = π × (D/2)²** (where D is in feet)
+
+### Example: 300 CFM through a 10 inch duct
+
+1. Area = π × (10/24)² = π × 0.1736 = 0.545 sq ft
+2. Velocity = 300 / 0.545 = **550 FPM** ✅
+
+### Example: 300 CFM through an 8 inch duct
+
+1. Area = π × (8/24)² = π × 0.1111 = 0.349 sq ft
+2. Velocity = 300 / 0.349 = **860 FPM** ⚠️ (approaching noise limit)
+
+This shows how a 2 inch reduction in duct diameter increases velocity by 56%.
+
+## What Happens at Extreme Velocities
+
+### Too High (above 900 FPM residential)
+- Audible rushing or whistling from registers
+- Increased pressure loss requiring more blower power
+- Turbulence at fittings creates vibration noise
+- Air noise transmitted through walls and ceilings
+
+### Too Low (below 300 FPM)
+- Poor air mixing in rooms (stratification)
+- Warm air rises to ceiling, cool air sinks to floor
+- Reduced "throw" from supply registers
+- Potential condensation on cold duct surfaces
+
+## Velocity Based Duct Sizing
+
+Some HVAC designers size ducts by specifying a target velocity instead of a friction rate. This is called the velocity method:
+
+**D (inches) = √(4 × CFM / (π × V)) × 12**
+
+The velocity method is common in commercial applications where noise criteria (NC ratings) dictate maximum velocities for different spaces.
+
+## Velocity and Duct Size Quick Reference
+
+| CFM | 6" Duct | 8" Duct | 10" Duct | 12" Duct | 14" Duct |
+|---|---|---|---|---|---|
+| 100 | 509 FPM | 286 FPM | 183 FPM | 127 FPM | 94 FPM |
+| 200 | 1,019 FPM | 573 FPM | 367 FPM | 255 FPM | 187 FPM |
+| 300 | — | 860 FPM | 550 FPM | 382 FPM | 281 FPM |
+| 400 | — | 1,146 FPM | 733 FPM | 509 FPM | 375 FPM |
+| 600 | — | — | 1,100 FPM | 764 FPM | 562 FPM |
+
+Values marked "—" indicate velocities above 1,200 FPM (not recommended for most applications).
+
+## How Our Calculator Handles Velocity
+
+Our [HVAC Duct Calculator](/) can size ducts by either friction rate or velocity. Select "Velocity" in the sizing method dropdown, enter your target FPM, and the calculator will determine the required duct diameter.
+
+## Related Guides
+
+- [How to calculate duct size](/blog/how-to-calculate-duct-size)
+- [Noise in duct systems](/blog/noise-in-duct-systems)
+- [CFM formula for HVAC](/blog/cfm-formula-hvac)

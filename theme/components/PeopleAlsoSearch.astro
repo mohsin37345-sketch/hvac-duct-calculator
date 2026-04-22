@@ -1,0 +1,34 @@
+---
+import { t } from '@theme/i18n/utils';
+
+export interface Props {
+  locale?: string;
+}
+
+const { locale = 'en' } = Astro.props;
+
+const items = [
+  { key: 'hub.pas.item1', href: '/blog/duct-cfm-calculation-explained' },
+  { key: 'hub.pas.item2', href: '/blog/what-is-hvac-duct-calculator' },
+  { key: 'hub.pas.item3', href: '/blog/ductulator-vs-online-calculator' },
+  { key: 'hub.pas.item4', href: '/blog/how-to-calculate-duct-size' },
+  { key: 'hub.pas.item5', href: '#friction-rate-info' },
+  { key: 'hub.pas.item6', href: '#utility-calcs' },
+  { key: 'hub.pas.item7', href: '/blog/cfm-formula-hvac' },
+  { key: 'hub.pas.item8', href: '/blog/manual-vs-automatic-duct-sizing' },
+];
+---
+
+<section class="py-10" id="people-also-search">
+  <h2 class="text-2xl font-extrabold text-silver-900 text-center mb-8">{t(locale, 'hub.s10.title')}</h2>
+  <div class="pas-grid">
+    {items.map((item) => (
+      <a href={item.href} class="pas-pill">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        {t(locale, item.key)}
+      </a>
+    ))}
+  </div>
+</section>

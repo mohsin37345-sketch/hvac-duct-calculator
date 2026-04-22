@@ -11,7 +11,7 @@ const { locale = 'en', currentPath = '/' } = Astro.props;
 ---
 
 <header class="sticky top-0 z-50 bg-white/75 backdrop-blur-xl border-b border-silver-200/60" style="backdrop-filter: blur(24px) saturate(1.8);">
-  <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between 2xl:max-w-[1440px]">
+  <div class="max-w-[1200px] w-full mx-auto px-4 py-3 flex items-center justify-between">
     <!-- Logo -->
     <a href={getLocalizedUrl(locale, '/')} class="flex items-center gap-3 no-underline" aria-label={t(locale, 'site.title')}>
       <div class="w-10 h-10 flex items-center justify-center rounded-xl bg-gradient-to-br from-[#5b6abf] to-[#4a58a8] shadow-md">

@@ -1,0 +1,106 @@
+---
+title: "Manual D Duct Design Explained: The ACCA Standard for Duct Sizing"
+description: "Manual D is the ACCA standard for residential duct design. Learn how it works, what it covers, and how it determines the correct duct size for every run."
+date: 2026-01-28
+author: "HVAC Duct Calculator Team"
+category: "Advanced"
+---
+
+## What Is Manual D
+
+Manual D is the ACCA (Air Conditioning Contractors of America) standard procedure for designing residential duct systems. While Manual J determines how much heating and cooling each room needs, Manual D determines how to deliver that conditioning through properly sized ductwork.
+
+Manual D takes the room by room CFM requirements from Manual J and produces a complete duct layout with specific sizes for every trunk section, branch run, and return duct in the system.
+
+## How Manual D Works
+
+The Manual D process follows these steps:
+
+### Step 1: Establish Equipment Data
+- Total system airflow (CFM) from equipment specifications
+- Available external static pressure (TESP) from equipment data
+- Blower performance data (CFM at various static pressures)
+
+### Step 2: Subtract Non Duct Pressure Losses
+- Filter pressure drop
+- Cooling coil pressure drop
+- Heating element pressure drop
+- Supply and return register/grille losses
+
+**Remaining pressure = Available Static Pressure for Ductwork**
+
+### Step 3: Design the Duct Layout
+- Route trunk lines and branches on the building plan
+- Identify the longest supply run and longest return run
+- Calculate TEL for the longest runs
+
+### Step 4: Determine Friction Rate
+**Friction Rate = (Available Static Pressure / Longest TEL) × 100**
+
+This single friction rate is used to size every duct in the system.
+
+### Step 5: Size Every Duct
+Using the friction rate and the CFM for each run, determine the duct diameter or rectangular equivalent. This is exactly what our [HVAC Duct Calculator](/) does.
+
+### Step 6: Verify the Design
+- Check velocities in all runs (must be within acceptable ranges)
+- Verify total pressure drop does not exceed available pressure
+- Ensure balancing is possible with dampers
+
+## Manual D vs Using a Calculator Alone
+
+| Aspect | Calculator Only | Full Manual D |
+|---|---|---|
+| Individual duct sizing | ✅ Accurate | ✅ Accurate |
+| System level design | ❌ Not addressed | ✅ Complete |
+| Equipment matching | ❌ Not addressed | ✅ Verified |
+| Balancing verification | ❌ Not addressed | ✅ Included |
+| Code compliance | ⚠️ Partial | ✅ Full |
+
+A duct calculator is an essential tool within the Manual D process but does not replace the full system level design analysis.
+
+## Key Manual D Concepts
+
+### The Longest Run
+The longest supply run (highest TEL) sets the friction rate for the entire system. Every other run, being shorter, will have excess pressure available. Balancing dampers compensate for this excess.
+
+### Balancing
+Since shorter runs have less pressure drop than the longest run, they tend to receive more airflow than designed. Manual D accounts for this and specifies where balancing dampers should be installed.
+
+### Available Static Pressure Budget
+Manual D creates a pressure budget that accounts for every component:
+
+| Component | Typical Pressure Budget |
+|---|---|
+| Total available | 0.50 in/wg |
+| Filter | -0.10 in/wg |
+| Coil | -0.20 in/wg |
+| Supply registers | -0.03 in/wg |
+| Return grilles | -0.02 in/wg |
+| **Available for ductwork** | **0.15 in/wg** |
+
+This 0.15 in/wg must serve both supply and return ductwork for the entire system.
+
+## When Is Manual D Required
+
+- **New residential construction** (required by most building codes)
+- **Major renovations** adding or modifying ductwork
+- **Equipment replacement** where existing ducts may not match new equipment
+- **Comfort complaints** that suggest systemic duct problems
+- **Energy audits** evaluating duct system efficiency
+
+## Manual D Software
+
+Professional tools for Manual D design:
+
+- **Wrightsoft Right D** — Full Manual D compliance
+- **Elite RHVAC** — ACCA approved Manual D
+- **HVAC Calc** — Simplified Manual D process
+
+For individual duct sizing calculations within a Manual D design, use our [HVAC Duct Calculator](/).
+
+## Related Guides
+
+- [Manual J load calculation explained](/blog/manual-j-load-calculation-explained)
+- [How to calculate duct size](/blog/how-to-calculate-duct-size)
+- [Static pressure calculation guide](/blog/static-pressure-calculation-guide)

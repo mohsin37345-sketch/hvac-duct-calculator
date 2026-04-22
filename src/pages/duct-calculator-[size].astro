@@ -1,0 +1,119 @@
+---
+import BaseLayout from '@theme/layouts/BaseLayout.astro';
+
+export function getStaticPaths() {
+  const sizes = [4, 6, 8, 10, 12, 14, 16, 18, 20, 24];
+  return sizes.map((size) => {
+    const area = Math.PI * Math.pow(size / 24, 2);
+    const velocities = [600, 700, 800, 900];
+    const cfmData = velocities.map((v) => ({
+      velocity: v,
+      cfm: Math.round(area * v),
+    }));
+    const applications =
+      size <= 6
+        ? 'Bathroom exhaust, small bedrooms, individual supply runs'
+        : size <= 10
+          ? 'Bedrooms, offices, standard residential supply branches'
+          : size <= 14
+            ? 'Living rooms, master bedrooms, main trunk branches'
+            : size <= 18
+              ? 'Main trunk lines, large open areas, return air'
+              : 'Commercial trunk lines, large return plenums, industrial applications';
+
+    return {
+      params: { size: `${size}-inch` },
+      props: { size, cfmData, applications },
+    };
+  });
+}
+
+const { size, cfmData, applications } = Astro.props;
+const area = Math.PI * Math.pow(size / 24, 2);
+const title = `${size} Inch Duct Calculator — CFM, Velocity & Sizing Guide`;
+const description = `Calculate airflow capacity for ${size} inch round ductwork. See CFM ratings at different velocities, recommended applications, and friction loss data for ${size}" HVAC ducts.`;
+
+const allSizes = [4, 6, 8, 10, 12, 14, 16, 18, 20, 24];
+---
+
+<BaseLayout title={title} description={description} locale="en" schemaType="website">
+  <div class="prog-hero">
+    <h1>{size} Inch Duct Calculator</h1>
+    <p>{description}</p>
+  </div>
+
+  <div class="glass-card p-6 sm:p-8 mb-8">
+    <h2 class="content-heading">Airflow Capacity for {size}" Round Duct</h2>
+    <p class="content-text">
+      A {size} inch round duct has a cross sectional area of {(area * 144).toFixed(1)} square inches
+      ({area.toFixed(3)} sq ft). The table below shows the CFM airflow at different air velocities.
+    </p>
+
+    <div class="glass-card overflow-hidden">
+      <table class="prog-table">
+        <thead>
+          <tr>
+            <th>Velocity (FPM)</th>
+            <th>Airflow (CFM)</th>
+            <th>Noise Level</th>
+            <th>Use Case</th>
+          </tr>
+        </thead>
+        <tbody>
+          {cfmData.map((row: { velocity: number; cfm: number }) => (
+            <tr>
+              <td class="font-mono font-medium">{row.velocity} FPM</td>
+              <td class="font-mono font-bold text-accent">{row.cfm} CFM</td>
+              <td>{row.velocity <= 700 ? '✅ Quiet' : row.velocity <= 800 ? '⚠️ Moderate' : '🔊 May be noisy'}</td>
+              <td>{row.velocity <= 700 ? 'Residential supply' : row.velocity <= 800 ? 'Commercial supply' : 'Industrial'}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="glass-card p-6 sm:p-8 mb-8">
+    <h2 class="content-heading">Recommended Applications</h2>
+    <p class="content-text">{applications}</p>
+    <p class="content-text">
+      At the standard residential friction rate of 0.08 in/wg per 100 feet, a {size} inch duct
+      is ideal for delivering {cfmData[1].cfm} CFM at a quiet {cfmData[1].velocity} FPM velocity.
+    </p>
+  </div>
+
+  <div class="glass-card p-6 sm:p-8 mb-8">
+    <h2 class="content-heading">Quick Duct Sizing Formula</h2>
+    <div class="formula-block">
+      <span class="formula-label">CFM for {size}" Duct</span>
+      <code class="formula-code">CFM = (π/4) × ({size}/12)² × Velocity</code>
+      <p class="formula-desc">
+        At 700 FPM: CFM = {area.toFixed(4)} × 700 = {Math.round(area * 700)} CFM
+      </p>
+    </div>
+  </div>
+
+  <div class="prog-cta">
+    <a href="/" class="btn-primary">Use Full HVAC Duct Calculator →</a>
+  </div>
+
+  <div class="glass-card p-6 sm:p-8 mb-8">
+    <h2 class="content-heading">Related Guides</h2>
+    <div class="prog-links">
+      <a href="/blog/how-to-calculate-duct-size/">How to Calculate Duct Size</a>
+      <a href="/blog/friction-rate-guide/">Friction Rate Guide</a>
+      <a href="/blog/airflow-velocity-ductwork/">Airflow Velocity Explained</a>
+      <a href="/blog/round-vs-rectangular-ducts/">Round vs Rectangular Ducts</a>
+      <a href="/blog/duct-cfm-calculation-explained/">CFM Calculation Guide</a>
+    </div>
+  </div>
+
+  <div class="glass-card p-6 sm:p-8">
+    <h2 class="content-heading">Other Duct Sizes</h2>
+    <div class="prog-links">
+      {allSizes.filter((s) => s !== size).map((s) => (
+        <a href={`/duct-calculator-${s}-inch/`}>{s}" Duct Calculator</a>
+      ))}
+    </div>
+  </div>
+</BaseLayout>

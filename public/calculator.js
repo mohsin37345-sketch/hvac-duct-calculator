@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // =====================
   const particlesContainer = document.getElementById('bgParticles');
   function createParticles() {
+    if (!particlesContainer) return;
     const count = window.innerWidth < 640 ? 6 : 12;
     for (let i = 0; i < count; i++) {
       const p = document.createElement('div');
@@ -170,8 +171,63 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && !frictionRateModal.classList.contains('hidden')) {
-      frictionRateModal.classList.add('hidden');
+    if (e.key === 'Escape') {
+      if (!frictionRateModal.classList.contains('hidden')) frictionRateModal.classList.add('hidden');
+      if (!embedModal.classList.contains('hidden')) embedModal.classList.add('hidden');
+    }
+  });
+
+  // =====================
+  // Embed Modal
+  // =====================
+  const embedModal = document.getElementById('embedModal');
+  const embedToolBtn = document.getElementById('embedToolBtn');
+  const closeEmbedModal = document.getElementById('closeEmbedModal');
+  const copyEmbedBtn = document.getElementById('copyEmbedBtn');
+  const embedCode = document.getElementById('embedCode');
+
+  if (embedToolBtn && embedModal) {
+    embedToolBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      embedModal.classList.remove('hidden');
+    });
+
+    closeEmbedModal.addEventListener('click', () => {
+      embedModal.classList.add('hidden');
+    });
+
+    embedModal.addEventListener('click', (e) => {
+      if (e.target === embedModal) embedModal.classList.add('hidden');
+    });
+
+    if (copyEmbedBtn && embedCode) {
+      copyEmbedBtn.addEventListener('click', () => {
+        embedCode.select();
+        document.execCommand('copy');
+        const originalText = copyEmbedBtn.textContent;
+        copyEmbedBtn.textContent = 'Copied!';
+        setTimeout(() => {
+          copyEmbedBtn.textContent = originalText;
+        }, 2000);
+      });
+    }
+  }
+
+  // =====================
+  // Uncommon Value Warning
+  // =====================
+  const uncommonWarning = document.getElementById('uncommonWarning');
+  frictionRateInput.addEventListener('input', () => {
+    if (sizeBy === 'friction_rate') {
+      const val = parseFloat(frictionRateInput.value);
+      // Warning if < 0.05 or > 0.5 which are outside typical residential/light-commercial bounds
+      if (!isNaN(val) && (val < 0.05 || val > 0.5)) {
+        uncommonWarning.classList.remove('hidden');
+      } else {
+        uncommonWarning.classList.add('hidden');
+      }
+    } else {
+      uncommonWarning.classList.add('hidden');
     }
   });
 
@@ -279,15 +335,15 @@ document.addEventListener('DOMContentLoaded', () => {
       const areaFt2 = Math.PI * Math.pow(effectiveDiameter / 12 / 2, 2);
 
       if (sizeBy === 'friction_rate') {
-        // Using Darcy-Weisbach simplified for HVAC:
-        // CFM = Area * Velocity
-        // Velocity estimated from friction rate and diameter
-        // v = (frictionRate * D^1.22 / (0.109136 * L_factor))^(1/1.82) simplified
-        // Using simplified ASHRAE approximation:
-        // Q = 2118.5 * A * sqrt(frictionRate * D / (f * L))
-        // Simplified: velocity ~ (frictionRate/100ft * diameter)^0.5 scaled
-        const velocityFPM = Math.pow(frictionRate, 0.5) * Math.pow(effectiveDiameter, 0.6) * 48;
-        const cfmCalc = areaFt2 * velocityFPM;
+        // Calculate Q (CFM) from diameter and friction rate using ASHRAE formula:
+        // H_f = 0.109136 * Q^1.9 / D^5.02  =>  Q = (H_f / 0.109136 * D^5.02)^(1/1.9)
+        let effectiveFriction = frictionRate;
+        if (ductType === 'flex') {
+          effectiveFriction = frictionRate / 1.5; // Flex has roughly 50% more resistance
+        }
+        
+        const cfmCalc = Math.pow((effectiveFriction / 0.109136) * Math.pow(effectiveDiameter, 5.02), 1 / 1.9);
+        const velocityFPM = cfmCalc / areaFt2;
         const totalPressureLoss = (frictionRate / 100) * totalEquivLength;
         
         results = {
@@ -302,8 +358,12 @@ document.addEventListener('DOMContentLoaded', () => {
         // Velocity sizing
         const velocity = frictionRate; // User entered velocity in FPM
         const cfmCalc = areaFt2 * velocity;
-        // Estimate friction from velocity: friction ≈ 0.109136 * v^1.82 / D^1.22 per 100ft
-        const frictionEst = 0.109136 * Math.pow(velocity / 1000, 1.82) / Math.pow(effectiveDiameter / 12, 1.22);
+        
+        // Estimate friction from velocity and diameter
+        let frictionEst = 0.109136 * Math.pow(cfmCalc, 1.9) / Math.pow(effectiveDiameter, 5.02);
+        if (ductType === 'flex') {
+          frictionEst *= 1.5; // Flex has higher friction
+        }
         const totalPressureLoss = (frictionEst / 100) * totalEquivLength;
 
         results = {
@@ -321,10 +381,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (sizeBy === 'friction_rate') {
         // Calculate required diameter from CFM and friction rate
-        // Using ASHRAE simplified: D = (0.109136 * Q^1.82 / (frictionRate))^(1/4.82) * 12 scaled
-        // Simplified approximation
-        const velocityTarget = cfmVal / (Math.PI * 0.25); // rough starting estimate
-        const diamCalc = Math.pow(cfmVal / (48 * Math.pow(frictionRate, 0.5)), 1 / 0.6);
+        // D = (0.109136 * Q^1.9 / H_f)^(1/5.02)
+        let effectiveFriction = frictionRate;
+        if (ductType === 'flex') {
+          effectiveFriction = frictionRate / 1.5;
+        }
+        
+        const diamCalc = Math.pow((0.109136 * Math.pow(cfmVal, 1.9)) / effectiveFriction, 1 / 5.02);
         const areaFt2 = Math.PI * Math.pow(diamCalc / 12 / 2, 2);
         const velocityFPM = cfmVal / areaFt2;
         const totalPressureLoss = (frictionRate / 100) * totalEquivLength;
@@ -337,10 +400,15 @@ document.addEventListener('DOMContentLoaded', () => {
           'Duct Area': { value: (areaFt2 * 144).toFixed(1), unit: 'sq. inches' }
         };
       } else {
+        // Calculate duct size from CFM and Velocity
         const velocity = frictionRate; // velocity in FPM
         const areaFt2 = cfmVal / velocity;
         const diamCalc = Math.sqrt(areaFt2 * 4 / Math.PI) * 12;
-        const frictionEst = 0.109136 * Math.pow(velocity / 1000, 1.82) / Math.pow(diamCalc / 12, 1.22);
+        
+        let frictionEst = 0.109136 * Math.pow(cfmVal, 1.9) / Math.pow(diamCalc, 5.02);
+        if (ductType === 'flex') {
+          frictionEst *= 1.5;
+        }
         const totalPressureLoss = (frictionEst / 100) * totalEquivLength;
 
         results = {

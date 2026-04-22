@@ -1,0 +1,161 @@
+---
+import { t } from '@theme/i18n/utils';
+
+export interface Props {
+  locale?: string;
+}
+
+const { locale = 'en' } = Astro.props;
+
+const ductSizes = [4, 6, 8, 10, 12, 14, 16, 18, 20, 24];
+const roomSizes = [100, 150, 200, 300, 400, 500, 750, 1000, 1500, 2000];
+const homeSizes = [500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 5000];
+---
+
+<section class="quick-ref-section" id="quick-reference">
+  <h2 class="text-2xl font-extrabold text-silver-900 text-center mb-2">Explore Duct Sizing Guides</h2>
+  <p class="text-silver-500 text-center mb-8 max-w-2xl mx-auto">Browse our comprehensive reference pages for specific duct sizes, room dimensions, and home square footage calculations.</p>
+
+  <div class="glass-card p-6 sm:p-8 mb-6">
+    <h3 class="text-lg font-bold text-silver-800 mb-4">
+      <span class="inline-flex items-center gap-2">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+        Duct Size Calculators
+      </span>
+    </h3>
+    <div class="quick-ref-grid">
+      {ductSizes.map((size) => (
+        <a href={`/duct-calculator-${size}-inch/`} class="quick-ref-link">
+          <span class="quick-ref-value">{size}"</span>
+          <span class="quick-ref-label">Round Duct</span>
+        </a>
+      ))}
+    </div>
+  </div>
+
+  <div class="glass-card p-6 sm:p-8 mb-6">
+    <h3 class="text-lg font-bold text-silver-800 mb-4">
+      <span class="inline-flex items-center gap-2">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+        CFM by Room Size
+      </span>
+    </h3>
+    <div class="quick-ref-grid">
+      {roomSizes.map((sqft) => (
+        <a href={`/cfm-calculator-${sqft}-sqft/`} class="quick-ref-link">
+          <span class="quick-ref-value">{sqft.toLocaleString()}</span>
+          <span class="quick-ref-label">sq ft room</span>
+        </a>
+      ))}
+    </div>
+  </div>
+
+  <div class="glass-card p-6 sm:p-8 mb-6">
+    <h3 class="text-lg font-bold text-silver-800 mb-4">
+      <span class="inline-flex items-center gap-2">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Whole Home Duct Sizing
+      </span>
+    </h3>
+    <div class="quick-ref-grid">
+      {homeSizes.map((sqft) => (
+        <a href={`/hvac-duct-sizing-for-${sqft}-sqft/`} class="quick-ref-link">
+          <span class="quick-ref-value">{sqft.toLocaleString()}</span>
+          <span class="quick-ref-label">sq ft home</span>
+        </a>
+      ))}
+    </div>
+  </div>
+
+  <div class="glass-card p-6 sm:p-8">
+    <h3 class="text-lg font-bold text-silver-800 mb-4">
+      <span class="inline-flex items-center gap-2">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        Essential Guides
+      </span>
+    </h3>
+    <div class="quick-ref-guides">
+      <a href="/blog/how-to-calculate-duct-size" class="quick-ref-guide-link">How to Calculate Duct Size</a>
+      <a href="/blog/friction-rate-guide" class="quick-ref-guide-link">Friction Rate Guide</a>
+      <a href="/blog/duct-cfm-calculation-explained" class="quick-ref-guide-link">CFM Calculation Explained</a>
+      <a href="/blog/what-is-hvac-duct-sizing" class="quick-ref-guide-link">What Is Duct Sizing</a>
+      <a href="/blog/static-pressure-calculation-guide" class="quick-ref-guide-link">Static Pressure Guide</a>
+      <a href="/blog/tel-total-effective-length-guide" class="quick-ref-guide-link">TEL Calculation Guide</a>
+      <a href="/blog/metal-vs-flex-ducts" class="quick-ref-guide-link">Metal vs Flex Ducts</a>
+      <a href="/blog/round-vs-rectangular-ducts" class="quick-ref-guide-link">Round vs Rectangular Ducts</a>
+      <a href="/blog/manual-j-load-calculation-explained" class="quick-ref-guide-link">Manual J Explained</a>
+      <a href="/blog/common-hvac-installation-mistakes" class="quick-ref-guide-link">Common Mistakes to Avoid</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .quick-ref-section {
+    padding: 2.5rem 0;
+  }
+  .quick-ref-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 0.75rem;
+  }
+  .quick-ref-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 0.75rem;
+    border-radius: 0.75rem;
+    background: var(--color-silver-50, #f9fafb);
+    border: 1px solid var(--color-silver-200, #e5e7eb);
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+  .quick-ref-link:hover {
+    background: var(--color-accent-subtle, #eef6ff);
+    border-color: var(--color-accent, #2563eb);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+  }
+  .quick-ref-value {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--color-accent, #2563eb);
+    line-height: 1;
+  }
+  .quick-ref-label {
+    font-size: 0.7rem;
+    color: var(--color-silver-500, #6b7280);
+    margin-top: 0.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+  }
+  .quick-ref-guides {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 0.5rem;
+  }
+  .quick-ref-guide-link {
+    display: flex;
+    align-items: center;
+    padding: 0.625rem 1rem;
+    border-radius: 0.5rem;
+    background: var(--color-silver-50, #f9fafb);
+    border: 1px solid var(--color-silver-200, #e5e7eb);
+    color: var(--color-silver-700, #374151);
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+  .quick-ref-guide-link:hover {
+    background: var(--color-accent-subtle, #eef6ff);
+    border-color: var(--color-accent, #2563eb);
+    color: var(--color-accent, #2563eb);
+  }
+  .quick-ref-guide-link::before {
+    content: '→';
+    margin-right: 0.5rem;
+    color: var(--color-accent, #2563eb);
+    font-weight: 700;
+  }
+</style>

@@ -1,0 +1,118 @@
+---
+title: "HVAC Load Calculation Guide: Sizing Your System Right"
+description: "Learn how to calculate HVAC heating and cooling loads for proper system sizing. Covers Manual J, BTU estimation methods, and load factors for residential buildings."
+date: 2026-03-02
+author: "HVAC Duct Calculator Team"
+category: "Calculations"
+---
+
+## What Is an HVAC Load Calculation
+
+An HVAC load calculation determines how much heating and cooling a building needs to maintain comfortable indoor temperatures. The result is measured in BTU per hour (BTU/hr) and directly determines the size of HVAC equipment and the airflow requirements for every room.
+
+Without a load calculation, you are guessing at equipment and duct sizes. And guessing leads to oversized or undersized systems that waste energy and fail to keep occupants comfortable.
+
+## Why Load Calculations Matter for Duct Sizing
+
+The load calculation is the starting point of the entire HVAC design chain:
+
+1. **Load calculation** → determines BTU requirement per room
+2. **BTU per room** → converts to CFM airflow per room
+3. **CFM per room** → determines duct size per room
+4. **Total CFM** → determines trunk duct size and equipment capacity
+
+Skip step 1 and every subsequent step is based on assumptions instead of data.
+
+## Quick Estimation Method
+
+For a rough estimate when detailed calculations are not practical:
+
+**Cooling load: 20 to 30 BTU per square foot**
+**Heating load: 25 to 50 BTU per square foot** (depends heavily on climate)
+
+| Climate | Cooling BTU/sq ft | Heating BTU/sq ft |
+|---|---|---|
+| Hot (Phoenix, Miami) | 25 to 30 | 15 to 25 |
+| Moderate (Atlanta, DC) | 20 to 25 | 30 to 40 |
+| Cold (Chicago, Minneapolis) | 15 to 20 | 40 to 50 |
+| Very cold (Anchorage) | 10 to 15 | 50 to 60 |
+
+### Example: 2,000 sq ft home in a moderate climate
+
+- Cooling load: 2,000 × 22 = 44,000 BTU/hr = 3.7 tons
+- Heating load: 2,000 × 35 = 70,000 BTU/hr
+
+## Manual J: The Industry Standard
+
+Manual J is the ACCA standard for calculating residential heating and cooling loads. It is the only method accepted by most building codes for permit applications.
+
+### What Manual J Accounts For
+
+**Building envelope:**
+- Wall construction and insulation R values
+- Ceiling and roof insulation
+- Floor construction (slab, crawl space, basement)
+- Window size, type, U factor, and SHGC (Solar Heat Gain Coefficient)
+- Door sizes and construction
+
+**Infiltration:**
+- Air leakage through the building envelope
+- Measured by blower door test or estimated by construction quality
+
+**Internal gains:**
+- Occupants (250 BTU/hr sensible per person)
+- Appliances and cooking
+- Lighting
+- Electronics
+
+**External factors:**
+- Outdoor design temperatures (heating and cooling)
+- Solar orientation
+- Shading from trees and adjacent buildings
+
+### Manual J Output
+
+A complete Manual J calculation produces:
+
+| Output | Description |
+|---|---|
+| Room by room cooling loads | Sensible and latent BTU/hr for each room |
+| Room by room heating loads | BTU/hr for each room |
+| Total cooling load | Sum of all room cooling loads |
+| Total heating load | Sum of all room heating loads |
+| Equipment sizing | Recommended tonnage for cooling |
+
+## Converting Load to Airflow
+
+Once you have BTU loads, convert to CFM:
+
+**Cooling CFM = BTU / (1.08 × 20) = BTU / 21.6**
+**Heating CFM (gas furnace) = BTU / (1.08 × 60) = BTU / 64.8**
+
+### Example Room
+
+A bedroom with 4,000 BTU cooling load:
+- Cooling CFM = 4,000 / 21.6 = **185 CFM**
+- This means the branch duct to this room needs to deliver 185 CFM
+
+Then size the duct using our [HVAC Duct Calculator](/).
+
+## Common Load Calculation Mistakes
+
+1. **Using only square footage** — Ignoring windows, insulation, and orientation produces inaccurate results
+2. **Oversizing for safety margin** — An oversized system short cycles, wastes energy, and provides poor humidity control
+3. **Ignoring latent loads** — In humid climates, the latent (moisture) load can be 30% of the total
+4. **Using heating load for cooling equipment** — Heating and cooling loads are different; equipment is sized for the larger one
+5. **Not accounting for duct losses** — Ducts in unconditioned spaces lose 10% to 30% of their capacity without insulation
+
+## Tools for Load Calculations
+
+- **Manual J software**: Wrightsoft, HVAC Calc, CoolCalc
+- **Quick estimates**: Our [HVAC Duct Calculator](/) with the square footage based programmatic pages
+- **Professional service**: Most HVAC contractors offer Manual J as part of their design process
+
+## Related Guides
+
+- [Duct CFM calculation explained](/blog/duct-cfm-calculation-explained)
+- [BTU to tonnage conversion](/blog/btu-to-tonnage-conversion)
+- [Manual J load calculation explained](/blog/manual-j-load-calculation-explained)

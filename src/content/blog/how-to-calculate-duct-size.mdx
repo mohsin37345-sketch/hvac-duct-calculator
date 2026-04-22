@@ -1,0 +1,152 @@
+---
+title: "How to Calculate Duct Size Step by Step"
+description: "Learn how to calculate HVAC duct size step by step using CFM, friction rate, and Total Effective Length. Includes worked examples and formulas."
+date: 2026-03-06
+author: "HVAC Duct Calculator Team"
+category: "Calculations"
+---
+
+## How to Calculate Duct Size
+
+Calculating duct size requires three key inputs: the airflow requirement (CFM), the friction rate, and the Total Effective Length (TEL) of the duct run. This guide walks through the complete process with real examples.
+
+## What You Need Before Starting
+
+Before you calculate any duct size, gather these values:
+
+1. **CFM airflow** for the room or zone (from Manual J or the 1 CFM per sq ft rule)
+2. **Friction rate** for your application (0.08 in/wg per 100 ft for residential supply)
+3. **Straight duct length** of the run in feet
+4. **Number and type of fittings** (bends, transitions, takeoffs)
+5. **Duct material** (metal or flex)
+
+## Step 1: Determine Required CFM
+
+For residential systems, the simplest method is 1 CFM per square foot of conditioned floor area:
+
+- 150 sq ft bedroom = 150 CFM
+- 300 sq ft living room = 300 CFM
+- 100 sq ft bathroom = 100 CFM
+
+For more accuracy, perform a Manual J load calculation. The load in BTU divided by the temperature differential gives CFM:
+
+**CFM = BTU / (1.08 × ΔT)**
+
+Where ΔT is typically 20°F for cooling and 55°F for heating.
+
+## Step 2: Calculate Total Effective Length (TEL)
+
+TEL combines the straight duct length with equivalent lengths for fittings:
+
+**TEL = Straight Length + Σ(Fitting Equivalent Lengths)**
+
+Standard equivalent lengths for metal ducts:
+
+| Fitting | Equivalent Length |
+|---|---|
+| 90° elbow | 10 feet |
+| 45° elbow | 5 feet |
+| 180° return bend | 20 feet |
+| Branch takeoff | 25 to 35 feet |
+| Boot fitting | 10 feet |
+
+For flex duct, multiply each equivalent length by **1.5**.
+
+### Example TEL Calculation
+
+A bedroom branch run:
+- Straight duct: 20 feet
+- One 90° elbow: 10 feet
+- One boot fitting at the register: 10 feet
+- **TEL = 20 + 10 + 10 = 40 feet**
+
+## Step 3: Select Friction Rate
+
+Use the standard for your application:
+
+| Application | Friction Rate |
+|---|---|
+| Residential supply | 0.08 in/wg per 100 ft |
+| Residential return | 0.06 in/wg per 100 ft |
+| Commercial low pressure | 0.08 to 0.10 in/wg per 100 ft |
+| Commercial medium pressure | 0.10 to 0.20 in/wg per 100 ft |
+
+For full details, see our [friction rate guide](/blog/friction-rate-guide).
+
+## Step 4: Calculate the Duct Size
+
+The relationship between duct size, CFM, and velocity is:
+
+**CFM = A × V**
+
+Where A is the cross sectional area in square feet and V is velocity in FPM.
+
+For a round duct: **A = π × (D/2)²** where D is diameter in feet.
+
+Solving for diameter when you know CFM and target velocity:
+
+**D (inches) = √(4 × CFM / (π × V)) × 12**
+
+At 0.08 friction rate, residential velocities typically fall between 600 and 800 FPM.
+
+### Worked Example
+
+**Problem:** Size a duct for a 200 sq ft bedroom.
+
+1. **CFM needed:** 200 CFM
+2. **TEL:** 20 ft straight + one 90° (10 ft) + boot (10 ft) = 40 ft
+3. **Friction rate:** 0.08 in/wg per 100 ft
+4. **Target velocity:** 700 FPM (quiet residential)
+
+**Calculation:**
+- D = √(4 × 200 / (π × 700)) × 12
+- D = √(800 / 2199) × 12
+- D = √0.3638 × 12
+- D = 0.603 × 12
+- D = **7.24 inches**
+
+**Result:** Round up to the next standard size = **8 inch round duct**
+
+**Verification:**
+- Actual area of 8" duct = π × (8/24)² = 0.349 sq ft
+- Actual velocity = 200 / 0.349 = 573 FPM ✅ (well within quiet range)
+- Pressure loss = 0.08 × (40/100) = 0.032 in/wg ✅
+
+## Step 5: Verify Velocity Is Acceptable
+
+Check your result against noise thresholds:
+
+| Application | Max Velocity | Noise Level |
+|---|---|---|
+| Residential bedrooms | 600 FPM | Very quiet |
+| Residential supply | 900 FPM | Acceptable |
+| Commercial offices | 1200 FPM | Moderate |
+| Industrial | 1800 FPM | Loud |
+
+If velocity exceeds the maximum, increase the duct size by one standard increment.
+
+## Step 6: Calculate Total Pressure Loss
+
+**Pressure Loss = Friction Rate × (TEL / 100)**
+
+For our example: 0.08 × (40/100) = 0.032 in/wg
+
+This value is critical for verifying that the blower fan has enough available static pressure to serve all duct runs.
+
+## Quick Reference: Common Duct Sizes
+
+| CFM | Round Duct (at 700 FPM) | Velocity |
+|---|---|---|
+| 100 | 6 inch | 509 FPM |
+| 150 | 7 inch | 561 FPM |
+| 200 | 8 inch | 573 FPM |
+| 300 | 10 inch | 550 FPM |
+| 400 | 10 inch | 733 FPM |
+| 600 | 12 inch | 764 FPM |
+| 800 | 14 inch | 749 FPM |
+
+## Use the Calculator
+
+Skip the manual math. Our [HVAC Duct Calculator](/) does all these steps instantly. Enter your values and get results in seconds.
+
+For more on the formulas behind the calculator, see [duct sizing formula explained](/blog/cfm-formula-hvac).

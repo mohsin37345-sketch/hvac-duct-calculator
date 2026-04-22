@@ -1,0 +1,120 @@
+---
+title: "ASHRAE Standards for Duct Sizing: What Engineers Follow"
+description: "Learn about the ASHRAE standards and guidelines that define HVAC duct sizing practices. Covers the equal friction method, duct design data, and key reference tables."
+date: 2026-01-26
+author: "HVAC Duct Calculator Team"
+category: "Advanced"
+---
+
+## What Is ASHRAE
+
+ASHRAE (American Society of Heating, Refrigerating and Air Conditioning Engineers) is the professional organization that develops the standards, guidelines, and reference data used by HVAC engineers worldwide. Their publications define the science and best practices behind duct sizing.
+
+## Key ASHRAE References for Duct Sizing
+
+### ASHRAE Fundamentals Handbook
+Contains the core duct sizing data in Chapter 21 (Duct Design):
+- Friction loss charts for round and rectangular ducts
+- Fitting loss coefficients
+- Equivalent length data for common fittings
+- Equal friction and velocity reduction sizing methods
+
+### ASHRAE Standard 55: Thermal Comfort
+Defines acceptable indoor temperatures and humidity levels that HVAC systems must maintain, which drives the CFM requirements for each room.
+
+### ASHRAE Standard 62.1 and 62.2: Ventilation
+Specifies minimum outdoor air ventilation rates for commercial (62.1) and residential (62.2) buildings. These ventilation requirements affect duct sizing for fresh air intake systems.
+
+### ASHRAE Standard 90.1: Energy Efficiency
+Sets maximum duct leakage rates, insulation requirements, and fan power limitations that influence duct design decisions.
+
+## The ASHRAE Equal Friction Method
+
+The equal friction method is the most commonly used duct sizing approach. It is the method built into our [HVAC Duct Calculator](/) and is recommended by ASHRAE for most applications.
+
+### How It Works
+1. Select a target friction rate (in/wg per 100 ft of duct)
+2. Size every duct in the system to maintain that friction rate
+3. The result is consistent pressure loss per unit length across all ducts
+
+### Advantages
+- Simple to apply
+- Easy to balance
+- Works well for residential and small commercial systems
+- Consistent noise levels throughout the system
+
+### Standard Friction Rates (from ASHRAE data)
+
+| Application | Friction Rate |
+|---|---|
+| Residential low velocity | 0.06 to 0.08 in/wg per 100 ft |
+| Residential standard | 0.08 in/wg per 100 ft |
+| Commercial low pressure | 0.08 to 0.10 in/wg per 100 ft |
+| Commercial medium pressure | 0.10 to 0.20 in/wg per 100 ft |
+| Commercial high pressure | 0.20 to 0.60 in/wg per 100 ft |
+
+## ASHRAE Friction Loss Data
+
+ASHRAE publishes friction loss charts that show the relationship between duct size, airflow, velocity, and friction rate. These charts are the basis for all duct sizing calculations.
+
+The key relationships:
+
+**For round ducts:**
+- Friction loss increases with the square of velocity
+- Friction loss decreases as duct diameter increases
+- Smooth (metal) ducts have lower friction than rough (flex) ducts
+
+**Roughness factors by material:**
+
+| Material | Absolute Roughness (ft) |
+|---|---|
+| Galvanized steel | 0.0003 |
+| Aluminum | 0.0002 |
+| Flexible duct (fully extended) | 0.003 |
+| Fibrous glass duct | 0.003 |
+| Concrete | 0.001 to 0.01 |
+
+The 10x difference in roughness between metal and flex duct explains why flex ducts need larger sizes for the same airflow.
+
+## ASHRAE Fitting Loss Coefficients
+
+ASHRAE publishes detailed loss coefficients for every type of duct fitting. Our calculator uses simplified equivalent length values derived from this data:
+
+| Fitting | ASHRAE Loss Coefficient (Co) | Equivalent Length |
+|---|---|---|
+| 90° smooth radius elbow | 0.22 | ~10 ft |
+| 90° mitered elbow | 1.20 | ~20 ft |
+| 45° smooth elbow | 0.08 | ~5 ft |
+| Tee, branch | 0.50 to 1.00 | ~25 to 35 ft |
+| Tee, main through | 0.10 to 0.20 | ~5 to 10 ft |
+
+## ASHRAE Velocity Guidelines
+
+ASHRAE publishes recommended maximum velocities for different applications:
+
+| Duct Location | Max Velocity (FPM) |
+|---|---|
+| Main ducts near air handler | 700 to 900 |
+| Supply branch ducts | 600 to 700 |
+| Supply risers | 500 to 600 |
+| Return ducts | 500 to 700 |
+| Outdoor air intake | 500 |
+
+Exceeding these velocities creates noise and increases energy consumption.
+
+## How Our Calculator Uses ASHRAE Data
+
+Our [HVAC Duct Calculator](/) implements:
+
+1. **ASHRAE equal friction method** for duct sizing
+2. **ASHRAE fitting equivalent lengths** for TEL calculation
+3. **ASHRAE velocity guidelines** for result verification
+4. **ASHRAE rectangular equivalent formula** for shape conversion
+
+The calculator provides results consistent with ASHRAE Fundamentals Handbook recommendations.
+
+## Related Guides
+
+- [Friction rate guide](/blog/friction-rate-guide)
+- [Manual J explained](/blog/manual-j-load-calculation-explained)
+- [Manual D explained](/blog/manual-d-duct-design-explained)

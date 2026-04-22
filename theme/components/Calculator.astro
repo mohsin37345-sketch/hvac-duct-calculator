@@ -16,11 +16,11 @@ const { locale = 'en' } = Astro.props;
       <div class="toggle-group" id="ductTypeToggle">
         <button type="button" class="toggle-btn active" data-value="metal" id="btn-ductType-metal">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/></svg>
-          {t(locale, 'calc.metal')}
+          <span>{t(locale, 'calc.metal')}</span>
         </button>
         <button type="button" class="toggle-btn" data-value="flex" id="btn-ductType-flex">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12c2-4 6-4 8 0s6 4 8 0"/><path d="M4 8c2-4 6-4 8 0s6 4 8 0"/><path d="M4 16c2-4 6-4 8 0s6 4 8 0"/></svg>
-          {t(locale, 'calc.flex')}
+          <span>{t(locale, 'calc.flex')}</span>
         </button>
       </div>
     </div>
@@ -45,6 +45,10 @@ const { locale = 'en' } = Astro.props;
         <div class="relative">
           <input type="text" id="frictionRate" class="form-input pr-28" inputmode="decimal" placeholder="0.08" autocomplete="off" />
           <span class="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-silver-400 pointer-events-none" id="frictionRateUnit">per 100 ft (in/wg)</span>
+        </div>
+        <div id="uncommonWarning" class="hidden mt-2 text-[0.75rem] font-medium text-amber-600 flex items-center gap-1">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          {t(locale, 'calc.uncommon')}
         </div>
       </div>
     </div>
@@ -141,6 +145,12 @@ const { locale = 'en' } = Astro.props;
       <span>{t(locale, 'calc.calculate')}</span>
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
     </button>
+    <div class="mt-4 flex justify-center">
+      <button type="button" id="embedToolBtn" class="flex items-center gap-1.5 text-xs font-semibold text-silver-500 hover:text-accent transition-colors">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        {t(locale, 'calc.embed')}
+      </button>
+    </div>
   </form>
 
   <!-- Results -->
@@ -180,6 +190,27 @@ const { locale = 'en' } = Astro.props;
           <tr class="hover:bg-accent-subtle"><td class="py-2">{t(locale, 'friction.industrial')}</td><td>0.30 – 1.00</td></tr>
         </tbody>
       </table>
+    </div>
+  </div>
+</div>
+
+<!-- Embed Modal -->
+<div class="fixed inset-0 bg-black/20 backdrop-blur-md z-[1000] hidden flex items-center justify-center p-4" id="embedModal">
+  <div class="glass-card max-w-lg w-full">
+    <div class="flex items-center justify-between p-5 border-b border-silver-200">
+      <h3 class="font-bold text-silver-900">{t(locale, 'calc.embedTitle')}</h3>
+      <button type="button" id="closeEmbedModal" class="p-1 rounded-md text-silver-400 hover:text-accent hover:bg-accent-subtle transition-colors" aria-label="Close">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="p-5">
+      <p class="text-sm text-silver-600 mb-4">{t(locale, 'calc.embedDesc')}</p>
+      <div class="relative">
+        <textarea id="embedCode" class="form-input text-xs font-mono resize-none w-full p-3 bg-silver-50" rows="4" readonly>&lt;iframe src="https://hvacductcalculator.com" width="100%" height="800" style="border:none; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,0.1);"&gt;&lt;/iframe&gt;</textarea>
+        <button type="button" id="copyEmbedBtn" class="absolute top-2 right-2 px-3 py-1.5 bg-silver-200 hover:bg-silver-300 text-silver-800 text-xs font-bold rounded-md transition-colors">
+          {t(locale, 'calc.copyCode')}
+        </button>
+      </div>
     </div>
   </div>
 </div>

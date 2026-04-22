@@ -1,0 +1,269 @@
+---
+import { t } from '@theme/i18n/utils';
+
+export interface Props {
+  locale?: string;
+}
+
+const { locale = 'en' } = Astro.props;
+---
+
+<div class="content-sections">
+  <!-- Section 1: What Is an HVAC Duct Calculator -->
+  <section class="content-block" id="what-is-duct-calculator">
+    <h2 class="content-heading">{t(locale, 'hub.s1.title')}</h2>
+    <img src="/images/hvac_duct_system_diagram.png" alt="Residential HVAC duct system diagram showing trunk lines and branch ducts" class="w-full h-auto rounded-xl shadow-md my-6" loading="lazy" />
+    <p class="content-text">{t(locale, 'hub.s1.p1')}</p>
+    <p class="content-text">{t(locale, 'hub.s1.p2')}</p>
+  </section>
+
+  <!-- Section 2: How to Use the Duct Calculator -->
+  <section class="content-block" id="how-to-use">
+    <h2 class="content-heading">{t(locale, 'hub.s2.title')}</h2>
+    <img src="/images/calculator_ui_preview.png" alt="HVAC duct sizing calculator user interface preview" class="w-full h-auto rounded-xl shadow-md my-6" loading="lazy" />
+    <p class="content-text">{t(locale, 'hub.s2.p1')}</p>
+    <ol class="content-steps">
+      <li><span class="step-num">1</span>{t(locale, 'hub.s2.step1')}</li>
+      <li><span class="step-num">2</span>{t(locale, 'hub.s2.step2')}</li>
+      <li><span class="step-num">3</span>{t(locale, 'hub.s2.step3')}</li>
+      <li><span class="step-num">4</span>{t(locale, 'hub.s2.step4')}</li>
+      <li><span class="step-num">5</span>{t(locale, 'hub.s2.step5')}</li>
+    </ol>
+  </section>
+
+  <!-- Section 3: Duct Sizing Formula Explained -->
+  <section class="content-block" id="duct-sizing-formula">
+    <h2 class="content-heading">{t(locale, 'hub.s3.title')}</h2>
+    <p class="content-text">{t(locale, 'hub.s3.p1')}</p>
+    <div class="formula-block">
+      <span class="formula-label">Airflow Formula</span>
+      <code class="formula-code">{t(locale, 'hub.s3.formula1')}</code>
+      <p class="formula-desc">{t(locale, 'hub.s3.formula1desc')}</p>
+    </div>
+    <p class="content-text">{t(locale, 'hub.s3.p2')}</p>
+    <div class="formula-block">
+      <span class="formula-label">CFM Formula</span>
+      <code class="formula-code">{t(locale, 'hub.s3.formula2')}</code>
+    </div>
+    <p class="content-text">{t(locale, 'hub.s3.p3')}</p>
+    <div class="internal-link-cta">
+      <a href="/blog/cfm-formula-hvac/">Explore All HVAC Duct Sizing Formulas →</a>
+    </div>
+    <div class="internal-link-cta">
+      <a href="/blog/how-to-calculate-duct-size/">Step by Step Duct Size Calculation Guide →</a>
+    </div>
+  </section>
+
+  <!-- Section 4: Understanding Airflow CFM -->
+  <section class="content-block" id="understanding-cfm">
+    <h2 class="content-heading">{t(locale, 'hub.s4.title')}</h2>
+    <img src="/images/airflow_velocity_visual.png" alt="3D visualization of airflow velocity inside a metal HVAC duct" class="w-full h-auto rounded-xl shadow-md my-6" loading="lazy" />
+    <p class="content-text">{t(locale, 'hub.s4.p1')}</p>
+    <p class="content-text">{t(locale, 'hub.s4.p2')}</p>
+    <div class="formula-block">
+      <span class="formula-label">CFM Calculation</span>
+      <code class="formula-code">{t(locale, 'hub.s4.formula')}</code>
+      <p class="formula-desc">{t(locale, 'hub.s4.formuladesc')}</p>
+    </div>
+  </section>
+
+  <!-- Section 5: Friction Rate and Static Pressure -->
+  <section class="content-block" id="friction-rate-static-pressure">
+    <h2 class="content-heading">{t(locale, 'hub.s5.title')}</h2>
+    <p class="content-text">{t(locale, 'hub.s5.p1')}</p>
+    <p class="content-text">{t(locale, 'hub.s5.p2')}</p>
+    <p class="content-text">{t(locale, 'hub.s5.p3')}</p>
+    <div class="internal-link-cta">
+      <a href="#friction-rate-info">View Common Friction Rates Table →</a>
+    </div>
+    <div class="internal-link-cta">
+      <a href="/blog/friction-rate-guide/">Read Complete Friction Rate Guide →</a>
+    </div>
+    <div class="internal-link-cta">
+      <a href="/blog/static-pressure-calculation-guide/">Static Pressure Calculation Guide →</a>
+    </div>
+  </section>
+
+  <!-- Section 6: Total Effective Length -->
+  <section class="content-block" id="total-effective-length">
+    <h2 class="content-heading">{t(locale, 'hub.s6.title')}</h2>
+    <p class="content-text">{t(locale, 'hub.s6.p1')}</p>
+    <p class="content-text">{t(locale, 'hub.s6.p2')}</p>
+    <ul class="content-fitting-list">
+      <li>{t(locale, 'hub.s6.fitting1')}</li>
+      <li>{t(locale, 'hub.s6.fitting2')}</li>
+      <li>{t(locale, 'hub.s6.fitting3')}</li>
+      <li>{t(locale, 'hub.s6.fitting4')}</li>
+    </ul>
+    <div class="formula-block">
+      <span class="formula-label">TEL Formula</span>
+      <code class="formula-code">{t(locale, 'hub.s6.formula')}</code>
+    </div>
+    <p class="content-text">{t(locale, 'hub.s6.p3')}</p>
+    <div class="internal-link-cta">
+      <a href="/blog/tel-total-effective-length-guide/">Complete TEL Calculation Guide →</a>
+    </div>
+  </section>
+
+  <!-- Section 7: Common Duct Sizing Mistakes -->
+  <section class="content-block" id="common-mistakes">
+    <h2 class="content-heading">{t(locale, 'hub.s7.title')}</h2>
+    <p class="content-text">{t(locale, 'hub.s7.p1')}</p>
+    <div class="mistakes-grid">
+      <div class="mistake-card">
+        <div class="mistake-icon">⚠️</div>
+        <h3 class="mistake-title">{t(locale, 'hub.s7.m1t')}</h3>
+        <p class="mistake-desc">{t(locale, 'hub.s7.m1d')}</p>
+      </div>
+      <div class="mistake-card">
+        <div class="mistake-icon">📐</div>
+        <h3 class="mistake-title">{t(locale, 'hub.s7.m2t')}</h3>
+        <p class="mistake-desc">{t(locale, 'hub.s7.m2d')}</p>
+      </div>
+      <div class="mistake-card">
+        <div class="mistake-icon">🔧</div>
+        <h3 class="mistake-title">{t(locale, 'hub.s7.m3t')}</h3>
+        <p class="mistake-desc">{t(locale, 'hub.s7.m3d')}</p>
+      </div>
+      <div class="mistake-card">
+        <div class="mistake-icon">📊</div>
+        <h3 class="mistake-title">{t(locale, 'hub.s7.m4t')}</h3>
+        <p class="mistake-desc">{t(locale, 'hub.s7.m4d')}</p>
+      </div>
+    </div>
+    <div class="internal-link-cta">
+      <a href="/blog/common-hvac-installation-mistakes/">See All Common HVAC Installation Mistakes →</a>
+    </div>
+    <div class="internal-link-cta">
+      <a href="/blog/wrong-duct-size-problems/">Wrong Duct Size Problems and Solutions →</a>
+    </div>
+  </section>
+
+  <!-- Section 8: Duct Material Impact -->
+  <section class="content-block" id="duct-material-impact">
+    <h2 class="content-heading">{t(locale, 'hub.s8.title')}</h2>
+    <p class="content-text">{t(locale, 'hub.s8.p1')}</p>
+    <div class="material-compare">
+      <div class="material-card metal">
+        <h3>🔩 Sheet Metal</h3>
+        <p>{t(locale, 'hub.s8.p2')}</p>
+      </div>
+      <div class="material-card flex">
+        <h3>🌀 Flexible Duct</h3>
+        <p>{t(locale, 'hub.s8.p3')}</p>
+      </div>
+    </div>
+    <div class="internal-link-cta">
+      <a href="/blog/metal-vs-flex-ducts/">Read Full Metal vs Flex Duct Guide →</a>
+    </div>
+  </section>
+
+  <!-- Section 9: Why Accurate Duct Sizing Matters -->
+  <section class="content-block" id="why-sizing-matters">
+    <h2 class="content-heading">{t(locale, 'hub.s9.title')}</h2>
+    <p class="content-text">{t(locale, 'hub.s9.p1')}</p>
+    <p class="content-text">{t(locale, 'hub.s9.p2')}</p>
+    <div class="stat-callout">
+      <div class="stat-icon">💡</div>
+      <p>{t(locale, 'hub.s9.p3')}</p>
+    </div>
+    <div class="internal-link-cta">
+      <a href="/blog/understanding-duct-sizing/">Read Our Complete Duct Sizing Guide →</a>
+    </div>
+  </section>
+
+  <!-- Section 10A: Understanding Calculator Inputs -->
+  <section class="content-block" id="calculator-inputs">
+    <h2 class="content-heading">{t(locale, 'hub.s10a.title')}</h2>
+    <p class="content-text">{t(locale, 'hub.s10a.p1')}</p>
+    <div class="inputs-grid">
+      <div class="input-card">
+        <div class="input-icon">🔩</div>
+        <p class="input-desc">{t(locale, 'hub.s10a.ducttype')}</p>
+      </div>
+      <div class="input-card">
+        <div class="input-icon">⚙️</div>
+        <p class="input-desc">{t(locale, 'hub.s10a.method')}</p>
+      </div>
+      <div class="input-card">
+        <div class="input-icon">📊</div>
+        <p class="input-desc">{t(locale, 'hub.s10a.frictionrate')}</p>
+      </div>
+      <div class="input-card">
+        <div class="input-icon">📏</div>
+        <p class="input-desc">{t(locale, 'hub.s10a.tel')}</p>
+      </div>
+      <div class="input-card">
+        <div class="input-icon">🔄</div>
+        <p class="input-desc">{t(locale, 'hub.s10a.bends')}</p>
+      </div>
+      <div class="input-card">
+        <div class="input-icon">📐</div>
+        <p class="input-desc">{t(locale, 'hub.s10a.dimensions')}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 10B: What Your Results Mean -->
+  <section class="content-block" id="results-explained">
+    <h2 class="content-heading">{t(locale, 'hub.s10b.title')}</h2>
+    <p class="content-text">{t(locale, 'hub.s10b.p1')}</p>
+    <div class="results-explainer">
+      <div class="result-explain-card">
+        <h3 class="result-explain-label">💨 CFM</h3>
+        <p>{t(locale, 'hub.s10b.cfm')}</p>
+      </div>
+      <div class="result-explain-card">
+        <h3 class="result-explain-label">🚀 Velocity</h3>
+        <p>{t(locale, 'hub.s10b.velocity')}</p>
+      </div>
+      <div class="result-explain-card">
+        <h3 class="result-explain-label">⬇️ Pressure Loss</h3>
+        <p>{t(locale, 'hub.s10b.pressloss')}</p>
+      </div>
+      <div class="result-explain-card">
+        <h3 class="result-explain-label">📏 Duct Size</h3>
+        <p>{t(locale, 'hub.s10b.ductsize')}</p>
+      </div>
+      <div class="result-explain-card">
+        <h3 class="result-explain-label">🔇 Noise</h3>
+        <p>{t(locale, 'hub.s10b.noiselevel')}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 10C: Real World Use Cases -->
+  <section class="content-block" id="use-cases">
+    <h2 class="content-heading">{t(locale, 'hub.s10c.title')}</h2>
+    <p class="content-text">{t(locale, 'hub.s10c.p1')}</p>
+    <div class="use-cases-grid">
+      <div class="use-case-card">
+        <div class="use-case-icon">🏗️</div>
+        <h3 class="use-case-title">{t(locale, 'hub.s10c.uc1t')}</h3>
+        <p class="use-case-desc">{t(locale, 'hub.s10c.uc1d')}</p>
+      </div>
+      <div class="use-case-card">
+        <div class="use-case-icon">➕</div>
+        <h3 class="use-case-title">{t(locale, 'hub.s10c.uc2t')}</h3>
+        <p class="use-case-desc">{t(locale, 'hub.s10c.uc2d')}</p>
+      </div>
+      <div class="use-case-card">
+        <div class="use-case-icon">🔄</div>
+        <h3 class="use-case-title">{t(locale, 'hub.s10c.uc3t')}</h3>
+        <p class="use-case-desc">{t(locale, 'hub.s10c.uc3d')}</p>
+      </div>
+      <div class="use-case-card">
+        <div class="use-case-icon">🔍</div>
+        <h3 class="use-case-title">{t(locale, 'hub.s10c.uc4t')}</h3>
+        <p class="use-case-desc">{t(locale, 'hub.s10c.uc4d')}</p>
+      </div>
+    </div>
+    <div class="internal-link-cta">
+      <a href="/blog/how-duct-sizing-works/">Complete Beginner Guide to Duct Sizing →</a>
+    </div>
+    <div class="internal-link-cta">
+      <a href="/blog/duct-sizing-for-home/">Duct Sizing for Home HVAC →</a>
+    </div>
+  </section>
+</div>
+
