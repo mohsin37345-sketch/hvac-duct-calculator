@@ -19,6 +19,9 @@ const {
   noindex = false,
 } = Astro.props;
 
+const isStaging = Astro.url.hostname.includes('vercel.app');
+const finalNoindex = noindex || isStaging;
+
 const fullTitle = title === siteConfig.name ? title : `${title} | ${siteConfig.name}`;
 const canonicalUrl = canonical || Astro.url.href;
 const ogImageUrl = ogImage?.startsWith('http') ? ogImage : `${siteConfig.url}${ogImage}`;
@@ -29,7 +32,7 @@ const ogImageUrl = ogImage?.startsWith('http') ? ogImage : `${siteConfig.url}${o
 <link rel="canonical" href={canonicalUrl} />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-{noindex ? (
+{finalNoindex ? (
   <meta name="robots" content="noindex, nofollow" />
 ) : (
   <>

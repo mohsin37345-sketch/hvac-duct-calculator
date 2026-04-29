@@ -1,0 +1,83 @@
+---
+import BaseLayout from '@theme/layouts/BaseLayout.astro';
+import { t } from '@theme/i18n/utils';
+
+const locale = 'en';
+---
+
+<BaseLayout title="Calculation Methodology | HVAC Duct Calculator" description="Learn about the engineering formulas and assumptions behind our HVAC duct sizing tool." locale={locale}>
+  <div class="max-w-4xl mx-auto px-4 py-12">
+    <h1 class="text-4xl font-extrabold text-silver-900 mb-8">Duct Sizing Methodology</h1>
+    
+    <div class="prose prose-silver max-w-none">
+      <section class="mb-12">
+        <h2 class="text-2xl font-bold text-silver-800 mb-4">Core Engineering Principles</h2>
+        <p class="text-silver-600 mb-4">
+          The HVAC Duct Calculator utilizes the <strong>Equal Friction Method</strong>, which is the industry standard for sizing residential and light commercial ductwork. This method involves sizing the duct system such that the pressure loss per unit length is constant throughout the system.
+        </p>
+        <p class="text-silver-600">
+          Our calculations are derived from the <strong>Darcy-Weisbach equation</strong> and the <strong>Colebrook equation</strong>, simplified for air at standard atmospheric pressure and temperature (0.075 lb/ft³).
+        </p>
+      </section>
+
+      <section class="mb-12 p-8 bg-silver-50 rounded-2xl border border-silver-200">
+        <h2 class="text-2xl font-bold text-silver-800 mb-6">Primary Formulas</h2>
+        
+        <div class="mb-8">
+          <h3 class="text-lg font-bold text-accent mb-2">Airflow and Velocity</h3>
+          <div class="bg-white p-4 rounded-lg font-mono text-center mb-2 border border-silver-100">
+            Q = A × V
+          </div>
+          <p class="text-sm text-silver-500">
+            Where <strong>Q</strong> is airflow in Cubic Feet per Minute (CFM), <strong>A</strong> is the cross-sectional area of the duct in square feet, and <strong>V</strong> is the velocity in Feet per Minute (FPM).
+          </p>
+        </div>
+
+        <div class="mb-8">
+          <h3 class="text-lg font-bold text-accent mb-2">Round Duct Diameter (Ductulator Formula)</h3>
+          <div class="bg-white p-4 rounded-lg font-mono text-center mb-2 border border-silver-100">
+            Hf = 0.109136 × Q^1.9 / D^5.02
+          </div>
+          <p class="text-sm text-silver-500">
+            Where <strong>Hf</strong> is the friction loss (inches of water per 100 feet), <strong>Q</strong> is the airflow (CFM), and <strong>D</strong> is the diameter (inches).
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-bold text-accent mb-2">Rectangular to Round Equivalent</h3>
+          <div class="bg-white p-4 rounded-lg font-mono text-center mb-2 border border-silver-100">
+            De = 1.3 × (a × b)^0.625 / (a + b)^0.25
+          </div>
+          <p class="text-sm text-silver-500">
+            Where <strong>De</strong> is the circular equivalent diameter, and <strong>a</strong> and <strong>b</strong> are the sides of the rectangular duct.
+          </p>
+        </div>
+      </section>
+
+      <section class="mb-12">
+        <h2 class="text-2xl font-bold text-silver-800 mb-4">Assumptions and Constants</h2>
+        <ul class="space-y-3 text-silver-600">
+          <li class="flex gap-2">
+            <span class="text-accent font-bold">•</span>
+            <span><strong>Air Density:</strong> Assumed at 0.075 lb/ft³ (Standard Air).</span>
+          </li>
+          <li class="flex gap-2">
+            <span class="text-accent font-bold">•</span>
+            <span><strong>Roughness Factor:</strong> 0.0003 ft for galvanized sheet metal; 0.003 ft for flexible ductwork.</span>
+          </li>
+          <li class="flex gap-2">
+            <span class="text-accent font-bold">•</span>
+            <span><strong>Flex Duct Adjustment:</strong> The calculator applies a 1.5x resistance multiplier for flexible ducting to account for typical installation compression and internal wire helix turbulence.</span>
+          </li>
+        </ul>
+      </section>
+
+      <section class="mb-12">
+        <h2 class="text-2xl font-bold text-silver-800 mb-4">Limitations</h2>
+        <p class="text-silver-600 italic">
+          While this tool provides high-precision estimates based on engineering theory, it does not account for specific local conditions such as high altitude (which reduces air density) or specific equipment fan curves. A full Manual D calculation remains the gold standard for final system design and permit applications.
+        </p>
+      </section>
+    </div>
+  </div>
+</BaseLayout>

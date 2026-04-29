@@ -5,7 +5,7 @@ import sitemap from '@astrojs/sitemap';
 import vercel from '@astrojs/vercel';
 
 export default defineConfig({
-  site: 'https://hvacductcalculator.com',
+  site: 'https://www.hvacductcalculator.com',
   trailingSlash: 'always',
   output: 'static',
   adapter: vercel(),

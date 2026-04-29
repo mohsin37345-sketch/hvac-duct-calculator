@@ -1,0 +1,59 @@
+---
+import { t } from '@theme/i18n/utils';
+
+export interface Props {
+  locale?: string;
+}
+
+const { locale = 'en' } = Astro.props;
+
+const chartData = [
+  { cfm: 100, round: '6"', rect: '6x6', note: 'Common for small bedrooms' },
+  { cfm: 150, round: '7"', rect: '8x6', note: 'Standard bedroom branch' },
+  { cfm: 200, round: '8"', rect: '10x6', note: 'Large bedroom or small living area' },
+  { cfm: 250, round: '8"', rect: '12x6', note: 'Standard for many rooms' },
+  { cfm: 300, round: '9"', rect: '10x8', note: 'Medium living space' },
+  { cfm: 350, round: '10"', rect: '12x8', note: 'Large room branch' },
+  { cfm: 400, round: '10"', rect: '14x8', note: '1-Ton AC equivalent' },
+  { cfm: 500, round: '12"', rect: '12x10', note: 'Main branch duct' },
+  { cfm: 600, round: '12"', rect: '14x10', note: '1.5-Ton AC equivalent' },
+  { cfm: 700, round: '14"', rect: '12x12', note: 'Small main trunk' },
+  { cfm: 800, round: '14"', rect: '16x10', note: '2-Ton AC equivalent' },
+  { cfm: 900, round: '14"', rect: '18x10', note: 'Main trunk line' },
+  { cfm: 1000, round: '16"', rect: '20x10', note: '2.5-Ton AC equivalent' },
+  { cfm: 1200, round: '16"', rect: '22x10', note: '3-Ton AC equivalent' },
+  { cfm: 1400, round: '18"', rect: '24x10', note: '3.5-Ton AC equivalent' },
+  { cfm: 1600, round: '18"', rect: '26x10', note: '4-Ton AC equivalent' },
+  { cfm: 1800, round: '20"', rect: '28x10', note: 'Large residential trunk' },
+  { cfm: 2000, round: '20"', rect: '30x10', note: '5-Ton AC equivalent' },
+];
+---
+
+<section class="content-block" id="cfm-chart">
+  <h2 class="content-heading">CFM to Duct Size Chart</h2>
+  <p class="content-text mb-6">Use this quick reference chart to estimate the required duct size based on CFM (Cubic Feet per Minute) at a standard friction rate of 0.1 in. w.g. per 100 ft of duct.</p>
+  
+  <div class="overflow-x-auto rounded-xl border border-silver-200 shadow-sm">
+    <table class="w-full text-sm text-left border-collapse">
+      <thead class="bg-silver-50 text-silver-600 font-bold uppercase tracking-wider text-[0.7rem]">
+        <tr>
+          <th class="px-4 py-3 border-b border-silver-200">Airflow (CFM)</th>
+          <th class="px-4 py-3 border-b border-silver-200">Round Duct Dia.</th>
+          <th class="px-4 py-3 border-b border-silver-200">Rectangular Size</th>
+          <th class="px-4 py-3 border-b border-silver-200">Common Application</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-silver-100 bg-white">
+        {chartData.map((row) => (
+          <tr class="hover:bg-silver-50 transition-colors">
+            <td class="px-4 py-3 font-bold text-silver-900">{row.cfm} CFM</td>
+            <td class="px-4 py-3 text-accent font-medium">{row.round}</td>
+            <td class="px-4 py-3 text-silver-600">{row.rect}</td>
+            <td class="px-4 py-3 text-silver-500 italic text-xs">{row.note}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  <p class="mt-4 text-[0.7rem] text-silver-400">* Values are estimates for metal ducts at 0.1 friction rate. Flex ducts typically require one size larger. Always verify with a professional using Manual D.</p>
+</section>

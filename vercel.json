@@ -1,0 +1,26 @@
+{
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "hvac-duct-calculator.vercel.app"
+        }
+      ],
+      "destination": "https://www.hvacductcalculator.com/$1",
+      "permanent": true
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "hvacductcalculator.com"
+        }
+      ],
+      "destination": "https://www.hvacductcalculator.com/$1",
+      "permanent": true
+    }
+  ]
+}

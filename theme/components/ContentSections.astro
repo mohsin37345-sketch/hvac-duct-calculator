@@ -258,11 +258,65 @@ const { locale = 'en' } = Astro.props;
         <p class="use-case-desc">{t(locale, 'hub.s10c.uc4d')}</p>
       </div>
     </div>
-    <div class="internal-link-cta">
-      <a href="/blog/how-duct-sizing-works/">Complete Beginner Guide to Duct Sizing →</a>
+  </section>
+
+  <!-- Section 11: Supply vs Return Ducts -->
+  <section class="content-block" id="supply-vs-return">
+    <h2 class="content-heading">Supply vs. Return Duct Sizing</h2>
+    <p class="content-text">In a balanced HVAC system, supply and return ducts serve different functions and often require different sizing considerations:</p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 my-6">
+      <div class="p-5 rounded-xl border border-blue-100 bg-blue-50/30">
+        <h3 class="font-bold text-blue-900 mb-2">Supply Ducts</h3>
+        <p class="text-sm text-blue-800">Supply ducts deliver conditioned air to rooms. They usually operate at higher velocities (up to 900 FPM in branches) and use a friction rate of 0.1 for metal ducts.</p>
+      </div>
+      <div class="p-5 rounded-xl border border-teal-100 bg-teal-50/30">
+        <h3 class="font-bold text-teal-900 mb-2">Return Ducts</h3>
+        <p class="text-sm text-teal-800">Return ducts pull air back to the air handler. They should be sized larger than supply ducts to reduce velocity (typically 400-600 FPM) and noise, often using a 0.08 or 0.05 friction rate.</p>
+      </div>
     </div>
-    <div class="internal-link-cta">
-      <a href="/blog/duct-sizing-for-home/">Duct Sizing for Home HVAC →</a>
+  </section>
+
+  <!-- Section 12: Trunk vs Branch Ducts -->
+  <section class="content-block" id="trunk-vs-branch">
+    <h2 class="content-heading">Trunk Duct vs. Branch Duct</h2>
+    <p class="content-text">The "trunk" is the main central duct from the equipment, while "branches" are the smaller pipes feeding individual rooms.</p>
+    <ul class="space-y-4 my-6">
+      <li class="flex gap-3">
+        <span class="text-accent font-bold">Trunk:</span>
+        <p class="text-sm">Main trunk lines carry the total system CFM. Velocity in residential trunks is usually capped at 700-900 FPM to keep the system quiet.</p>
+      </li>
+      <li class="flex gap-3">
+        <span class="text-accent font-bold">Branch:</span>
+        <p class="text-sm">Branches carry smaller loads (e.g., 100-200 CFM). Because they are closer to the registers, velocities should be lower (600-700 FPM) to avoid "whistling" noises.</p>
+      </li>
+    </ul>
+  </section>
+
+  <!-- Section 13: Velocity and Friction Guidance -->
+  <section class="content-block" id="guidance">
+    <h2 class="content-heading">Velocity & Friction Guidance</h2>
+    <div class="formula-block bg-silver-50">
+      <h3 class="font-bold mb-3">Recommended Velocity Ranges</h3>
+      <table class="w-full text-xs">
+        <tr class="border-b border-silver-200"><td class="py-2 font-medium">Main Trunk (Supply)</td><td class="py-2 text-right">700 – 900 FPM</td></tr>
+        <tr class="border-b border-silver-200"><td class="py-2 font-medium">Main Trunk (Return)</td><td class="py-2 text-right">400 – 600 FPM</td></tr>
+        <tr class="border-b border-silver-200"><td class="py-2 font-medium">Branch Ducts</td><td class="py-2 text-right">600 – 700 FPM</td></tr>
+        <tr><td class="py-2 font-medium">Filter Grilles</td><td class="py-2 text-right">300 – 450 FPM</td></tr>
+      </table>
+    </div>
+    <p class="content-text mt-6">A common "rule of thumb" is to use a <strong>0.1 friction rate</strong> for all residential duct design. However, modern high-efficiency systems often require a lower friction rate (0.05 to 0.08) to ensure the blower can handle the static pressure load.</p>
+  </section>
+
+  <!-- Section 14: Limitations -->
+  <section class="content-block border-t-2 border-amber-100 pt-10" id="limitations">
+    <div class="p-6 rounded-2xl bg-amber-50 border border-amber-200">
+      <h2 class="text-xl font-bold text-amber-900 mb-3 flex items-center gap-2">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        Important Limitations
+      </h2>
+      <p class="text-sm text-amber-800 leading-relaxed">
+        This HVAC duct calculator is intended for planning estimates and educational purposes only. Professional duct design requires <strong>ACCA Manual D</strong> calculations which account for equipment-specific blower data, altitude, and component pressure drops. Incorrect duct sizing can lead to equipment failure, high energy bills, and poor indoor air quality. Always consult with a licensed HVAC professional for final designs.
+      </p>
     </div>
   </section>
 </div>

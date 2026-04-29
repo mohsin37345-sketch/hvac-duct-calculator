@@ -427,6 +427,21 @@ document.addEventListener('DOMContentLoaded', () => {
   function displayResults(results) {
     resultsGrid.innerHTML = '';
     let delay = 0;
+    
+    // Check for warnings
+    const velocity = parseFloat(results['Velocity']?.value);
+    let warningHtml = '';
+    if (velocity > 900) {
+      warningHtml = `
+        <div class="col-span-full mt-4 p-3 bg-amber-50 border border-amber-200 rounded-lg text-amber-700 text-xs flex items-start gap-2 animate-fade-in">
+          <svg class="mt-0.5 shrink-0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <div>
+            <strong>High Velocity Warning:</strong> ${velocity.toFixed(0)} FPM exceeds recommended residential limits (typically 600-900 FPM). This may cause excessive noise and pressure drop.
+          </div>
+        </div>
+      `;
+    }
+
     for (const [label, data] of Object.entries(results)) {
       const card = document.createElement('div');
       card.className = 'result-card';
@@ -439,8 +454,52 @@ document.addEventListener('DOMContentLoaded', () => {
       resultsGrid.appendChild(card);
       delay += 0.07;
     }
+
+    if (warningHtml) {
+      const div = document.createElement('div');
+      div.className = 'col-span-full';
+      div.innerHTML = warningHtml;
+      resultsGrid.appendChild(div);
+    }
+
+    // Add action buttons
+    const actionsDiv = document.createElement('div');
+    actionsDiv.className = 'col-span-full mt-6 flex flex-wrap justify-center gap-3';
+    actionsDiv.innerHTML = `
+      <button type="button" id="copyResultsBtn" class="flex items-center gap-1.5 px-4 py-2 bg-silver-100 hover:bg-silver-200 text-silver-700 text-xs font-bold rounded-full transition-all">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        Copy Results
+      </button>
+      <button type="button" id="printResultsBtn" class="flex items-center gap-1.5 px-4 py-2 bg-silver-100 hover:bg-silver-200 text-silver-700 text-xs font-bold rounded-full transition-all">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        Print
+      </button>
+    `;
+    resultsGrid.appendChild(actionsDiv);
+
+    document.getElementById('copyResultsBtn').addEventListener('click', () => copyResults(results));
+    document.getElementById('printResultsBtn').addEventListener('click', () => window.print());
+
     resultsContainer.classList.remove('hidden');
     resultsContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  function copyResults(results) {
+    let text = "HVAC Duct Calculation Results:\n\n";
+    for (const [label, data] of Object.entries(results)) {
+      text += `${label}: ${data.value} ${data.unit}\n`;
+    }
+    text += "\nCalculated at: https://www.hvacductcalculator.com";
+    
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = document.getElementById('copyResultsBtn');
+      const originalText = btn.innerHTML;
+      btn.innerHTML = `
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        Copied!
+      `;
+      setTimeout(() => { btn.innerHTML = originalText; }, 2000);
+    });
   }
 
   function hideResults() {

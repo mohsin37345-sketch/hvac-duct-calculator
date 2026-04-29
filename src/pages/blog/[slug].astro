@@ -62,9 +62,19 @@ const { Content } = await render(post);
       <Content />
     </div>
 
+    <!-- CTA Section -->
+    <div class="mt-12 p-8 rounded-2xl bg-gradient-to-br from-silver-900 to-silver-800 text-white shadow-xl">
+      <h3 class="text-xl font-bold mb-4">Need to size your ducts?</h3>
+      <p class="text-silver-300 text-sm mb-6">Use our free professional HVAC duct calculator to get accurate sizing for round, rectangular, and flex ducts.</p>
+      <a href={getLocalizedUrl(locale, '/')} class="inline-flex items-center gap-2 px-6 py-3 bg-accent hover:bg-accent/90 text-white font-bold rounded-lg transition-all shadow-lg shadow-accent/20">
+        Go to Duct Calculator
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+
     <div class="mt-8 text-center">
-      <a href={getLocalizedUrl(locale, '/blog')} class="text-accent font-semibold hover:underline">
-        ← {t(locale, 'nav.blog')}
+      <a href={getLocalizedUrl(locale, '/blog')} class="text-silver-500 font-semibold hover:text-accent transition-colors">
+        ← Back to {t(locale, 'nav.blog')}
       </a>
     </div>
   </article>

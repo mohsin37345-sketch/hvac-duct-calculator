@@ -9,6 +9,9 @@ import FrictionTable from '@theme/components/FrictionTable.astro';
 import ReviewedBy from '@theme/components/ReviewedBy.astro';
 import PeopleAlsoSearch from '@theme/components/PeopleAlsoSearch.astro';
 import FAQ from '@theme/components/FAQ.astro';
+import Feedback from '@theme/components/Feedback.astro';
+import DuctSizeChart from '@theme/components/DuctSizeChart.astro';
+import ExactAnswerSections from '@theme/components/ExactAnswerSections.astro';
 import { t } from '@theme/i18n/utils';
 
 const locale = 'en';
@@ -23,13 +26,16 @@ const locale = 'en';
 
     <Calculator locale={locale} />
     <UtilityCalcs locale={locale} />
+    <DuctSizeChart locale={locale} />
   </div>
 
   <ContentSections locale={locale} />
+  <ExactAnswerSections locale={locale} />
   <QuickReference locale={locale} />
   <HowItWorks locale={locale} />
   <FrictionTable locale={locale} />
   <ReviewedBy locale={locale} />
+  <Feedback locale={locale} />
   <PeopleAlsoSearch locale={locale} />
   <FAQ locale={locale} />
 </BaseLayout>

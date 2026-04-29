@@ -1,5 +1,5 @@
 {
-  "site.title": "HVAC Duct Calculator",
+  "site.title": "HVAC Duct Calculator: CFM to Duct Size Chart",
   "site.tagline": "Calculate Proper HVAC Ductwork Sizing",
   "site.description": "Free online HVAC duct sizing calculator. Calculate duct dimensions, airflow, friction loss, and velocity for metal and flex ductwork.",
 
@@ -9,6 +9,7 @@
   "nav.contact": "Contact",
   "nav.terms": "Terms",
   "nav.privacy": "Privacy",
+  "nav.methodology": "Methodology",
   "nav.sitemap": "Sitemap",
 
   "calc.ductType": "Duct Type",
@@ -97,9 +98,9 @@
 
   "about.title": "About HVAC Duct Calculator",
   "about.description": "Learn about our free HVAC duct sizing tool built for HVAC professionals and contractors.",
-  "about.content1": "HVAC Duct Calculator is a free, professional-grade tool designed to help HVAC engineers, contractors, and technicians calculate proper ductwork sizing for residential and commercial HVAC systems.",
-  "about.content2": "Our calculator uses industry-standard formulas based on ASHRAE guidelines to determine airflow rates, friction losses, velocity, and recommended duct dimensions. Whether you're working with metal or flex ducts, round or rectangular shapes, our tool provides accurate results in seconds.",
-  "about.content3": "We built this tool because we believe every HVAC professional should have access to reliable duct sizing calculations without expensive software subscriptions. Our mission is to make HVAC design calculations accessible, accurate, and easy to use.",
+  "about.content1": "HVAC Duct Calculator is a professional-grade digital tool designed to help HVAC engineers, contractors, and home performance technicians calculate accurate ductwork sizing. Our mission is to provide an accessible, reliable, and free alternative to complex engineering software for day-to-day HVAC design and troubleshooting.",
+  "about.content2": "All calculations provided by this tool are based on established industry standards, primarily the equal friction method and ASHRAE (American Society of Heating, Refrigerating and Air-Conditioning Engineers) guidelines. We utilize the Darcy-Weisbach equation and standard air density assumptions to ensure engineering accuracy for both metal and flexible ductwork systems.",
+  "about.content3": "This tool was created to help professionals quickly verify branch and trunk sizes, estimate pressure losses, and ensure systems operate within recommended velocity limits. While our calculator is highly accurate for planning, it is designed to complement—not replace—a full Manual D duct design performed by a licensed professional.",
 
   "terms.title": "Terms of Service",
   "privacy.title": "Privacy Policy",
@@ -115,8 +116,8 @@
   "footer.rights": "All rights reserved.",
   "footer.language": "Language",
 
-  "hub.h1": "HVAC Duct Calculator — Free Tool for Accurate Duct Sizing",
-  "hub.snippet": "An HVAC duct calculator (also known as a ductulator) is a free online tool that determines the correct duct size based on airflow (CFM), friction rate, and duct length. It helps HVAC professionals and homeowners design efficient ductwork systems that deliver proper airflow to every room.",
+  "hub.h1": "HVAC Duct Calculator – Size Round, Rectangular & Flex Ducts",
+  "hub.snippet": "Enter CFM, friction rate, velocity, duct type, and TEL to calculate round or rectangular HVAC duct size. Includes CFM charts, flex duct sizing, and pressure loss.",
 
   "hub.s1.title": "What Is an HVAC Duct Calculator",
   "hub.s1.p1": "An HVAC duct calculator (also called a ductulator or duct size calculator) is a tool used to determine the correct duct dimensions for heating, ventilation, and air conditioning systems. It takes inputs such as airflow in CFM, friction loss rate, duct length, and the number of fittings to calculate the ideal duct diameter or rectangular equivalent.",
@@ -184,7 +185,7 @@
 
   "hub.reviewed.title": "Reviewed by HVAC Professional",
   "hub.reviewed.text": "The calculations in this tool are based on ASHRAE (American Society of Heating, Refrigerating and Air Conditioning Engineers) guidelines and the equal friction method used by professional HVAC engineers worldwide.",
-  "hub.reviewed.author": "Technical Review By: John Smith, PE (Mechanical Engineer, ASHRAE Member)",
+  "hub.reviewed.author": "Verified HVAC Engineering Calculations",
   "hub.reviewed.date": "Last Updated: April 2026",
   "hub.reviewed.disclaimer": "Disclaimer: This calculator provides estimates for educational and planning purposes. Actual duct sizing should be verified by a licensed HVAC professional using Manual J (load calculation) and Manual D (duct design) procedures. Local building codes and specific equipment requirements may affect final duct sizing.",
   "hub.reviewed.badge1": "ASHRAE Based Formulas",

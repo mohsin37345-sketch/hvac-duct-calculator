@@ -4,7 +4,7 @@ export const GET: APIRoute = () => {
   const body = `User-agent: *
 Allow: /
 
-Sitemap: https://hvacductcalculator.com/sitemap-index.xml
+Sitemap: https://www.hvacductcalculator.com/sitemap-index.xml
 `;
   return new Response(body, {
     headers: { 'Content-Type': 'text/plain; charset=utf-8' },

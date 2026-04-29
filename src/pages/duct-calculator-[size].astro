@@ -10,28 +10,29 @@ export function getStaticPaths() {
       velocity: v,
       cfm: Math.round(area * v),
     }));
-    const applications =
-      size <= 6
-        ? 'Bathroom exhaust, small bedrooms, individual supply runs'
-        : size <= 10
-          ? 'Bedrooms, offices, standard residential supply branches'
-          : size <= 14
-            ? 'Living rooms, master bedrooms, main trunk branches'
-            : size <= 18
-              ? 'Main trunk lines, large open areas, return air'
-              : 'Commercial trunk lines, large return plenums, industrial applications';
+    const rectEquiv = size === 6 ? '8x4 or 6x6' : 
+                      size === 8 ? '10x6 or 8x8' :
+                      size === 10 ? '14x8 or 12x10' :
+                      size === 12 ? '16x8 or 14x10' :
+                      size === 14 ? '20x8 or 18x10' :
+                      size === 16 ? '24x8 or 20x10' :
+                      size === 18 ? '26x10 or 22x12' :
+                      size === 20 ? '30x10 or 24x12' : 'N/A';
+    
+    const maxCFM = Math.round(area * 900);
+    const minCFM = Math.round(area * 500);
 
     return {
       params: { size: `${size}-inch` },
-      props: { size, cfmData, applications },
+      props: { size, cfmData, applications, rectEquiv, maxCFM, minCFM },
     };
   });
 }
 
-const { size, cfmData, applications } = Astro.props;
+const { size, cfmData, applications, rectEquiv, maxCFM, minCFM } = Astro.props;
 const area = Math.PI * Math.pow(size / 24, 2);
-const title = `${size} Inch Duct Calculator — CFM, Velocity & Sizing Guide`;
-const description = `Calculate airflow capacity for ${size} inch round ductwork. See CFM ratings at different velocities, recommended applications, and friction loss data for ${size}" HVAC ducts.`;
+const title = `${size} Inch Duct Calculator: CFM Capacity & Sizing Guide`;
+const description = `What is the CFM for a ${size} inch duct? Calculate airflow capacity, velocity limits, and rectangular equivalents for ${size}" HVAC ducts. Includes metal and flex duct notes.`;
 
 const allSizes = [4, 6, 8, 10, 12, 14, 16, 18, 20, 24];
 ---
@@ -74,45 +75,58 @@ const allSizes = [4, 6, 8, 10, 12, 14, 16, 18, 20, 24];
   </div>
 
   <div class="glass-card p-6 sm:p-8 mb-8">
-    <h2 class="content-heading">Recommended Applications</h2>
-    <p class="content-text">{applications}</p>
-    <p class="content-text">
-      At the standard residential friction rate of 0.08 in/wg per 100 feet, a {size} inch duct
-      is ideal for delivering {cfmData[1].cfm} CFM at a quiet {cfmData[1].velocity} FPM velocity.
-    </p>
+    <h2 class="content-heading">Technical Specifications</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <div class="p-4 rounded-xl border border-silver-100 bg-silver-50/50">
+        <h3 class="text-xs font-bold text-silver-400 uppercase tracking-widest mb-2">Rectangular Equivalent</h3>
+        <p class="text-lg font-bold text-silver-900">{rectEquiv} inches</p>
+        <p class="text-[0.7rem] text-silver-500 mt-1">Based on ASHRAE equivalent diameter formulas.</p>
+      </div>
+      <div class="p-4 rounded-xl border border-silver-100 bg-silver-50/50">
+        <h3 class="text-xs font-bold text-silver-400 uppercase tracking-widest mb-2">Max Recommended CFM</h3>
+        <p class="text-lg font-bold text-silver-900">{maxCFM} CFM</p>
+        <p class="text-[0.7rem] text-silver-500 mt-1">Based on 900 FPM (max residential velocity).</p>
+      </div>
+    </div>
   </div>
 
   <div class="glass-card p-6 sm:p-8 mb-8">
-    <h2 class="content-heading">Quick Duct Sizing Formula</h2>
-    <div class="formula-block">
-      <span class="formula-label">CFM for {size}" Duct</span>
-      <code class="formula-code">CFM = (π/4) × ({size}/12)² × Velocity</code>
-      <p class="formula-desc">
-        At 700 FPM: CFM = {area.toFixed(4)} × 700 = {Math.round(area * 700)} CFM
+    <h2 class="content-heading">{size} Inch Metal vs. Flex Duct</h2>
+    <div class="space-y-4">
+      <p class="text-silver-600 text-sm">
+        While the nominal diameter is the same, <strong>{size}" flexible duct</strong> has significantly higher air resistance than smooth <strong>{size}" galvanized sheet metal duct</strong>.
       </p>
+      <ul class="list-disc pl-5 text-sm text-silver-600 space-y-2">
+        <li><strong>Metal Duct:</strong> Delivers approximately {cfmData[1].cfm} CFM at 0.1 friction rate.</li>
+        <li><strong>Flex Duct:</strong> Usually requires a 1.5x resistance factor. To deliver the same airflow, you may need to increase to a {size + 2}" flex duct.</li>
+        <li><strong>Return Air:</strong> For a return duct, a {size}" round duct is generally limited to {minCFM} CFM to maintain quiet operation (600 FPM).</li>
+      </ul>
     </div>
   </div>
 
   <div class="prog-cta">
-    <a href="/" class="btn-primary">Use Full HVAC Duct Calculator →</a>
+    <a href="/" class="btn-primary">Calculate Exact Sizing Online →</a>
   </div>
 
   <div class="glass-card p-6 sm:p-8 mb-8">
-    <h2 class="content-heading">Related Guides</h2>
-    <div class="prog-links">
-      <a href="/blog/how-to-calculate-duct-size/">How to Calculate Duct Size</a>
-      <a href="/blog/friction-rate-guide/">Friction Rate Guide</a>
-      <a href="/blog/airflow-velocity-ductwork/">Airflow Velocity Explained</a>
-      <a href="/blog/round-vs-rectangular-ducts/">Round vs Rectangular Ducts</a>
-      <a href="/blog/duct-cfm-calculation-explained/">CFM Calculation Guide</a>
+    <h2 class="content-heading">Frequently Asked Questions</h2>
+    <div class="space-y-6">
+      <div>
+        <h3 class="text-base font-bold text-silver-900 mb-2">How much CFM can a {size} inch duct handle?</h3>
+        <p class="text-sm text-silver-600">A {size} inch round duct can handle between {minCFM} and {maxCFM} CFM. For residential supply branches, it is typically used for {cfmData[1].cfm} CFM at 0.08 friction rate.</p>
+      </div>
+      <div>
+        <h3 class="text-base font-bold text-silver-900 mb-2">What is the rectangular equivalent of {size}" round?</h3>
+        <p class="text-sm text-silver-600">The most common rectangular equivalents for a {size} inch round duct are {rectEquiv} inches.</p>
+      </div>
     </div>
   </div>
 
   <div class="glass-card p-6 sm:p-8">
     <h2 class="content-heading">Other Duct Sizes</h2>
-    <div class="prog-links">
+    <div class="flex flex-wrap gap-2">
       {allSizes.filter((s) => s !== size).map((s) => (
-        <a href={`/duct-calculator-${s}-inch/`}>{s}" Duct Calculator</a>
+        <a href={`/duct-calculator-${s}-inch/`} class="px-3 py-1.5 rounded-md bg-silver-100 text-silver-600 text-xs font-bold hover:bg-accent hover:text-white transition-all">{s}" Duct</a>
       ))}
     </div>
   </div>

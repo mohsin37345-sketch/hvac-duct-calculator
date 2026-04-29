@@ -1,0 +1,64 @@
+---
+import { t } from '@theme/i18n/utils';
+
+export interface Props {
+  locale?: string;
+}
+
+const { locale = 'en' } = Astro.props;
+---
+
+<div class="space-y-12 my-16">
+  <section class="content-block">
+    <h2 class="content-heading">Quick Sizing Answers</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="glass-card p-6">
+        <h3 class="text-lg font-bold text-silver-900 mb-2">What size duct for 400 CFM?</h3>
+        <p class="text-silver-600 text-sm">For 400 CFM, a <strong>10-inch round</strong> duct is the standard recommendation at 0.1 friction rate. Rectangular alternatives include 14x8 or 12x10 inches.</p>
+      </div>
+      <div class="glass-card p-6">
+        <h3 class="text-lg font-bold text-silver-900 mb-2">What size duct for 600 CFM?</h3>
+        <p class="text-silver-600 text-sm">For 600 CFM, you generally need a <strong>12-inch round</strong> duct. For rectangular ducts, 14x10 or 16x8 inches are common equivalents.</p>
+      </div>
+      <div class="glass-card p-6">
+        <h3 class="text-lg font-bold text-silver-900 mb-2">What size duct for 800 CFM?</h3>
+        <p class="text-silver-600 text-sm">800 CFM (typical for a 2-ton system) requires a <strong>14-inch round</strong> duct or rectangular sizes like 16x10 or 20x8 inches.</p>
+      </div>
+      <div class="glass-card p-6">
+        <h3 class="text-lg font-bold text-silver-900 mb-2">What size duct for 1000 CFM?</h3>
+        <p class="text-silver-600 text-sm">1000 CFM (typical for 2.5 tons) requires a <strong>16-inch round</strong> duct or rectangular alternatives like 20x10 or 18x12 inches.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-block">
+    <h2 class="content-heading">Duct Sizing by AC Tonnage</h2>
+    <p class="content-text mb-6">HVAC systems typically require about 400 CFM of airflow per ton of cooling. Below are standard main trunk sizing estimates for residential systems.</p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="p-4 rounded-xl border border-silver-200 bg-white shadow-sm">
+        <div class="text-accent font-black text-xl mb-1">2-Ton AC</div>
+        <div class="text-silver-500 text-xs mb-3">800 CFM Total</div>
+        <div class="text-silver-900 font-bold">14" Round</div>
+        <div class="text-silver-400 text-[0.7rem]">or 16x10 Rectangular</div>
+      </div>
+      <div class="p-4 rounded-xl border border-silver-200 bg-white shadow-sm">
+        <div class="text-accent font-black text-xl mb-1">3-Ton AC</div>
+        <div class="text-silver-500 text-xs mb-3">1200 CFM Total</div>
+        <div class="text-silver-900 font-bold">16" Round</div>
+        <div class="text-silver-400 text-[0.7rem]">or 22x10 Rectangular</div>
+      </div>
+      <div class="p-4 rounded-xl border border-silver-200 bg-white shadow-sm">
+        <div class="text-accent font-black text-xl mb-1">4-Ton AC</div>
+        <div class="text-silver-500 text-xs mb-3">1600 CFM Total</div>
+        <div class="text-silver-900 font-bold">18" Round</div>
+        <div class="text-silver-400 text-[0.7rem]">or 26x10 Rectangular</div>
+      </div>
+      <div class="p-4 rounded-xl border border-silver-200 bg-white shadow-sm">
+        <div class="text-accent font-black text-xl mb-1">5-Ton AC</div>
+        <div class="text-silver-500 text-xs mb-3">2000 CFM Total</div>
+        <div class="text-silver-900 font-bold">20" Round</div>
+        <div class="text-silver-400 text-[0.7rem]">or 30x10 Rectangular</div>
+      </div>
+    </div>
+  </section>
+</div>

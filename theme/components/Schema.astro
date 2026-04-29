@@ -56,6 +56,15 @@ if (type === 'website') {
       priceCurrency: 'USD',
     },
   });
+  schemas.push({
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'HVAC Duct Calculator',
+    applicationCategory: 'BusinessApplication',
+    operatingSystem: 'Any',
+    browserRequirements: 'requires HTML5 support',
+    url: siteConfig.url,
+  });
 }
 
 if (type === 'about') {
@@ -95,6 +104,31 @@ if (type === 'article' && articleData) {
       { '@type': 'ListItem', position: 2, name: t(locale, 'nav.blog'), item: `${siteConfig.url}${getLocalizedUrl(locale, '/blog')}` },
       { '@type': 'ListItem', position: 3, name: articleData.title },
     ],
+  });
+}
+
+if (type === 'faq') {
+  schemas.push({
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: 'What is a friction rate in duct sizing?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Friction rate is the pressure drop per 100 feet of duct length, measured in inches of water gauge (in/wg).'
+        }
+      },
+      {
+        '@type': 'Question',
+        name: 'How do I size a duct for 400 CFM?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'For 400 CFM at a standard 0.1 friction rate, you typically need a 10-inch round duct or an equivalent rectangular size.'
+        }
+      }
+    ]
   });
 }
 ---
