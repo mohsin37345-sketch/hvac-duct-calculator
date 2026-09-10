@@ -26,6 +26,7 @@ const homeSizes = [500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 5000];
         <h2 class="text-lg font-bold text-silver-800 mb-3">{t(locale, 'sitemap.pages')}</h2>
         <ul class="space-y-2">
           <li><a href={getLocalizedUrl(locale, '/')} class="text-accent hover:underline">{t(locale, 'nav.home')}</a></li>
+          <li><a href="/duct-size-chart-cfm/" class="text-accent hover:underline">Duct Size Chart: CFM (Round, Rectangular &amp; Flex)</a></li>
           {pages.map((page) => (
             <li><a href={page.url} class="text-accent hover:underline">{page.label}</a></li>
           ))}

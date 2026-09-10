@@ -24,12 +24,12 @@ export function getStaticPaths() {
 
     return {
       params: { size: `${size}-inch` },
-      props: { size, cfmData, applications, rectEquiv, maxCFM, minCFM },
+      props: { size, cfmData, rectEquiv, maxCFM, minCFM },
     };
   });
 }
 
-const { size, cfmData, applications, rectEquiv, maxCFM, minCFM } = Astro.props;
+const { size, cfmData, rectEquiv, maxCFM, minCFM } = Astro.props;
 const area = Math.PI * Math.pow(size / 24, 2);
 const title = `${size} Inch Duct Calculator: CFM Capacity & Sizing Guide`;
 const description = `What is the CFM for a ${size} inch duct? Calculate airflow capacity, velocity limits, and rectangular equivalents for ${size}" HVAC ducts. Includes metal and flex duct notes.`;

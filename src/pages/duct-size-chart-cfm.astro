@@ -1,0 +1,512 @@
+---
+import BaseLayout from '@theme/layouts/BaseLayout.astro';
+import { siteConfig } from '@src/config/site';
+
+const title = 'Duct Size Chart: CFM for Round, Rectangular & Flex Duct';
+const description = 'Use our complete CFM chart for duct size selection. Reference airflow ratings for round, rectangular, and flex ductwork at standard 0.1 in. w.g. friction.';
+const canonical = `${siteConfig.url}/duct-size-chart-cfm/`;
+
+// Structured Data: BreadcrumbList + FAQPage
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: `${siteConfig.url}/`,
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Duct Size Chart: CFM',
+      item: canonical,
+    },
+  ],
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'How do I calculate duct size from CFM?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'To calculate duct size from CFM, divide CFM by target air velocity in FPM to get duct area in square feet (Area = CFM / Velocity), then convert to diameter or rectangular dimensions. Alternatively, standard ACCA Manual D friction charts size ducts at 0.1 in. w.g. friction loss per 100 feet.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What size duct do I need for 1,200 CFM?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'A 1,200 CFM airflow (standard for a 3-ton heat pump or AC system) requires a 16-inch round duct or a 20×10-inch rectangular duct at standard 0.1 in. w.g. friction rate, keeping residential trunk velocity under 900 FPM.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What size duct do I need for a 12x12 room?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'A standard 12×12 ft bedroom typically requires 100 to 150 CFM depending on climate, insulation, and window exposure. At 0.1 in. w.g. friction rate, this requires a 6-inch round duct (up to 109 CFM) or a 7-inch round duct (up to 163 CFM) for quiet residential operation.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What size main trunk duct is needed for a heat pump?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Heat pumps typically require 400 CFM per ton of heating/cooling capacity. A 2-ton heat pump (800 CFM) requires a 14-inch round or 16×8-inch rectangular trunk, while a 3-ton heat pump (1,200 CFM) requires a 16-inch round or 20×10-inch rectangular trunk.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is the difference between flex and rigid metal duct capacity?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Flexible duct carries roughly 15% to 25% less CFM than rigid galvanized sheet metal of the exact same diameter. The inner helical wire ribs, natural installation compression, and minor sagging create higher friction resistance, requiring one size larger in flex runs.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How does return air duct sizing differ from supply duct sizing?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Return air ducts are sized larger than supply ducts to maintain lower air velocity (typically 600 to 700 FPM max, or a 0.05 to 0.08 friction rate). Lower return velocity prevents whistling grilles, reduces fan static pressure stress, and keeps living spaces quiet.',
+      },
+    },
+  ],
+};
+
+const customSchemas = [breadcrumbSchema, faqSchema];
+
+// Data: Round Ducts (4" to 24") at 0.1 in.wg/100ft
+const roundDuctData = [
+  { size: 4, cfm: 37, velocity: 426, use: 'Bathroom exhaust, small branch', id: 'size-4-round', flag: 'Branch (Quiet)' },
+  { size: 5, cfm: 67, velocity: 492, use: 'Small bedroom branch, range run', id: 'size-5-round', flag: 'Branch (Quiet)' },
+  { size: 6, cfm: 109, velocity: 553, use: 'Standard bedroom branch (100–120 sq ft)', id: 'size-6-round', flag: 'Branch (Optimal)' },
+  { size: 7, cfm: 163, velocity: 611, use: 'Master bedroom or kitchen branch', id: 'size-7-round', flag: 'Branch (Optimal)' },
+  { size: 8, cfm: 232, velocity: 666, use: 'Living room branch, small supply trunk', id: 'size-8-round', flag: 'Branch (Optimal)' },
+  { size: 9, cfm: 317, velocity: 718, use: 'Large room branch, small zone trunk', id: 'size-9-round', flag: 'Trunk (Optimal)' },
+  { size: 10, cfm: 419, velocity: 768, use: '1-Ton AC main trunk, multi-room branch', id: 'size-10-round', flag: 'Trunk (Optimal)' },
+  { size: 12, cfm: 678, velocity: 863, use: '1.5-Ton to 2-Ton main supply trunk', id: 'size-12-round', flag: 'Trunk (Optimal)' },
+  { size: 14, cfm: 1019, velocity: 953, use: '2.5-Ton main supply trunk line', id: 'size-14-round', flag: 'Notice: 953 FPM (>900 FPM limit)' },
+  { size: 16, cfm: 1450, velocity: 1039, use: '3.5-Ton to 4-Ton trunk or commercial', id: 'size-16-round', flag: 'Notice: 1,039 FPM (Commercial / lower FR)' },
+  { size: 18, cfm: 1980, velocity: 1120, use: '5-Ton residential trunk / light commercial', id: 'size-18-round', flag: 'Notice: 1,120 FPM (Commercial / lower FR)' },
+  { size: 20, cfm: 2615, velocity: 1199, use: 'Multi-zone commercial trunk line', id: 'size-20-round', flag: 'Notice: 1,199 FPM (Commercial)' },
+  { size: 22, cfm: 3364, velocity: 1274, use: 'Large commercial distribution', id: 'size-22-round', flag: 'Notice: 1,274 FPM (Commercial)' },
+  { size: 24, cfm: 4233, velocity: 1348, use: 'High-capacity commercial supply main', id: 'size-24-round', flag: 'Notice: 1,348 FPM (Commercial)' },
+];
+
+// Data: Rectangular Ducts at 0.1 in.wg/100ft
+const rectDuctData = [
+  { w: 8, h: 6, cfm: 200, equiv: 7.6, velocity: 599, stocked: true, flag: 'Branch (Quiet)' },
+  { w: 10, h: 6, cfm: 264, equiv: 8.4, velocity: 634, stocked: true, flag: 'Branch (Optimal)' },
+  { w: 12, h: 6, cfm: 330, equiv: 9.1, velocity: 661, stocked: true, flag: 'Branch (Optimal)' },
+  { w: 14, h: 6, cfm: 397, equiv: 9.8, velocity: 681, stocked: false, flag: 'Branch (Optimal)' },
+  { w: 16, h: 6, cfm: 465, equiv: 10.4, velocity: 698, stocked: false, flag: 'Branch (Optimal)' },
+  { w: 10, h: 8, cfm: 393, equiv: 9.8, velocity: 708, stocked: true, flag: 'Trunk (Optimal)' },
+  { w: 12, h: 8, cfm: 496, equiv: 10.7, velocity: 743, stocked: true, flag: 'Trunk (Optimal)' },
+  { w: 14, h: 8, cfm: 600, equiv: 11.5, velocity: 772, stocked: true, flag: 'Trunk (Optimal)' },
+  { w: 16, h: 8, cfm: 706, equiv: 12.2, velocity: 795, stocked: true, id: 'size-16x8-rect', flag: 'Trunk (Optimal)' },
+  { w: 18, h: 8, cfm: 814, equiv: 12.9, velocity: 814, stocked: true, flag: 'Trunk (Optimal)' },
+  { w: 20, h: 8, cfm: 922, equiv: 13.5, velocity: 830, stocked: true, flag: 'Trunk (Optimal)' },
+  { w: 12, h: 10, cfm: 673, equiv: 12.0, velocity: 807, stocked: true, flag: 'Trunk (Optimal)' },
+  { w: 14, h: 10, cfm: 819, equiv: 12.9, velocity: 843, stocked: true, flag: 'Trunk (Optimal)' },
+  { w: 16, h: 10, cfm: 969, equiv: 13.7, velocity: 872, stocked: true, flag: 'Trunk (Optimal)' },
+  { w: 18, h: 10, cfm: 1120, equiv: 14.5, velocity: 896, stocked: true, flag: 'Trunk (Optimal)' },
+  { w: 20, h: 10, cfm: 1274, equiv: 15.2, velocity: 917, stocked: true, flag: 'Notice: 917 FPM (>900 FPM limit)' },
+  { w: 24, h: 10, cfm: 1585, equiv: 16.5, velocity: 951, stocked: true, flag: 'Notice: 951 FPM (>900 FPM limit)' },
+];
+
+// Data: Flexible Ducts at 0.1 in.wg/100ft
+const flexDuctData = [
+  { size: 4, cfmStretched: 33, cfmInstalled: 30, velocity: 344, id: 'size-4-flex', flag: 'Compliant (<700 FPM)' },
+  { size: 5, cfmStretched: 59, cfmInstalled: 54, velocity: 396, id: 'size-5-flex', flag: 'Compliant (<700 FPM)' },
+  { size: 6, cfmStretched: 96, cfmInstalled: 88, velocity: 448, id: 'size-6-flex', flag: 'Compliant (<700 FPM)' },
+  { size: 7, cfmStretched: 144, cfmInstalled: 132, velocity: 494, id: 'size-7-flex', flag: 'Compliant (<700 FPM)' },
+  { size: 8, cfmStretched: 204, cfmInstalled: 188, velocity: 539, id: 'size-8-flex', flag: 'Compliant (<700 FPM)' },
+  { size: 9, cfmStretched: 279, cfmInstalled: 256, velocity: 579, id: 'size-9-flex', flag: 'Compliant (<700 FPM)' },
+  { size: 10, cfmStretched: 369, cfmInstalled: 338, velocity: 620, id: 'size-10-flex', flag: 'Compliant (<700 FPM)' },
+  { size: 12, cfmStretched: 597, cfmInstalled: 548, velocity: 698, id: 'size-12-flex', flag: 'Compliant (<700 FPM)' },
+  { size: 14, cfmStretched: 897, cfmInstalled: 823, velocity: 770, id: 'size-14-flex', flag: 'Exceeds 700 FPM limit' },
+  { size: 16, cfmStretched: 1276, cfmInstalled: 1172, velocity: 839, id: 'size-16-flex', flag: 'Exceeds 700 FPM limit' },
+];
+
+// Data: Return Air Sizing
+const returnAirData = [
+  { ton: '1.0 Ton', cfm: 400, round: '12"', rect: '14×8" or 12×10"', velocity: '509 FPM', status: 'Optimal (<600 FPM)' },
+  { ton: '1.5 Ton', cfm: 600, round: '14"', rect: '18×8" or 14×10"', velocity: '561 FPM', status: 'Optimal (<600 FPM)' },
+  { ton: '2.0 Ton', cfm: 800, round: '14"–16"', rect: '20×10" or 24×8"', velocity: '573 FPM', status: 'Optimal (<600 FPM)' },
+  { ton: '2.5 Ton', cfm: 1000, round: '16"', rect: '24×10" or 20×12"', velocity: '600 FPM', status: 'Standard (600 FPM)' },
+  { ton: '3.0 Ton', cfm: 1200, round: '18"', rect: '26×10" or 22×12"', velocity: '611 FPM', status: 'Standard (600–650 FPM)' },
+  { ton: '3.5 Ton', cfm: 1400, round: '18"–20"', rect: '28×10" or 24×12"', velocity: '642 FPM', status: 'Standard (600–650 FPM)' },
+  { ton: '4.0 Ton', cfm: 1600, round: '20"', rect: '30×10" or 26×12"', velocity: '660 FPM', status: 'Quiet Limit (660 FPM)' },
+  { ton: '5.0 Ton', cfm: 2000, round: '22"–24"', rect: '34×10" or 30×12"', velocity: '679 FPM', status: 'Quiet Limit (679 FPM)' },
+];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  locale="en"
+  exactTitle={true}
+  customSchemas={customSchemas}
+>
+  <article class="max-w-4xl mx-auto space-y-8 pb-12">
+    
+    <!-- Hero / Above The Fold -->
+    <header class="text-center pt-4 pb-2">
+      <nav aria-label="Breadcrumbs" class="flex items-center justify-center gap-2 text-xs font-medium text-silver-500 mb-3">
+        <a href="/" class="hover:text-accent transition-colors">Home</a>
+        <span aria-hidden="true" class="text-silver-300">/</span>
+        <span class="text-silver-700" aria-current="page">Duct Size Chart: CFM</span>
+      </nav>
+
+      <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-silver-900 tracking-tight mb-4">
+        Duct Size Chart: CFM for Round, Rectangular &amp; Flex Duct
+      </h1>
+
+      <!-- 1. Opening Paragraph (40-60 words) -->
+      <p class="text-silver-600 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto mb-6">
+        This field duct sizing chart provides reference CFM airflow capacities across standard round, rectangular, and flexible duct dimensions. All values are calculated using standard ACCA Manual D and ASHRAE friction loss at 0.1 in. w.g. per 100 ft (the standard residential design rate) for supply and return air ductwork.
+      </p>
+
+      <!-- 2. Jump-Link Bar -->
+      <nav aria-label="Chart sections" class="flex flex-wrap items-center justify-center gap-2 mb-6">
+        <a href="#round-duct-cfm-chart" class="px-3.5 py-1.5 text-xs sm:text-sm font-semibold text-silver-700 bg-white hover:text-accent hover:border-accent border border-silver-200 rounded-full shadow-xs transition-all">
+          Round
+        </a>
+        <a href="#rectangular-duct-cfm-chart" class="px-3.5 py-1.5 text-xs sm:text-sm font-semibold text-silver-700 bg-white hover:text-accent hover:border-accent border border-silver-200 rounded-full shadow-xs transition-all">
+          Rectangular
+        </a>
+        <a href="#flex-duct-cfm-chart" class="px-3.5 py-1.5 text-xs sm:text-sm font-semibold text-silver-700 bg-white hover:text-accent hover:border-accent border border-silver-200 rounded-full shadow-xs transition-all">
+          Flex
+        </a>
+        <a href="#return-air-duct-sizing" class="px-3.5 py-1.5 text-xs sm:text-sm font-semibold text-silver-700 bg-white hover:text-accent hover:border-accent border border-silver-200 rounded-full shadow-xs transition-all">
+          Return Air
+        </a>
+        <a href="#download-pdf" class="px-3.5 py-1.5 text-xs sm:text-sm font-semibold text-white bg-accent hover:bg-accent-hover rounded-full shadow-xs transition-all inline-flex items-center gap-1">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download PDF
+        </a>
+      </nav>
+
+      <!-- 3. Inline CTA to Calculator -->
+      <div class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-accent-subtle border border-accent/20 text-silver-800 text-sm font-medium">
+        <span>Need a size for a specific CFM?</span>
+        <a href="/" class="text-accent font-bold hover:underline inline-flex items-center gap-1">
+          Use the duct size calculator
+          <span aria-hidden="true">&rarr;</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- SECTION 1: Round Duct CFM Chart -->
+    <section class="glass-card p-5 sm:p-7 scroll-mt-20" id="round-duct-cfm-chart">
+      <div class="mb-4">
+        <h2 class="text-xl sm:text-2xl font-bold text-silver-900 mb-1">Round Duct CFM Chart</h2>
+        <p class="text-xs sm:text-sm text-silver-500 font-medium">
+          Assumes rigid galvanized sheet metal at a standard residential friction rate of <strong>0.1 in. w.g. per 100 ft</strong>. Velocity sanity guidelines: 600–700 FPM (branch runs), 700–900 FPM (main supply trunks).
+        </p>
+      </div>
+
+      <!-- Responsive Table Container with 360px viewport support -->
+      <div class="overflow-x-auto rounded-xl border border-silver-200 bg-white shadow-xs" style="min-height: 400px;">
+        <table class="w-full text-left text-sm border-collapse min-w-[560px]">
+          <caption class="sr-only">Round duct airflow capacities from 4 inch to 24 inch diameter at 0.1 friction loss</caption>
+          <thead class="bg-silver-100/75 text-silver-700 font-bold uppercase tracking-wider text-xs border-b border-silver-200 sticky top-0 z-10">
+            <tr>
+              <th scope="col" class="py-3 px-4">Duct Diameter (in)</th>
+              <th scope="col" class="py-3 px-4">CFM @ 0.1 in.wg</th>
+              <th scope="col" class="py-3 px-4">Velocity (FPM)</th>
+              <th scope="col" class="py-3 px-4">Typical Use &amp; Status</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-silver-100">
+            {roundDuctData.map((row) => (
+              <tr id={row.id} class="hover:bg-silver-50/80 transition-colors">
+                <th scope="row" class="py-3 px-4 font-bold text-silver-900">
+                  {row.size}&quot; Round
+                </th>
+                <td class="py-3 px-4 font-mono font-bold text-accent">
+                  {row.cfm.toLocaleString()} CFM
+                </td>
+                <td class="py-3 px-4 font-mono text-silver-700">
+                  {row.velocity} FPM
+                </td>
+                <td class="py-3 px-4 text-xs text-silver-600">
+                  <div class="font-medium text-silver-800">{row.use}</div>
+                  {row.velocity > 900 ? (
+                    <span class="inline-block mt-0.5 px-2 py-0.5 rounded text-[11px] font-semibold bg-amber-100 text-amber-800">
+                      ⚠️ {row.flag}
+                    </span>
+                  ) : (
+                    <span class="inline-block mt-0.5 px-2 py-0.5 rounded text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200/50">
+                      ✓ {row.flag}
+                    </span>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Under table source & quick lookups -->
+      <div class="mt-4 pt-3 border-t border-silver-200/80 text-xs text-silver-500 space-y-1.5">
+        <p>
+          <strong>Quick Lookups:</strong> An <strong>8 inch duct delivers ~232 CFM</strong> at 666 FPM (ideal for medium bedrooms), while a <strong>14 round duct delivers ~1,019 CFM</strong> (standard 2.5-ton supply trunk) and a <strong>16 inch duct delivers ~1,450 CFM</strong> (standard 3.5-ton trunk).
+        </p>
+        <p>
+          <em>Source:</em> Derived from standard ACCA Manual D and ASHRAE Fundamentals friction loss charts at 0.1 in. w.g. per 100 ft. These numbers are planning figures for initial sizing and do not substitute for a complete Manual J heat load calculation and Manual D duct system design.
+        </p>
+      </div>
+    </section>
+
+    <!-- SECTION 2: Rectangular Duct CFM Chart -->
+    <section class="glass-card p-5 sm:p-7 scroll-mt-20" id="rectangular-duct-cfm-chart">
+      <div class="mb-4">
+        <h2 class="text-xl sm:text-2xl font-bold text-silver-900 mb-1">Rectangular Duct CFM Chart</h2>
+        <p class="text-xs sm:text-sm text-silver-500 font-medium">
+          Airflow capacities for standard rectangular sheet metal duct sizes at <strong>0.1 in. w.g. per 100 ft</strong> using Huebscher equivalent diameter equations. Common residential supply trunks are kept between 700 and 900 FPM.
+        </p>
+      </div>
+
+      <div class="overflow-x-auto rounded-xl border border-silver-200 bg-white shadow-xs" style="min-height: 400px;">
+        <table class="w-full text-left text-sm border-collapse min-w-[560px]">
+          <caption class="sr-only">Standard rectangular duct sizes airflow capacity and equivalent round diameter</caption>
+          <thead class="bg-silver-100/75 text-silver-700 font-bold uppercase tracking-wider text-xs border-b border-silver-200 sticky top-0 z-10">
+            <tr>
+              <th scope="col" class="py-3 px-4">Duct Size (W&times;H)</th>
+              <th scope="col" class="py-3 px-4">CFM @ 0.1 in.wg</th>
+              <th scope="col" class="py-3 px-4">Equiv. Round (in)</th>
+              <th scope="col" class="py-3 px-4">Velocity (FPM) &amp; Status</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-silver-100">
+            {rectDuctData.map((row) => (
+              <tr id={row.id} class="hover:bg-silver-50/80 transition-colors">
+                <th scope="row" class="py-3 px-4 font-bold text-silver-900">
+                  {row.w}&times;{row.h}&quot;
+                  {row.stocked && (
+                    <span class="ml-1.5 text-[10px] uppercase font-semibold px-1.5 py-0.5 bg-silver-100 text-silver-600 rounded">
+                      Stock
+                    </span>
+                  )}
+                </th>
+                <td class="py-3 px-4 font-mono font-bold text-accent">
+                  {row.cfm.toLocaleString()} CFM
+                </td>
+                <td class="py-3 px-4 font-mono text-silver-700">
+                  {row.equiv}&quot; dia
+                </td>
+                <td class="py-3 px-4 text-xs">
+                  <span class="font-mono text-silver-800 font-semibold">{row.velocity} FPM</span>
+                  <span class="block text-[11px] mt-0.5 text-silver-500">
+                    {row.velocity > 900 ? (
+                      <span class="text-amber-700 font-medium">⚠️ {row.flag}</span>
+                    ) : (
+                      <span class="text-emerald-700 font-medium">✓ {row.flag}</span>
+                    )}
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mt-4 pt-3 border-t border-silver-200/80 text-xs text-silver-500 space-y-1.5">
+        <p>
+          <strong>Stocked Sizes:</strong> The most commonly stocked rectangular sheet metal duct sizes in residential HVAC distributor shops are 8&times;6&quot;, 10&times;6&quot;, 12&times;8&quot;, 14&times;8&quot;, <strong>16&times;8&quot; (~706 CFM)</strong>, and 20&times;8&quot; (~922 CFM).
+        </p>
+        <p>
+          <em>Source:</em> Sized according to standard ACCA Manual D equivalent rectangular duct tables. Note that for quiet residential systems moving over 1,200 CFM, consider reducing design friction rate to 0.08 in. w.g. or increasing trunk depth.
+        </p>
+      </div>
+    </section>
+
+    <!-- SECTION 3: Flexible Duct CFM Chart -->
+    <section class="glass-card p-5 sm:p-7 scroll-mt-20" id="flex-duct-cfm-chart">
+      <div class="mb-4">
+        <h2 class="text-xl sm:text-2xl font-bold text-silver-900 mb-1">Flexible Duct CFM Chart</h2>
+        <p class="text-xs sm:text-sm text-silver-500 font-medium">
+          Airflow comparison between fully stretched flexible duct vs. typical field installed flexible duct at <strong>0.1 in. w.g. per 100 ft</strong>. Velocity limit: keep strictly <strong>below 700 FPM</strong>.
+        </p>
+      </div>
+
+      <div class="overflow-x-auto rounded-xl border border-silver-200 bg-white shadow-xs" style="min-height: 380px;">
+        <table class="w-full text-left text-sm border-collapse min-w-[560px]">
+          <caption class="sr-only">Flexible duct CFM ratings for stretched vs typical installed conditions</caption>
+          <thead class="bg-silver-100/75 text-silver-700 font-bold uppercase tracking-wider text-xs border-b border-silver-200 sticky top-0 z-10">
+            <tr>
+              <th scope="col" class="py-3 px-4">Duct Diameter (in)</th>
+              <th scope="col" class="py-3 px-4">CFM (Fully Stretched)</th>
+              <th scope="col" class="py-3 px-4">CFM (Typical Installed)</th>
+              <th scope="col" class="py-3 px-4">Velocity (FPM) &amp; Limit</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-silver-100">
+            {flexDuctData.map((row) => (
+              <tr id={row.id} class="hover:bg-silver-50/80 transition-colors">
+                <th scope="row" class="py-3 px-4 font-bold text-silver-900">
+                  {row.size}&quot; Flex
+                </th>
+                <td class="py-3 px-4 font-mono font-medium text-silver-700">
+                  {row.cfmStretched} CFM
+                </td>
+                <td class="py-3 px-4 font-mono font-bold text-accent">
+                  {row.cfmInstalled} CFM
+                </td>
+                <td class="py-3 px-4 text-xs">
+                  <span class="font-mono text-silver-800 font-semibold">{row.velocity} FPM</span>
+                  <span class="block text-[11px] mt-0.5">
+                    {row.velocity > 700 ? (
+                      <span class="text-rose-700 font-semibold">⚠️ Exceeds 700 FPM max limit</span>
+                    ) : (
+                      <span class="text-emerald-700 font-semibold">✓ Quiet Branch Compliant</span>
+                    )}
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mt-4 pt-3 border-t border-silver-200/80 text-xs text-silver-500 space-y-1.5">
+        <p class="text-silver-700 font-medium">
+          <strong>Flex Derate Explanation:</strong> Flexible duct carries roughly 15% to 25% less CFM than rigid sheet metal of identical diameter due to internal spiral wire ribbing, standard 15% longitudinal field compression, and natural sag between support hangers.
+        </p>
+        <p>
+          <strong>Quick Lookups:</strong> A <strong>12 flex duct delivers ~548 CFM</strong> installed, while a <strong>14 flex delivers ~823 CFM</strong> but exceeds the recommended 700 FPM velocity threshold for flexible ductwork. For runs over 25 feet or airflow exceeding 600 CFM, rigid metal ductwork is strongly advised.
+        </p>
+      </div>
+    </section>
+
+    <!-- SECTION 4: PDF Download Block -->
+    <section class="glass-card p-6 sm:p-8 bg-gradient-to-br from-white via-silver-50 to-accent-subtle/30 border-accent/20 scroll-mt-20" id="download-pdf">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="space-y-2 text-center md:text-left">
+          <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-accent-subtle text-accent border border-accent/20">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            Printable Engineering Reference
+          </div>
+          <h3 class="text-xl sm:text-2xl font-bold text-silver-900">
+            Download Duct Sizing Chart CFM (PDF)
+          </h3>
+          <p class="text-sm text-silver-600 max-w-lg">
+            Download the complete 1-page printable reference sheet featuring all round, rectangular, flexible, and return air duct CFM tables branded with engineering limits.
+          </p>
+        </div>
+
+        <div class="flex flex-col sm:flex-row md:flex-col items-center gap-3 shrink-0">
+          <a
+            href="/cfm-duct-size-chart.pdf"
+            download="cfm-duct-size-chart.pdf"
+            class="btn-primary w-full sm:w-auto text-center"
+            id="download-chart-pdf"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download Chart (PDF)
+          </a>
+          <a
+            href="/duct-size-chart-cfm/print/"
+            class="text-xs font-medium text-silver-500 hover:text-accent underline transition-colors"
+          >
+            Or open printer-friendly view &rarr;
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: Return Air Duct Sizing -->
+    <section class="glass-card p-5 sm:p-7 scroll-mt-20" id="return-air-duct-sizing">
+      <div class="mb-4">
+        <h2 class="text-xl sm:text-2xl font-bold text-silver-900 mb-2">Return Air Duct Sizing</h2>
+        <p class="text-sm text-silver-600 leading-relaxed mb-4">
+          Return air duct sizing requires special care because return grilles directly connect to occupied living areas without sound-dampening coil packages. While supply ducts typically operate between 700 and 900 FPM, return air ducts should maintain a lower design velocity between <strong>500 and 650 FPM</strong> (or a conservative friction rate of 0.05 to 0.08 in. w.g./100 ft). Undersized return ducts starve the HVAC blower of required CFM, drastically increasing static pressure, freezing evaporator coils in summer, and generating loud return grille whistling.
+        </p>
+      </div>
+
+      <div class="overflow-x-auto rounded-xl border border-silver-200 bg-white shadow-xs">
+        <table class="w-full text-left text-sm border-collapse min-w-[540px]">
+          <caption class="sr-only">Recommended return air duct sizes by AC and heat pump tonnage</caption>
+          <thead class="bg-silver-100/75 text-silver-700 font-bold uppercase tracking-wider text-xs border-b border-silver-200">
+            <tr>
+              <th scope="col" class="py-3 px-4">System Size</th>
+              <th scope="col" class="py-3 px-4">Return CFM</th>
+              <th scope="col" class="py-3 px-4">Min. Round Return</th>
+              <th scope="col" class="py-3 px-4">Min. Rectangular Return</th>
+              <th scope="col" class="py-3 px-4">Design Velocity</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-silver-100">
+            {returnAirData.map((row) => (
+              <tr class="hover:bg-silver-50/80 transition-colors">
+                <th scope="row" class="py-3 px-4 font-bold text-silver-900">{row.ton}</th>
+                <td class="py-3 px-4 font-mono font-bold text-accent">{row.cfm} CFM</td>
+                <td class="py-3 px-4 font-mono text-silver-800">{row.round}</td>
+                <td class="py-3 px-4 text-silver-700">{row.rect}</td>
+                <td class="py-3 px-4 text-xs font-semibold text-emerald-700">{row.velocity} ({row.status})</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-3 text-xs text-silver-500">
+        * When designing multiple return drops or central hallway returns, ensure the sum of all return duct branch areas equals or exceeds the total cross-sectional area specified above.
+      </p>
+    </section>
+
+    <!-- SECTION 6: How to Read This Chart -->
+    <section class="glass-card p-5 sm:p-7 scroll-mt-20" id="how-to-read-chart">
+      <h2 class="text-xl sm:text-2xl font-bold text-silver-900 mb-3">How to Read This Chart</h2>
+      <div class="prose max-w-none text-silver-700 text-sm sm:text-base leading-relaxed space-y-4">
+        <p>
+          Duct sizing charts relate three core aerodynamic properties: <strong>Airflow (CFM)</strong>, <strong>Duct Cross-Sectional Dimension</strong>, and <strong>Friction Rate (in. w.g. per 100 ft)</strong>. This chart standardizes all values at a constant friction loss of 0.10 in. w.g. per 100 ft of equivalent duct length—the default standard specified in ACCA Manual D for residential systems with moderate equivalent duct runs.
+        </p>
+        <p>
+          To size a duct using this chart:
+        </p>
+        <ol class="list-decimal pl-5 space-y-2 text-silver-700">
+          <li><strong>Identify your design CFM:</strong> Determine the heating and cooling airflow required for the zone or room (typically 400 CFM per ton of equipment capacity, or room-by-room CFM from your Manual J load calculation).</li>
+          <li><strong>Select your duct material:</strong> Choose between rigid sheet metal (round or rectangular) or flexible ductwork. If using flex, look under the <em>Typical Installed</em> column to account for real-world wire resistance and installation sag.</li>
+          <li><strong>Cross-reference velocity limits:</strong> Verify that the resulting velocity does not exceed 700 FPM for branch lines or 900 FPM for supply trunks. High air velocity creates wind rush and whistling through dampers and diffusers.</li>
+        </ol>
+        <p class="pt-2">
+          Have non-standard available static pressure, complex duct fittings, or custom friction rates? Calculate exact custom airflow and equivalent sizes using our <a href="/" class="text-accent font-semibold hover:underline">interactive HVAC duct size calculator</a>.
+        </p>
+      </div>
+    </section>
+
+    <!-- SECTION 7: FAQ -->
+    <section class="glass-card p-5 sm:p-7 scroll-mt-20" id="faq">
+      <div class="mb-6 text-center sm:text-left">
+        <h2 class="text-xl sm:text-2xl font-bold text-silver-900 mb-1">Frequently Asked Questions</h2>
+        <p class="text-xs sm:text-sm text-silver-500">
+          Common questions on ductwork sizing, CFM airflow capacities, and engineering rules of thumb.
+        </p>
+      </div>
+
+      <div class="space-y-3">
+        {faqSchema.mainEntity.map((item) => (
+          <details class="faq-item rounded-lg p-2 bg-silver-50/50 hover:bg-silver-50 transition-colors">
+            <summary class="font-bold text-silver-900 text-sm sm:text-base cursor-pointer py-1">
+              {item.name}
+            </summary>
+            <div class="faq-answer text-xs sm:text-sm text-silver-600 pt-2 pb-1 leading-relaxed">
+              {item.acceptedAnswer.text}
+            </div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+  </article>
+</BaseLayout>

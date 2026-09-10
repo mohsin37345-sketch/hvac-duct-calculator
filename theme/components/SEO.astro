@@ -8,6 +8,7 @@ export interface Props {
   ogImage?: string;
   locale?: string;
   noindex?: boolean;
+  exactTitle?: boolean;
 }
 
 const {
@@ -17,12 +18,13 @@ const {
   ogImage = siteConfig.ogImage,
   locale = 'en',
   noindex = false,
+  exactTitle = false,
 } = Astro.props;
 
 const isStaging = Astro.url.hostname.includes('vercel.app');
 const finalNoindex = noindex || isStaging;
 
-const fullTitle = title === siteConfig.name ? title : `${title} | ${siteConfig.name}`;
+const fullTitle = exactTitle || title === siteConfig.name ? title : `${title} | ${siteConfig.name}`;
 const canonicalUrl = canonical || Astro.url.href;
 const ogImageUrl = ogImage?.startsWith('http') ? ogImage : `${siteConfig.url}${ogImage}`;
 ---

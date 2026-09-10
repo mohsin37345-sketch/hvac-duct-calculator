@@ -12,7 +12,7 @@ export interface Props {
   locale?: string;
   canonical?: string;
   ogImage?: string;
-  schemaType?: 'website' | 'about' | 'contact' | 'article';
+  schemaType?: 'website' | 'about' | 'contact' | 'article' | 'faq' | 'none';
   articleData?: {
     title: string;
     description: string;
@@ -20,7 +20,9 @@ export interface Props {
     datePublished: string;
     author: string;
   };
+  customSchemas?: object[];
   noindex?: boolean;
+  exactTitle?: boolean;
 }
 
 const {
@@ -31,7 +33,9 @@ const {
   ogImage,
   schemaType = 'website',
   articleData,
+  customSchemas,
   noindex = false,
+  exactTitle = false,
 } = Astro.props;
 
 const localeInfo = getLocaleInfo(locale);
@@ -62,6 +66,7 @@ const currentPath = Astro.url.pathname;
     ogImage={ogImage}
     locale={locale}
     noindex={noindex}
+    exactTitle={exactTitle}
   />
 
   <!-- hreflang alternates -->
@@ -74,7 +79,7 @@ const currentPath = Astro.url.pathname;
   ))}
   <link rel="alternate" hreflang="x-default" href={`https://www.hvacductcalculator.com${currentPath}`} />
 
-  <Schema type={schemaType} locale={locale} articleData={articleData} />
+  <Schema type={schemaType} locale={locale} articleData={articleData} customSchemas={customSchemas} />
 </head>
 <body class="min-h-screen flex flex-col">
   <Header locale={locale} currentPath={currentPath} />

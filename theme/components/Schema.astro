@@ -4,7 +4,7 @@ import { navItems } from '@src/config/site';
 import { t, getLocalizedUrl } from '@theme/i18n/utils';
 
 export interface Props {
-  type?: 'website' | 'about' | 'contact' | 'article';
+  type?: 'website' | 'about' | 'contact' | 'article' | 'faq' | 'none';
   locale?: string;
   articleData?: {
     title: string;
@@ -13,9 +13,10 @@ export interface Props {
     datePublished: string;
     author: string;
   };
+  customSchemas?: object[];
 }
 
-const { type = 'website', locale = 'en', articleData } = Astro.props;
+const { type = 'website', locale = 'en', articleData, customSchemas } = Astro.props;
 
 const orgSchema = {
   '@context': 'https://schema.org',
@@ -34,6 +35,10 @@ const navSchema = {
 };
 
 const schemas: object[] = [orgSchema, navSchema];
+
+if (customSchemas && customSchemas.length > 0) {
+  schemas.push(...customSchemas);
+}
 
 if (type === 'website') {
   schemas.push({

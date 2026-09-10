@@ -1,0 +1,371 @@
+---
+// Standalone printable reference page
+const roundDuctData = [
+  { size: 4, cfm: 37, velocity: 426, use: 'Bath exhaust' },
+  { size: 5, cfm: 67, velocity: 492, use: 'Small bedroom' },
+  { size: 6, cfm: 109, velocity: 553, use: 'Standard bedroom' },
+  { size: 7, cfm: 163, velocity: 611, use: 'Master bedroom' },
+  { size: 8, cfm: 232, velocity: 666, use: 'Living branch / trunk' },
+  { size: 9, cfm: 317, velocity: 718, use: 'Zone trunk' },
+  { size: 10, cfm: 419, velocity: 768, use: '1-Ton main trunk' },
+  { size: 12, cfm: 678, velocity: 863, use: '1.5–2 Ton main trunk' },
+  { size: 14, cfm: 1019, velocity: 953, use: '2.5-Ton trunk (953 FPM)' },
+  { size: 16, cfm: 1450, velocity: 1039, use: '3.5–4 Ton trunk' },
+  { size: 18, cfm: 1980, velocity: 1120, use: '5-Ton trunk / light comm.' },
+  { size: 20, cfm: 2615, velocity: 1199, use: 'Commercial trunk' },
+];
+
+const rectDuctData = [
+  { size: '8×6"', cfm: 200, equiv: '7.6"', velocity: 599 },
+  { size: '10×6"', cfm: 264, equiv: '8.4"', velocity: 634 },
+  { size: '12×6"', cfm: 330, equiv: '9.1"', velocity: 661 },
+  { size: '10×8"', cfm: 393, equiv: '9.8"', velocity: 708 },
+  { size: '12×8"', cfm: 496, equiv: '10.7"', velocity: 743 },
+  { size: '14×8"', cfm: 600, equiv: '11.5"', velocity: 772 },
+  { size: '16×8"', cfm: 706, equiv: '12.2"', velocity: 795 },
+  { size: '18×8"', cfm: 814, equiv: '12.9"', velocity: 814 },
+  { size: '20×8"', cfm: 922, equiv: '13.5"', velocity: 830 },
+  { size: '12×10"', cfm: 673, equiv: '12.0"', velocity: 807 },
+  { size: '14×10"', cfm: 819, equiv: '12.9"', velocity: 843 },
+  { size: '16×10"', cfm: 969, equiv: '13.7"', velocity: 872 },
+  { size: '18×10"', cfm: 1120, equiv: '14.5"', velocity: 896 },
+  { size: '20×10"', cfm: 1274, equiv: '15.2"', velocity: 917 },
+];
+
+const flexDuctData = [
+  { size: 4, stretched: 33, installed: 30, velocity: 344 },
+  { size: 5, stretched: 59, installed: 54, velocity: 396 },
+  { size: 6, stretched: 96, installed: 88, velocity: 448 },
+  { size: 7, stretched: 144, installed: 132, velocity: 494 },
+  { size: 8, stretched: 204, installed: 188, velocity: 539 },
+  { size: 9, stretched: 279, installed: 256, velocity: 579 },
+  { size: 10, stretched: 369, installed: 338, velocity: 620 },
+  { size: 12, stretched: 597, installed: 548, velocity: 698 },
+  { size: 14, stretched: 897, installed: 823, velocity: '770*' },
+  { size: 16, stretched: 1276, installed: 1172, velocity: '839*' },
+];
+
+const returnAirData = [
+  { ton: '1.0 Ton (400 CFM)', round: '12"', rect: '14×8" / 12×10"', vel: '509 FPM' },
+  { ton: '2.0 Ton (800 CFM)', round: '14"–16"', rect: '20×10" / 24×8"', vel: '573 FPM' },
+  { ton: '3.0 Ton (1,200 CFM)', round: '18"', rect: '26×10" / 22×12"', vel: '611 FPM' },
+  { ton: '4.0 Ton (1,600 CFM)', round: '20"', rect: '30×10" / 26×12"', vel: '660 FPM' },
+  { ton: '5.0 Ton (2,000 CFM)', round: '22"–24"', rect: '34×10" / 30×12"', vel: '679 FPM' },
+];
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Duct Sizing Chart CFM Reference Sheet | HVAC Duct Calculator</title>
+  <meta name="robots" content="noindex, follow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      margin: 0;
+      padding: 24px;
+      color: #1f2937;
+      background: #f9fafb;
+      font-size: 11px;
+      line-height: 1.4;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .print-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1000px;
+      margin: 0 auto 20px;
+      padding: 12px 18px;
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .btn-print {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      background: #5b6abf;
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 13px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .btn-print:hover { background: #4a58a8; }
+    .back-link { color: #5b6abf; font-weight: 500; font-size: 13px; text-decoration: none; }
+    .back-link:hover { text-decoration: underline; }
+
+    .print-sheet {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 28px;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+    }
+
+    header {
+      border-bottom: 2px solid #5b6abf;
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+    h1 {
+      font-size: 18px;
+      font-weight: 800;
+      color: #111827;
+      margin: 0 0 4px;
+      letter-spacing: -0.01em;
+    }
+    .subtitle {
+      font-size: 11px;
+      color: #4b5563;
+      margin: 0;
+    }
+    .brand-mark {
+      text-align: right;
+      font-size: 11px;
+      font-weight: 700;
+      color: #5b6abf;
+    }
+    .brand-url { font-size: 10px; color: #6b7280; font-weight: 500; }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    @media (max-width: 768px) {
+      .grid-2 { grid-template-columns: 1fr; }
+    }
+
+    .table-box {
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .table-title {
+      background: #f3f4f6;
+      font-size: 12px;
+      font-weight: 700;
+      color: #111827;
+      padding: 6px 10px;
+      border-bottom: 1px solid #e5e7eb;
+      display: flex;
+      justify-content: space-between;
+    }
+    .table-title span { font-size: 10px; font-weight: 500; color: #6b7280; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 10px;
+    }
+    th, td {
+      padding: 4px 8px;
+      text-align: left;
+      border-bottom: 1px solid #f1f3f5;
+    }
+    th {
+      background: #fafbfc;
+      font-weight: 700;
+      color: #4b5563;
+      text-transform: uppercase;
+      font-size: 9px;
+      letter-spacing: 0.03em;
+    }
+    td.num { font-family: ui-monospace, SFMono-Regular, monospace; font-weight: 600; }
+    td.highlight { color: #5b6abf; font-weight: 700; }
+    tr:last-child td { border-bottom: none; }
+
+    footer {
+      margin-top: 16px;
+      padding-top: 10px;
+      border-top: 1px solid #e5e7eb;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 9px;
+      color: #6b7280;
+    }
+
+    @media print {
+      body { background: #ffffff; padding: 0; font-size: 9.5px; }
+      .print-bar { display: none !important; }
+      .print-sheet {
+        border: none;
+        padding: 0;
+        max-width: 100%;
+      }
+      @page {
+        margin: 10mm 10mm 10mm 10mm;
+        size: letter;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="print-bar">
+    <a href="/duct-size-chart-cfm/" class="back-link">&larr; Back to interactive page</a>
+    <button onclick="window.print()" class="btn-print">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+      Print / Save to PDF
+    </button>
+  </div>
+
+  <div class="print-sheet">
+    <header>
+      <div>
+        <h1>Duct Size Chart: CFM Reference Sheet</h1>
+        <p class="subtitle">Standard Residential Friction Loss: <strong>0.1 in. w.g. per 100 ft</strong> &bull; Based on ACCA Manual D &amp; ASHRAE Standards</p>
+      </div>
+      <div class="brand-mark">
+        HVAC Duct Calculator
+        <div class="brand-url">www.hvacductcalculator.com</div>
+      </div>
+    </header>
+
+    <div class="grid-2">
+      <!-- Round Duct Table -->
+      <div class="table-box">
+        <div class="table-title">
+          1. Round Duct CFM Chart
+          <span>Rigid Metal @ 0.1 FR</span>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Dia.</th>
+              <th>CFM</th>
+              <th>Velocity</th>
+              <th>Recommended Use</th>
+            </tr>
+          </thead>
+          <tbody>
+            {roundDuctData.map((row) => (
+              <tr>
+                <td><strong>{row.size}&quot;</strong></td>
+                <td class="num highlight">{row.cfm} CFM</td>
+                <td class="num">{row.velocity} FPM</td>
+                <td>{row.use}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Rectangular Duct Table -->
+      <div class="table-box">
+        <div class="table-title">
+          2. Rectangular Duct CFM Chart
+          <span>Huebscher Equiv. @ 0.1 FR</span>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Size (W&times;H)</th>
+              <th>CFM</th>
+              <th>Equiv.</th>
+              <th>Velocity</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rectDuctData.map((row) => (
+              <tr>
+                <td><strong>{row.size}</strong></td>
+                <td class="num highlight">{row.cfm} CFM</td>
+                <td class="num">{row.equiv}</td>
+                <td class="num">{row.velocity} FPM</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <!-- Flex Duct Table -->
+      <div class="table-box">
+        <div class="table-title">
+          3. Flexible Duct CFM Chart
+          <span>Keep velocity &lt; 700 FPM</span>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Dia.</th>
+              <th>Stretched</th>
+              <th>Installed</th>
+              <th>Velocity</th>
+            </tr>
+          </thead>
+          <tbody>
+            {flexDuctData.map((row) => (
+              <tr>
+                <td><strong>{row.size}&quot; Flex</strong></td>
+                <td class="num">{row.stretched} CFM</td>
+                <td class="num highlight">{row.installed} CFM</td>
+                <td class="num">{row.velocity} FPM</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Return Air Sizing Table -->
+      <div class="table-box">
+        <div class="table-title">
+          4. Return Air Duct Sizing
+          <span>Quiet Target: 500–650 FPM</span>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>System Size</th>
+              <th>Min. Round</th>
+              <th>Min. Rectangular</th>
+              <th>Design Velocity</th>
+            </tr>
+          </thead>
+          <tbody>
+            {returnAirData.map((row) => (
+              <tr>
+                <td><strong>{row.ton}</strong></td>
+                <td class="num highlight">{row.round}</td>
+                <td>{row.rect}</td>
+                <td class="num">{row.vel}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <footer>
+      <div>
+        <strong>Notes:</strong> Flex duct is derated ~20% for wire friction and 15% standard installation sag (*exceeds 700 FPM). Return ducts require lower velocity (&lt;650 FPM) to avoid grille noise.
+      </div>
+      <div>
+        hvacductcalculator.com &copy; 2026
+      </div>
+    </footer>
+  </div>
+
+</body>
+</html>
