@@ -64,16 +64,6 @@ const currentPath = Astro.url.pathname;
     crossorigin="anonymous"
   ></script>
 
-  {showAds && (
-    <>
-      <!-- Adsterra Popunder -->
-      <script is:inline data-cfasync="false" src="https://abscloud.org/1/a7a4282c6b9f5f2a59ed9ae52a247e3f"></script>
-
-      <!-- Adsterra SocialBar -->
-      <script is:inline data-cfasync="false" src="https://bauval.org/14/cab0162d07421f6b41fff162b4d1bd76"></script>
-    </>
-  )}
-
   <SEO
     title={title}
     description={description}
