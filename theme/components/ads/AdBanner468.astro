@@ -6,20 +6,20 @@ export interface Props {
 const { className = '' } = Astro.props;
 ---
 
-<div class={`ad-container-468 my-6 flex flex-col items-center justify-center ${className}`}>
-  <div class="text-[10px] uppercase tracking-widest text-silver-400 mb-1 select-none font-medium">Advertisement</div>
-  <div class="w-full max-w-full overflow-x-auto flex justify-center py-1">
-    <div class="w-[468px] h-[60px] min-w-[468px] flex justify-center items-center bg-silver-50/50 rounded border border-silver-100">
-      <script is:inline>
-        atOptions = {
-          'key' : '5cb5b4fe2c353cee219b9c93ef7735b7',
-          'format' : 'iframe',
-          'height' : 60,
-          'width' : 468,
-          'params' : {}
-        };
-      </script>
-      <script is:inline src="https://bauval.org/22/5cb5b4fe2c353cee219b9c93ef7735b7"></script>
-    </div>
+<div class={`ad-container-468 my-4 flex flex-col items-center justify-center ${className}`}>
+  <span class="text-[10px] uppercase tracking-widest text-silver-400 mb-1 select-none font-medium">Advertisement</span>
+  <div
+    class="w-[468px] h-[60px] max-w-full overflow-hidden flex justify-center items-center rounded border border-silver-100 bg-silver-50/50"
+    style="contain: layout size; contain-intrinsic-size: 468px 60px;"
+  >
+    <iframe
+      srcdoc={`<!DOCTYPE html><html><head><meta charset="utf-8"><style>*{margin:0;padding:0;box-sizing:border-box;}body{overflow:hidden;background:transparent;display:flex;justify-content:center;align-items:center;height:60px;width:468px;}</style></head><body><script>var atOptions = {'key' : '5cb5b4fe2c353cee219b9c93ef7735b7','format' : 'iframe','height' : 60,'width' : 468,'params' : {}};</script><script src="https://bauval.org/22/5cb5b4fe2c353cee219b9c93ef7735b7"></script></body></html>`}
+      width="468"
+      height="60"
+      title="Advertisement"
+      loading="lazy"
+      class="border-0 overflow-hidden max-w-full"
+      style="border:none;width:468px;height:60px;"
+    ></iframe>
   </div>
 </div>

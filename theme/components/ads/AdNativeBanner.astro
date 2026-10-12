@@ -6,7 +6,7 @@ export interface Props {
 const { className = '' } = Astro.props;
 ---
 
-<div class={`ad-container-native my-8 w-full ${className}`}>
+<div class={`ad-container-native my-8 w-full ${className}`} style="content-visibility: auto; contain-intrinsic-size: 1000px 180px;">
   <div class="flex items-center justify-between mb-2 px-1">
     <span class="text-[11px] uppercase tracking-wider text-silver-400 font-semibold select-none">Sponsored Recommendations</span>
     <span class="text-[10px] text-silver-400 uppercase tracking-wider">Advertisement</span>
