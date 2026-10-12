@@ -1,0 +1,66 @@
+---
+export interface Props {
+  className?: string;
+  variant?: 'card' | 'badge' | 'bar';
+}
+
+const { className = '', variant = 'card' } = Astro.props;
+const smartlinkUrl = 'https://araplhn.org/4/283a67fbd41648d020d37c4088e67480';
+---
+
+{variant === 'card' && (
+  <div class={`ad-smartlink-card my-8 p-5 sm:p-6 rounded-2xl bg-gradient-to-r from-accent/5 via-accent-subtle/40 to-silver-50 border border-accent/20 relative overflow-hidden shadow-sm ${className}`}>
+    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 relative z-10">
+      <div class="flex items-start gap-3.5">
+        <div class="w-10 h-10 rounded-xl bg-accent text-white flex items-center justify-center shrink-0 shadow-md">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+          </svg>
+        </div>
+        <div>
+          <div class="flex items-center gap-2 mb-1">
+            <span class="text-xs uppercase tracking-wider font-bold text-accent">Sponsored HVAC Partner</span>
+            <span class="text-[10px] text-silver-400 bg-white/80 px-1.5 py-0.5 rounded border border-silver-200">Ad</span>
+          </div>
+          <h3 class="text-base sm:text-lg font-bold text-silver-900 leading-snug">
+            Compare Top HVAC Equipment, Duct Supplies & Local Contractor Deals
+          </h3>
+          <p class="text-xs sm:text-sm text-silver-600 mt-1">
+            Looking for ductwork materials, flexible duct bundles, airflow diagnostic meters, or contractor quotes? Browse current specials.
+          </p>
+        </div>
+      </div>
+      <a
+        href={smartlinkUrl}
+        target="_blank"
+        rel="noopener noreferrer sponsored"
+        class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl font-bold text-sm text-white bg-accent hover:opacity-95 transition-all shadow-sm shrink-0 w-full sm:w-auto"
+      >
+        <span>View Deals & Quotes</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+          <polyline points="15 3 21 3 21 9"></polyline>
+          <line x1="10" y1="14" x2="21" y2="3"></line>
+        </svg>
+      </a>
+    </div>
+  </div>
+)}
+
+{variant === 'bar' && (
+  <div class={`ad-smartlink-bar my-4 p-3 rounded-xl bg-silver-50 border border-silver-200/80 flex items-center justify-between gap-3 text-xs text-silver-700 ${className}`}>
+    <div class="flex items-center gap-2">
+      <span class="px-1.5 py-0.5 text-[10px] font-bold text-accent bg-accent/10 rounded uppercase">Special Offer</span>
+      <span>Browse HVAC installation supplies & local contractor deals</span>
+    </div>
+    <a
+      href={smartlinkUrl}
+      target="_blank"
+      rel="noopener noreferrer sponsored"
+      class="text-accent hover:underline font-semibold flex items-center gap-1 shrink-0"
+    >
+      <span>Explore</span>
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+    </a>
+  </div>
+)}

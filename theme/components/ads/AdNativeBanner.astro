@@ -1,0 +1,18 @@
+---
+export interface Props {
+  className?: string;
+}
+
+const { className = '' } = Astro.props;
+---
+
+<div class={`ad-container-native my-8 w-full ${className}`}>
+  <div class="flex items-center justify-between mb-2 px-1">
+    <span class="text-[11px] uppercase tracking-wider text-silver-400 font-semibold select-none">Sponsored Recommendations</span>
+    <span class="text-[10px] text-silver-400 uppercase tracking-wider">Advertisement</span>
+  </div>
+  <div class="glass-card p-4 sm:p-5 rounded-xl border border-silver-200/80 bg-white/60 backdrop-blur-sm overflow-hidden shadow-sm">
+    <script is:inline async="async" data-cfasync="false" src="https://bauval.org/21/9f898ffbe12be889e1616f26b3021001"></script>
+    <div id="container-9f898ffbe12be889e1616f26b3021001" class="w-full min-h-[120px]"></div>
+  </div>
+</div>

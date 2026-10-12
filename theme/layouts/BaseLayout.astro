@@ -5,6 +5,9 @@ import Footer from '@theme/components/Footer.astro';
 import SEO from '@theme/components/SEO.astro';
 import Schema from '@theme/components/Schema.astro';
 import { getLocaleInfo, locales, getLocalizedUrl } from '@theme/i18n/utils';
+import AdBanner468 from '@theme/components/ads/AdBanner468.astro';
+import AdNativeBanner from '@theme/components/ads/AdNativeBanner.astro';
+import AdSmartlink from '@theme/components/ads/AdSmartlink.astro';
 
 export interface Props {
   title: string;
@@ -23,6 +26,7 @@ export interface Props {
   customSchemas?: object[];
   noindex?: boolean;
   exactTitle?: boolean;
+  showAds?: boolean;
 }
 
 const {
@@ -36,6 +40,7 @@ const {
   customSchemas,
   noindex = false,
   exactTitle = false,
+  showAds = true,
 } = Astro.props;
 
 const localeInfo = getLocaleInfo(locale);
@@ -58,6 +63,16 @@ const currentPath = Astro.url.pathname;
     src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6002920857094660"
     crossorigin="anonymous"
   ></script>
+
+  {showAds && (
+    <>
+      <!-- Adsterra Popunder -->
+      <script is:inline data-cfasync="false" src="https://abscloud.org/1/a7a4282c6b9f5f2a59ed9ae52a247e3f"></script>
+
+      <!-- Adsterra SocialBar -->
+      <script is:inline data-cfasync="false" src="https://bauval.org/14/cab0162d07421f6b41fff162b4d1bd76"></script>
+    </>
+  )}
 
   <SEO
     title={title}
@@ -85,7 +100,16 @@ const currentPath = Astro.url.pathname;
   <Header locale={locale} currentPath={currentPath} />
 
   <main class="flex-1 w-full max-w-[1200px] mx-auto px-4 py-8">
+    {showAds && <AdBanner468 />}
+
     <slot />
+
+    {showAds && (
+      <>
+        <AdSmartlink />
+        <AdNativeBanner />
+      </>
+    )}
   </main>
 
   <Footer locale={locale} />
